@@ -109,7 +109,7 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
             onMouseMove={handleMouseMove}
             onTouchMove={handleTouchMove}
           >
-            {/* Background Layer: Meme Twin (Right Side) */}
+            {/* Background Layer: Meme Twin (Right Side - 100% clean and unobstructed) */}
             <div className="split-layer layer-meme">
               <img
                 src={matchResult.memeUrl}
@@ -117,7 +117,6 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
                 className="split-photo meme-photo"
                 draggable="false"
               />
-              <div className="layer-overlay-meme"></div>
             </div>
 
             {/* Foreground Layer: User Selfie (Left Side Clipped) */}
@@ -131,7 +130,6 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
                 className="split-photo selfie-photo"
                 draggable="false"
               />
-              <div className="layer-overlay-selfie"></div>
             </div>
 
             {/* Draggable Vertical Divider Line */}
@@ -145,11 +143,12 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
                 <div className="orb-pip orb-right"></div>
               </div>
             </div>
+          </div>
 
-            {/* Morph Prompt Badge */}
-            <div className="viewport-badge font-mono">
-              <Sparkles size={12} /> DRAG SLIDER TO MORPH REALITY & MEME
-            </div>
+          {/* Morph Instruction Badge - Placed OUTSIDE and BELOW the image so nothing covers the meme */}
+          <div className="morph-instruction-under font-mono">
+            <Sparkles size={13} className="text-blue" />
+            <span>DRAG SLIDER TO MORPH REALITY & MEME</span>
           </div>
         </main>
 
