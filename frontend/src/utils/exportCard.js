@@ -1,58 +1,33 @@
-// High-Resolution Creative Polaroid / Match Card Generator
-export async function generateMatchCard({ userImageSrc, memeImageSrc, emotion, score, traits }) {
+// High-Resolution Creative Polaroid & Editorial Split Poster Generator
+
+export async function generateSplitPoster({ userImageSrc, memeImageSrc, emotion, score, sliderPos = 50 }) {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
 
-  canvas.width = 1000;
-  canvas.height = 1300;
+  canvas.width = 1600;
+  canvas.height = 1000;
 
-  // 1. Draw rich obsidian & gradient background
-  const bgGrad = ctx.createLinearGradient(0, 0, 1000, 1300);
-  bgGrad.addColorStop(0, "#0B0E14");
-  bgGrad.addColorStop(0.5, "#121826");
-  bgGrad.addColorStop(1, "#07090E");
+  // Background: Left bright gradient to Right deep obsidian
+  const bgGrad = ctx.createLinearGradient(0, 0, 1600, 0);
+  bgGrad.addColorStop(0, "#E2E8F0");
+  bgGrad.addColorStop(0.35, "#CBD5E1");
+  bgGrad.addColorStop(0.5, "#0F172A");
+  bgGrad.addColorStop(1, "#030712");
   ctx.fillStyle = bgGrad;
-  ctx.fillRect(0, 0, 1000, 1300);
+  ctx.fillRect(0, 0, 1600, 1000);
 
-  // 2. Artistic decorative grid border
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
-  ctx.lineWidth = 2;
-  ctx.strokeRect(36, 36, 928, 1228);
-
-  // Top Glowing Header Bar
-  const headGrad = ctx.createLinearGradient(50, 60, 950, 60);
-  headGrad.addColorStop(0, "#00FFA3");
-  headGrad.addColorStop(0.5, "#00F0FF");
-  headGrad.addColorStop(1, "#B026FF");
-  ctx.fillStyle = headGrad;
-  ctx.fillRect(50, 50, 900, 6);
-
-  // Studio Header Text
-  ctx.fillStyle = "#FFFFFF";
-  ctx.font = "bold 34px sans-serif";
-  ctx.fillText("✦ MEME CRAFT // ART MATCH STUDIO", 60, 105);
-
-  ctx.fillStyle = "#9BA4B8";
-  ctx.font = "18px monospace";
-  ctx.fillText("AWS REKOGNITION POWERED • VERIFIED MATCH", 60, 135);
-
-  // Load and draw images helper
   const loadImage = (src) =>
-    new Promise((resolve, reject) => {
+    new Promise((resolve) => {
       const img = new Image();
       img.crossOrigin = "anonymous";
       img.onload = () => resolve(img);
       img.onerror = () => {
-        // Create fallback colored block if image fails cross-origin
         const dummy = document.createElement("canvas");
-        dummy.width = 400;
-        dummy.height = 400;
+        dummy.width = 600;
+        dummy.height = 800;
         const dctx = dummy.getContext("2d");
         dctx.fillStyle = "#1E293B";
-        dctx.fillRect(0, 0, 400, 400);
-        dctx.fillStyle = "#FFFFFF";
-        dctx.font = "20px sans-serif";
-        dctx.fillText("Image Preview", 130, 200);
+        dctx.fillRect(0, 0, 600, 800);
         resolve(dummy);
       };
       img.src = src;
@@ -64,92 +39,82 @@ export async function generateMatchCard({ userImageSrc, memeImageSrc, emotion, s
       loadImage(memeImageSrc),
     ]);
 
-    // Draw Student Selfie Polaroid Frame
-    ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.2)";
-    ctx.lineWidth = 1;
-    ctx.fillRect(60, 180, 420, 500);
-    ctx.strokeRect(60, 180, 420, 500);
+    // Center Face Position
+    const faceW = 700;
+    const faceH = 850;
+    const faceX = (1600 - faceW) / 2;
+    const faceY = 75;
 
-    // Draw user image
-    ctx.drawImage(userImg, 75, 195, 390, 410);
+    // 1. Draw Right Meme Face
+    ctx.save();
+    ctx.drawImage(memeImg, faceX, faceY, faceW, faceH);
+    ctx.restore();
 
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 20px sans-serif";
-    ctx.fillText("YOUR PHOTO", 75, 645);
-    ctx.fillStyle = "#00FFA3";
-    ctx.font = "16px monospace";
-    ctx.fillText(emotion.toUpperCase() + " DETECTED", 75, 668);
+    // 2. Draw Left User Face clipped to slider position
+    const splitOffset = faceX + (faceW * sliderPos) / 100;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(0, 0, splitOffset, 1000);
+    ctx.clip();
+    ctx.drawImage(userImg, faceX, faceY, faceW, faceH);
+    ctx.restore();
 
-    // Draw Matched Meme Polaroid Frame
-    ctx.fillStyle = "rgba(255, 255, 255, 0.06)";
-    ctx.fillRect(520, 180, 420, 500);
-    ctx.strokeRect(520, 180, 420, 500);
+    // 3. Draw vertical split line
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.moveTo(splitOffset, faceY - 20);
+    ctx.lineTo(splitOffset, faceY + faceH + 20);
+    ctx.stroke();
 
-    // Draw meme image
-    ctx.drawImage(memeImg, 535, 195, 390, 410);
+    // Left Editorial Typography
+    ctx.fillStyle = "#0F172A";
+    ctx.font = "900 64px 'Bebas Neue', sans-serif";
+    ctx.fillText("REALITY", 80, 420);
 
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 20px sans-serif";
-    ctx.fillText("YOUR MEME TWIN", 535, 645);
-    ctx.fillStyle = "#00F0FF";
-    ctx.font = "16px monospace";
-    ctx.fillText("AFFINITY: " + Math.round(score * 100) + "%", 535, 668);
+    ctx.font = "700 22px 'Bebas Neue', sans-serif";
+    ctx.fillStyle = "#334155";
+    ctx.fillText("STUDENT IDENTITY", 80, 460);
+    ctx.fillText("FACIAL GEOMETRY DETECTED", 80, 490);
+    ctx.fillText(`${emotion.toUpperCase()} EXPRESSION`, 80, 520);
 
-    // Match Metrics Box
-    ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
-    ctx.fillRect(60, 720, 880, 360);
-    ctx.strokeRect(60, 720, 880, 360);
+    // Right Editorial Typography
+    ctx.fillStyle = "#94A3B8";
+    ctx.font = "600 16px monospace";
+    ctx.fillText("AWS NEURAL ALCHEMY", 1120, 360);
 
-    // Big Match Score Badge
-    ctx.fillStyle = headGrad;
-    ctx.font = "900 84px sans-serif";
-    ctx.fillText(Math.round(score * 100) + "%", 100, 825);
-
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 28px sans-serif";
-    ctx.fillText("EXPRESSION VIBE MATCH", 100, 875);
+    ctx.fillStyle = "#F8FAFC";
+    ctx.font = "700 52px 'Cinzel', serif";
+    ctx.fillText("THE MEME TWIN", 1120, 425);
 
     ctx.fillStyle = "#94A3B8";
-    ctx.font = "20px sans-serif";
-    ctx.fillText(
-      `Detected emotion: ${emotion} • Facial Energy Alignment Verified`,
-      100,
-      915
-    );
+    ctx.font = "18px 'Cinzel', serif";
+    ctx.fillText("AN ARTIFICIAL COGNITION EXPERIMENT", 1120, 470);
+    ctx.fillText("IN EXPRESSIVE TRANSMUTATION.", 1120, 495);
 
-    // Feature tags
-    const tags = [];
-    if (traits?.smiling) tags.push("Smiling ✓");
-    if (traits?.mouthOpen) tags.push("Mouth Open ✓");
-    if (traits?.wearingGlasses) tags.push("Eyewear ✓");
-    tags.push("Neural Geometry ✓");
-
-    ctx.font = "bold 18px monospace";
-    tags.forEach((tag, idx) => {
-      ctx.fillStyle = "rgba(0, 255, 163, 0.15)";
-      ctx.fillRect(100 + idx * 190, 960, 175, 45);
-      ctx.fillStyle = "#00FFA3";
-      ctx.fillText(tag, 115 + idx * 190, 990);
-    });
-
-    // Footer
-    ctx.fillStyle = "#64748B";
+    ctx.fillStyle = "#00FFA3";
+    ctx.font = "900 64px 'Cinzel', serif";
+    ctx.fillText(`${Math.round(score * 100)}%`, 1120, 580);
+    ctx.fillStyle = "#CBD5E1";
     ctx.font = "16px monospace";
-    ctx.fillText(
-      "GENERATED BY AWS IMAGE-TO-MEME PLATFORM • 24H PRIVACY PURGED",
-      60,
-      1200
-    );
+    ctx.fillText("EXPRESSION AFFINITY", 1120, 610);
 
-    // Trigger Download
+    // Bottom Watermark
+    ctx.fillStyle = "#475569";
+    ctx.font = "14px monospace";
+    ctx.fillText("AWS IMAGE-TO-MEME PLATFORM • REKOGNITION POWERED • 24H PRIVACY PURGED", 80, 950);
+
+    // Download
     const dataUrl = canvas.toDataURL("image/png");
     const link = document.createElement("a");
-    link.download = `memecraft-${emotion.toLowerCase()}-card.png`;
+    link.download = `meme-twin-split-poster.png`;
     link.href = dataUrl;
     link.click();
   } catch (err) {
-    console.error("Failed to render card canvas:", err);
+    console.error("Failed to generate split poster:", err);
   }
+}
+
+export async function generateMatchCard({ userImageSrc, memeImageSrc, emotion, score, traits }) {
+  return generateSplitPoster({ userImageSrc, memeImageSrc, emotion, score });
 }

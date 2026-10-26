@@ -1,44 +1,46 @@
 /* ==========================================================================
-   MEMECRAFT DESIGN SYSTEM // ART & CRAFT STUDIO PALETTE
-   Dynamic, vibrant, high-energy UI with mood-reactive chromatic transitions
+   MEMECRAFT DESIGN SYSTEM // WHITE, BLUE GRADIENTS & HOLI POWDER BURSTS
+   Vibrant White Canvas, Electric Blue Accents, and Festive Holi Background
    ========================================================================== */
 
 :root {
-  /* Dynamic Vibe Tokens (Default: Electric Aurora / Chromatic Lime-Cyan) */
-  --vibe-hue: 165;
-  --vibe-primary: #00FFA3;
-  --vibe-secondary: #00F0FF;
-  --vibe-tertiary: #B026FF;
-  --vibe-accent: #FFE600;
-  --vibe-glow: rgba(0, 255, 163, 0.35);
-  --vibe-glow-secondary: rgba(0, 240, 255, 0.25);
-  --vibe-gradient: linear-gradient(135deg, #00FFA3 0%, #00F0FF 50%, #B026FF 100%);
-  --vibe-badge-bg: rgba(0, 255, 163, 0.12);
-  --vibe-badge-border: rgba(0, 255, 163, 0.4);
+  /* Dynamic Vibe Tokens (Default: Electric Royal Blue & Cyan) */
+  --vibe-hue: 220;
+  --vibe-primary: #2563EB;
+  --vibe-secondary: #00D2FF;
+  --vibe-tertiary: #1D4ED8;
+  --vibe-accent: #FF007F;
+  --vibe-glow: rgba(37, 99, 235, 0.3);
+  --vibe-glow-secondary: rgba(0, 210, 255, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #1D4ED8 0%, #2563EB 45%, #00D2FF 100%);
+  --vibe-badge-bg: rgba(37, 99, 235, 0.08);
+  --vibe-badge-border: rgba(37, 99, 235, 0.3);
 
-  /* Deep High-End Surface Tokens */
-  --bg-dark: #090B10;
-  --bg-surface: #10141E;
-  --bg-surface-elevated: #171D2C;
-  --bg-card: rgba(22, 28, 44, 0.72);
-  --bg-glass: rgba(255, 255, 255, 0.05);
+  /* Clean White Canvas & Elevated Glass Surface Tokens */
+  --bg-dark: #FFFFFF;
+  --bg-surface: #F8FAFC;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-glass: rgba(255, 255, 255, 0.7);
 
-  /* Clean Crisp White and Foreground Tokens */
+  /* High-Contrast Crisp Midnight & Blue Typography */
   --text-white: #FFFFFF;
-  --text-primary: #F3F5FA;
-  --text-secondary: #9BA4B8;
-  --text-muted: #5E6982;
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-light: rgba(255, 255, 255, 0.18);
-  --border-vivid: rgba(255, 255, 255, 0.3);
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --border-subtle: rgba(37, 99, 235, 0.1);
+  --border-light: rgba(37, 99, 235, 0.18);
+  --border-vivid: rgba(37, 99, 235, 0.35);
 
-  /* Shadows & Depth */
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 20px 50px -10px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 30px var(--vibe-glow);
+  /* Shadows & Depth with Soft Royal Blue Diffusion */
+  --shadow-sm: 0 4px 14px rgba(37, 99, 235, 0.06);
+  --shadow-lg: 0 20px 50px -10px rgba(37, 99, 235, 0.14);
+  --shadow-glow: 0 0 35px var(--vibe-glow);
 
   /* Typography */
   --font-display: 'Syne', sans-serif;
+  --font-serif: 'Cinzel', serif;
+  --font-condensed: 'Bebas Neue', sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -47,76 +49,80 @@
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-condensed {
+  font-family: var(--font-condensed);
+  letter-spacing: 0.05em;
+}
+
 /* ==========================================================================
-   DYNAMIC EMOTION THEMES (Applied dynamically to document root)
+   DYNAMIC EMOTION THEMES (Blue Base with Festive Holi Gulal Accents)
    ========================================================================== */
 [data-vibe="HAPPY"] {
-  --vibe-hue: 45;
-  --vibe-primary: #FF7B00;
-  --vibe-secondary: #FFD200;
-  --vibe-tertiary: #FF0077;
-  --vibe-accent: #00FFA3;
-  --vibe-glow: rgba(255, 123, 0, 0.4);
-  --vibe-glow-secondary: rgba(255, 210, 0, 0.3);
-  --vibe-gradient: linear-gradient(135deg, #FF7B00 0%, #FFD200 50%, #FF0077 100%);
-  --vibe-badge-bg: rgba(255, 123, 0, 0.15);
-  --vibe-badge-border: rgba(255, 123, 0, 0.5);
+  --vibe-primary: #2563EB;
+  --vibe-secondary: #FF9900;
+  --vibe-tertiary: #FF007F;
+  --vibe-accent: #00D2FF;
+  --vibe-glow: rgba(255, 153, 0, 0.3);
+  --vibe-glow-secondary: rgba(37, 99, 235, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #2563EB 0%, #FF007F 50%, #FF9900 100%);
+  --vibe-badge-bg: rgba(255, 153, 0, 0.1);
+  --vibe-badge-border: rgba(255, 153, 0, 0.4);
 }
 
 [data-vibe="SURPRISED"] {
-  --vibe-hue: 280;
-  --vibe-primary: #9D00FF;
-  --vibe-secondary: #00F0FF;
-  --vibe-tertiary: #FF00E5;
-  --vibe-accent: #FFE600;
-  --vibe-glow: rgba(157, 0, 255, 0.45);
-  --vibe-glow-secondary: rgba(0, 240, 255, 0.3);
-  --vibe-gradient: linear-gradient(135deg, #9D00FF 0%, #00F0FF 60%, #FF00E5 100%);
-  --vibe-badge-bg: rgba(157, 0, 255, 0.15);
-  --vibe-badge-border: rgba(157, 0, 255, 0.5);
+  --vibe-primary: #7C3AED;
+  --vibe-secondary: #00D2FF;
+  --vibe-tertiary: #EC4899;
+  --vibe-accent: #2563EB;
+  --vibe-glow: rgba(124, 58, 237, 0.35);
+  --vibe-glow-secondary: rgba(0, 210, 255, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #7C3AED 0%, #00D2FF 50%, #EC4899 100%);
+  --vibe-badge-bg: rgba(124, 58, 237, 0.1);
+  --vibe-badge-border: rgba(124, 58, 237, 0.4);
 }
 
 [data-vibe="CALM"] {
-  --vibe-hue: 195;
-  --vibe-primary: #00E5FF;
-  --vibe-secondary: #38BDF8;
-  --vibe-tertiary: #6366F1;
-  --vibe-accent: #10B981;
-  --vibe-glow: rgba(0, 229, 255, 0.35);
-  --vibe-glow-secondary: rgba(56, 189, 248, 0.25);
-  --vibe-gradient: linear-gradient(135deg, #00E5FF 0%, #38BDF8 50%, #6366F1 100%);
-  --vibe-badge-bg: rgba(0, 229, 255, 0.15);
-  --vibe-badge-border: rgba(0, 229, 255, 0.5);
+  --vibe-primary: #0284C7;
+  --vibe-secondary: #00D2FF;
+  --vibe-tertiary: #10B981;
+  --vibe-accent: #2563EB;
+  --vibe-glow: rgba(2, 132, 199, 0.3);
+  --vibe-glow-secondary: rgba(16, 185, 129, 0.2);
+  --vibe-gradient: linear-gradient(135deg, #1E40AF 0%, #0284C7 50%, #00D2FF 100%);
+  --vibe-badge-bg: rgba(2, 132, 199, 0.1);
+  --vibe-badge-border: rgba(2, 132, 199, 0.4);
 }
 
 [data-vibe="CONFUSED"] {
-  --vibe-hue: 310;
-  --vibe-primary: #EC4899;
-  --vibe-secondary: #8B5CF6;
-  --vibe-tertiary: #F59E0B;
-  --vibe-accent: #14B8A6;
-  --vibe-glow: rgba(236, 72, 153, 0.4);
-  --vibe-glow-secondary: rgba(139, 92, 246, 0.3);
-  --vibe-gradient: linear-gradient(135deg, #EC4899 0%, #8B5CF6 50%, #F59E0B 100%);
-  --vibe-badge-bg: rgba(236, 72, 153, 0.15);
-  --vibe-badge-border: rgba(236, 72, 153, 0.5);
+  --vibe-primary: #9333EA;
+  --vibe-secondary: #2563EB;
+  --vibe-tertiary: #F43F5E;
+  --vibe-accent: #06B6D4;
+  --vibe-glow: rgba(147, 51, 234, 0.3);
+  --vibe-glow-secondary: rgba(37, 99, 235, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #9333EA 0%, #2563EB 50%, #F43F5E 100%);
+  --vibe-badge-bg: rgba(147, 51, 234, 0.1);
+  --vibe-badge-border: rgba(147, 51, 234, 0.4);
 }
 
 [data-vibe="ANGRY"] {
-  --vibe-hue: 0;
-  --vibe-primary: #FF2E4D;
-  --vibe-secondary: #FF8533;
-  --vibe-tertiary: #FFE600;
-  --vibe-accent: #00FFA3;
-  --vibe-glow: rgba(255, 46, 77, 0.45);
-  --vibe-glow-secondary: rgba(255, 133, 51, 0.3);
-  --vibe-gradient: linear-gradient(135deg, #FF2E4D 0%, #FF8533 50%, #FFE600 100%);
-  --vibe-badge-bg: rgba(255, 46, 77, 0.15);
-  --vibe-badge-border: rgba(255, 46, 77, 0.5);
+  --vibe-primary: #DC2626;
+  --vibe-secondary: #2563EB;
+  --vibe-tertiary: #F97316;
+  --vibe-accent: #FF007F;
+  --vibe-glow: rgba(220, 38, 38, 0.35);
+  --vibe-glow-secondary: rgba(37, 99, 235, 0.2);
+  --vibe-gradient: linear-gradient(135deg, #DC2626 0%, #2563EB 50%, #F97316 100%);
+  --vibe-badge-bg: rgba(220, 38, 38, 0.1);
+  --vibe-badge-border: rgba(220, 38, 38, 0.4);
 }
 
 /* ==========================================================================
-   GLOBAL RESET & ART BACKGROUND
+   GLOBAL RESET & HOLI POWDER BURST CANVAS
    ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -126,7 +132,7 @@
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-dark);
+  background-color: #FFFFFF;
   color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
@@ -135,46 +141,50 @@ body {
   transition: background-color 0.8s var(--ease-smooth);
 }
 
-/* Creative Animated Studio Backdrop */
+/* Holi Gulal Burst 1: Vibrant Magenta & Rose Pink (Top Left) */
 body::before {
   content: '';
   position: fixed;
-  top: -20%;
-  left: -15%;
-  width: 70vw;
-  height: 70vw;
-  background: radial-gradient(circle, var(--vibe-glow) 0%, transparent 65%);
-  filter: blur(80px);
+  top: -10%;
+  left: -10%;
+  width: 65vw;
+  height: 65vw;
+  background: radial-gradient(circle, rgba(255, 0, 127, 0.22) 0%, rgba(255, 105, 180, 0.14) 35%, transparent 70%);
+  filter: blur(85px);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.6;
-  transition: background 1s var(--ease-smooth), opacity 1s ease;
-  animation: floatOrb 22s ease-in-out infinite alternate;
+  animation: floatHoli1 18s ease-in-out infinite alternate;
 }
 
+/* Holi Gulal Burst 2: Saffron Orange, Electric Blue & Turquoise (Bottom Right) */
 body::after {
   content: '';
   position: fixed;
-  bottom: -20%;
-  right: -15%;
-  width: 65vw;
-  height: 65vw;
-  background: radial-gradient(circle, var(--vibe-glow-secondary) 0%, transparent 65%);
+  bottom: -15%;
+  right: -10%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.25) 0%, rgba(37, 99, 235, 0.2) 35%, rgba(255, 153, 0, 0.18) 55%, transparent 75%);
   filter: blur(90px);
   pointer-events: none;
   z-index: 0;
-  opacity: 0.5;
-  transition: background 1s var(--ease-smooth);
-  animation: floatOrb 18s ease-in-out infinite alternate-reverse;
+  animation: floatHoli2 22s ease-in-out infinite alternate-reverse;
 }
 
-@keyframes floatOrb {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(40px, 30px) scale(1.1); }
-  100% { transform: translate(-30px, -20px) scale(0.95); }
+/* Floating Holi Powder Keyframes */
+@keyframes floatHoli1 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(60px, 40px) scale(1.15) rotate(15deg); }
+  100% { transform: translate(-40px, 20px) scale(0.92) rotate(-10deg); }
 }
 
-/* Subtle Art Studio Texture */
+@keyframes floatHoli2 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-50px, -30px) scale(1.12) rotate(-12deg); }
+  100% { transform: translate(30px, -40px) scale(0.95) rotate(10deg); }
+}
+
+/* Holi Multi-Color Powder Splashes in Midground */
 .craft-grid-overlay {
   position: fixed;
   top: 0;
@@ -182,11 +192,14 @@ body::after {
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
+    radial-gradient(circle at 20% 80%, rgba(255, 230, 0, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(0, 255, 163, 0.14) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.1) 0%, transparent 50%),
+    radial-gradient(rgba(37, 99, 235, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 28px 28px;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.4;
+  opacity: 0.85;
 }
 
 /* Typography Helpers */
@@ -230,15 +243,16 @@ h1, h2, h3, h4, .font-display {
 }
 
 .btn-primary {
-  background: var(--text-white);
-  color: #0B0E14;
-  box-shadow: 0 0 25px var(--vibe-glow), 0 4px 14px rgba(0, 0, 0, 0.4);
+  background: var(--vibe-gradient);
+  color: #FFFFFF;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+  border: none;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px) scale(1.02);
-  background: #FFFFFF;
-  box-shadow: 0 0 35px var(--vibe-glow), 0 8px 25px rgba(0, 0, 0, 0.5);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.45);
 }
 
 .btn-primary:active {
@@ -247,46 +261,48 @@ h1, h2, h3, h4, .font-display {
 
 .btn-vibe {
   background: var(--vibe-gradient);
-  color: #000000;
+  color: #FFFFFF;
   border: none;
-  box-shadow: 0 0 25px var(--vibe-glow);
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
 }
 
 .btn-vibe:hover {
   transform: translateY(-2px) scale(1.02);
   filter: brightness(1.1);
-  box-shadow: 0 0 40px var(--vibe-glow);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
 }
 
 .btn-outline {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   border: 1px solid var(--border-light);
   backdrop-filter: blur(12px);
 }
 
 .btn-outline:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: #FFFFFF;
   border-color: var(--vibe-primary);
+  color: var(--vibe-primary);
   transform: translateY(-2px);
-  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.12);
 }
 
-/* Glassmorphism Surface Container */
+/* Crisp Frosted Glass Surface Container */
 .craft-card {
   background: var(--bg-card);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--border-light);
   border-radius: 28px;
-  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
   transition: border-color 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
 }
 
 .craft-card:hover {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12);
 }
 
 /* Iridescent Top Accent Border */
@@ -296,9 +312,9 @@ h1, h2, h3, h4, .font-display {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: var(--vibe-gradient);
-  opacity: 0.8;
+  opacity: 0.9;
   transition: opacity 0.4s ease, background 0.8s var(--ease-smooth);
 }
 
@@ -316,7 +332,7 @@ h1, h2, h3, h4, .font-display {
   background: var(--vibe-badge-bg);
   border: 1px solid var(--vibe-badge-border);
   color: var(--vibe-primary);
-  box-shadow: 0 0 15px var(--vibe-badge-bg);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.08);
   transition: all 0.5s var(--ease-smooth);
 }
 
@@ -360,10 +376,10 @@ h1, h2, h3, h4, .font-display {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #252D3F;
+  background: #CBD5E1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

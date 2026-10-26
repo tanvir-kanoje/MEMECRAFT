@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import CameraBooth from "./components/CameraBooth";
 import AnalyzingOverlay from "./components/AnalyzingOverlay";
-import MatchShowcase from "./components/MatchShowcase";
+import SplitFaceSlider from "./components/SplitFaceSlider";
 import SettingsModal from "./components/SettingsModal";
 import { matchSelfieImage, getApiBaseUrl } from "./api/client";
 import { Sparkles, Shield, Cpu, Zap, AlertTriangle } from "lucide-react";
@@ -125,7 +125,7 @@ export default function App() {
           {isAnalyzing ? (
             <AnalyzingOverlay userPreview={userPreview} />
           ) : matchResult ? (
-            <MatchShowcase
+            <SplitFaceSlider
               matchResult={matchResult}
               userPreview={userPreview}
               onReset={handleReset}
