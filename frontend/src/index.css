@@ -1,48 +1,54 @@
 /* ==========================================================================
-   MEMECRAFT DESIGN SYSTEM // WHITE, BLUE GRADIENTS & HOLI POWDER BURSTS
-   Vibrant White Canvas, Electric Blue Accents, and Festive Holi Background
+   PICCO DESIGN SYSTEM // WARM CREAM ALABASTER & EDITORIAL TYPOGRAPHY
+   Inspired by Picco Framer Template + AWS Serverless Engineering
    ========================================================================== */
 
 :root {
-  /* Dynamic Vibe Tokens (Default: Electric Royal Blue & Cyan) */
+  /* Picco Core Paper & Surface Palette */
+  --picco-bg: #F7F4ED;
+  --picco-card: #FFFFFF;
+  --picco-card-muted: #F2EEE5;
+  --picco-border: #E5E0D5;
+  --picco-border-hover: #D5CEBE;
+  --picco-border-subtle: #ECE8DE;
+  
+  /* Ink & Typography */
+  --picco-ink: #0F0F0F;
+  --picco-text-muted: #52524E;
+  --picco-text-subtle: #8A8880;
+
+  /* Picco Signature Accents */
+  --picco-blue: #2978F3;
+  --picco-navy: #2F4C9C;
+  --picco-yellow: #F0CD3E;
+  --picco-orange: #FF5324;
+  --picco-green: #0E9C6C;
+  --picco-sky: #69AFEB;
+
+  /* Dynamic Emotion Vibe Tokens (Active when selfie match runs) */
   --vibe-hue: 220;
-  --vibe-primary: #2563EB;
+  --vibe-primary: #2978F3;
   --vibe-secondary: #00D2FF;
   --vibe-tertiary: #1D4ED8;
-  --vibe-accent: #FF007F;
-  --vibe-glow: rgba(37, 99, 235, 0.3);
-  --vibe-glow-secondary: rgba(0, 210, 255, 0.25);
-  --vibe-gradient: linear-gradient(135deg, #1D4ED8 0%, #2563EB 45%, #00D2FF 100%);
-  --vibe-badge-bg: rgba(37, 99, 235, 0.08);
-  --vibe-badge-border: rgba(37, 99, 235, 0.3);
+  --vibe-accent: #FF5324;
+  --vibe-glow: rgba(41, 120, 243, 0.25);
+  --vibe-glow-secondary: rgba(0, 210, 255, 0.2);
+  --vibe-gradient: linear-gradient(135deg, #1D4ED8 0%, #2978F3 45%, #00D2FF 100%);
+  --vibe-badge-bg: rgba(41, 120, 243, 0.08);
+  --vibe-badge-border: rgba(41, 120, 243, 0.25);
 
-  /* Clean White Canvas & Elevated Glass Surface Tokens */
-  --bg-dark: #FFFFFF;
-  --bg-surface: #F8FAFC;
-  --bg-surface-elevated: #FFFFFF;
-  --bg-card: rgba(255, 255, 255, 0.88);
-  --bg-glass: rgba(255, 255, 255, 0.7);
-
-  /* High-Contrast Crisp Midnight & Blue Typography */
-  --text-white: #FFFFFF;
-  --text-primary: #0F172A;
-  --text-secondary: #334155;
-  --text-muted: #64748B;
-  --border-subtle: rgba(37, 99, 235, 0.1);
-  --border-light: rgba(37, 99, 235, 0.18);
-  --border-vivid: rgba(37, 99, 235, 0.35);
-
-  /* Shadows & Depth with Soft Royal Blue Diffusion */
-  --shadow-sm: 0 4px 14px rgba(37, 99, 235, 0.06);
-  --shadow-lg: 0 20px 50px -10px rgba(37, 99, 235, 0.14);
+  /* Shadows & Depth */
+  --shadow-picco-sm: 0 2px 8px rgba(0, 0, 0, 0.03);
+  --shadow-picco: 0 4px 20px rgba(15, 15, 15, 0.04);
+  --shadow-picco-lg: 0 16px 40px -10px rgba(15, 15, 15, 0.07);
   --shadow-glow: 0 0 35px var(--vibe-glow);
 
-  /* Typography */
-  --font-display: 'Syne', sans-serif;
-  --font-serif: 'Cinzel', serif;
-  --font-condensed: 'Bebas Neue', sans-serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography Hierarchy */
+  --font-serif: 'Averia Serif Libre', Georgia, serif;
+  --font-hand: 'Caveat', cursive;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
 
   /* Transitions */
   --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -53,9 +59,12 @@
   font-family: var(--font-serif);
 }
 
-.font-condensed {
-  font-family: var(--font-condensed);
-  letter-spacing: 0.05em;
+.font-hand {
+  font-family: var(--font-hand);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
 }
 
 /* ==========================================================================
@@ -131,9 +140,9 @@
 }
 
 body {
-  font-family: var(--font-body);
-  background-color: #FFFFFF;
-  color: var(--text-primary);
+  font-family: var(--font-sans);
+  background-color: var(--picco-bg);
+  color: var(--picco-ink);
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;

@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from "react";
-import Header from "./components/Header";
+import Navbar from "./components/Navbar";
+import HeroPicco from "./components/HeroPicco";
+import ProjectsSection from "./components/ProjectsSection";
+import ServicesSection from "./components/ServicesSection";
+import AboutSection from "./components/AboutSection";
+import FaqSection from "./components/FaqSection";
+import FooterPicco from "./components/FooterPicco";
 import CameraBooth from "./components/CameraBooth";
 import AnalyzingOverlay from "./components/AnalyzingOverlay";
 import SplitFaceSlider from "./components/SplitFaceSlider";
 import SettingsModal from "./components/SettingsModal";
 import { matchSelfieImage, getApiBaseUrl } from "./api/client";
-import { Sparkles, Shield, Cpu, Zap, AlertTriangle } from "lucide-react";
+import { Sparkles, AlertTriangle } from "lucide-react";
 import "./App.css";
 
 export default function App() {
@@ -26,18 +32,30 @@ export default function App() {
     }
   }, [currentVibe]);
 
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   // Handle photo capture & triggering match pipeline
   const handleCapture = async (blobOrFile, previewUrl, forceVibe = null) => {
     setUserPreview(previewUrl);
     setErrorMsg(null);
     setIsAnalyzing(true);
 
+    // Scroll to the studio stage to keep user focused
+    setTimeout(() => {
+      scrollTo("studio");
+    }, 100);
+
     try {
       let result;
       if (blobOrFile) {
         result = await matchSelfieImage(blobOrFile);
       } else {
-        // Preset mock fallback
+        // Preset mock fallback for testing
         await new Promise((r) => setTimeout(r, 1200));
         result = {
           status: "success",
@@ -75,6 +93,7 @@ export default function App() {
     setUserPreview(null);
     setCurrentVibe(null);
     setErrorMsg(null);
+    scrollTo("studio");
   };
 
   return (
@@ -82,106 +101,83 @@ export default function App() {
       {/* Texture Background Grid */}
       <div className="craft-grid-overlay"></div>
 
-      {/* Navigation Header */}
-      <Header
+      {/* Picco Floating Pill Navbar */}
+      <Navbar
         currentVibe={currentVibe}
         apiBaseUrl={apiBaseUrl}
         onOpenSettings={() => setIsSettingsOpen(true)}
       />
 
       <main className="main-content">
-        {/* Hero Banner (Only when not showing match) */}
-        {!matchResult && !isAnalyzing && (
-          <section className="hero-section">
-            <div className="hero-pill-badge font-mono">
-              <Sparkles size={14} /> ZERO-BIOMETRIC RETENTION • 100% EXPRESSION FUN
+        {/* Picco Editorial Hero */}
+        <HeroPicco
+          onScrollToStudio={() => scrollTo("studio")}
+          onScrollToProjects={() => scrollTo("projects")}
+        />
+
+        {/* Live Studio Showcase Stage (Flagship Experience) */}
+        <section id="studio" className="picco-studio-section">
+          <div className="picco-studio-header">
+            <div className="picco-section-tag">
+              <span>✦ FLAGSHIP PROJECT • LIVE AWS WORKSPACE</span>
             </div>
-            <h1 className="hero-headline">
-              Capture Your Vibe. <br />
-              <span className="gradient-text">Meet Your Meme Twin.</span>
-            </h1>
-            <p className="hero-lead">
-              Our serverless AWS engine analyzes your facial micro-expressions in real time, scans 800+ pre-indexed memes, and discovers your expressional counterpart in seconds.
+            <h2 className="picco-section-title">
+              MEMECRAFT <span className="picco-serif-highlight">// The Live Studio</span>
+            </h2>
+            <p className="picco-section-subtitle">
+              Look directly into the camera or upload a portrait. In under 400ms, our AWS Rekognition engine decomposes your facial micro-expressions into an emotional vector and discovers your meme counterpart.
             </p>
-          </section>
-        )}
-
-        {/* Error Notice */}
-        {errorMsg && (
-          <div className="error-banner craft-card">
-            <AlertTriangle className="error-icon" size={24} />
-            <div className="error-text">
-              <h4 className="font-display">Notice</h4>
-              <p>{errorMsg}</p>
-            </div>
-            <button className="btn-craft btn-outline btn-sm" onClick={handleReset}>
-              Try Again
-            </button>
           </div>
-        )}
 
-        {/* Dynamic Studio Workspace */}
-        <section className="studio-workspace">
-          {isAnalyzing ? (
-            <AnalyzingOverlay userPreview={userPreview} />
-          ) : matchResult ? (
-            <SplitFaceSlider
-              matchResult={matchResult}
-              userPreview={userPreview}
-              onReset={handleReset}
-            />
-          ) : (
-            <CameraBooth onCapture={handleCapture} isAnalyzing={isAnalyzing} />
-          )}
+          <div className="picco-studio-container">
+            {/* Error Notice */}
+            {errorMsg && (
+              <div className="error-banner craft-card" style={{ marginBottom: "2rem" }}>
+                <AlertTriangle className="error-icon" size={24} />
+                <div className="error-text">
+                  <h4 className="font-display">Detection Notice</h4>
+                  <p>{errorMsg}</p>
+                </div>
+                <button className="btn-craft btn-outline btn-sm" onClick={handleReset}>
+                  Try Again
+                </button>
+              </div>
+            )}
+
+            {/* Dynamic Studio Workspace */}
+            <div className="studio-workspace">
+              {isAnalyzing ? (
+                <AnalyzingOverlay userPreview={userPreview} />
+              ) : matchResult ? (
+                <SplitFaceSlider
+                  matchResult={matchResult}
+                  userPreview={userPreview}
+                  onReset={handleReset}
+                />
+              ) : (
+                <CameraBooth onCapture={handleCapture} isAnalyzing={isAnalyzing} />
+              )}
+            </div>
+          </div>
         </section>
 
-        {/* Studio Highlights Bar */}
-        {!matchResult && !isAnalyzing && (
-          <section className="features-strip">
-            <div className="feature-item craft-card">
-              <Cpu size={26} className="feature-icon gradient-text" />
-              <div>
-                <h4 className="font-display">Amazon Rekognition</h4>
-                <p className="text-secondary text-sm">
-                  Deep multi-attribute analysis detecting 8+ emotional nuances, head yaw, and smile intensity.
-                </p>
-              </div>
-            </div>
+        {/* Picco Selected Projects Section */}
+        <ProjectsSection onJumpToStudio={() => scrollTo("studio")} />
 
-            <div className="feature-item craft-card">
-              <Zap size={26} className="feature-icon gradient-text" />
-              <div>
-                <h4 className="font-display">Serverless & Instant</h4>
-                <p className="text-secondary text-sm">
-                  Powered by AWS Lambda & S3 presigned direct pipelines capable of serving 500+ students concurrently.
-                </p>
-              </div>
-            </div>
+        {/* Architectural Disciplines / Capabilities */}
+        <ServicesSection />
 
-            <div className="feature-item craft-card">
-              <Shield size={26} className="feature-icon gradient-text" />
-              <div>
-                <h4 className="font-display">24-Hour Privacy Purge</h4>
-                <p className="text-secondary text-sm">
-                  Your selfie is never used for identity tracking and is automatically purged via S3 lifecycle rules.
-                </p>
-              </div>
-            </div>
-          </section>
-        )}
+        {/* The Person Behind the Work */}
+        <AboutSection />
+
+        {/* Frequently Asked Questions */}
+        <FaqSection />
       </main>
 
-      {/* College Project Footer */}
-      <footer className="studio-footer font-mono">
-        <div className="footer-inner">
-          <p>✦ AWS IMAGE-TO-MEME MATCHING PLATFORM ✦</p>
-          <p className="text-muted text-xs">
-            Built for college events, presentations & hackathons • Fully compliant with AWS Well-Architected serverless best practices.
-          </p>
-        </div>
-      </footer>
+      {/* Picco Footer & Contact CTA */}
+      <FooterPicco />
 
-      {/* Settings Modal */}
+      {/* Settings Modal (AWS API Configuration) */}
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}

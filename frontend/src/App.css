@@ -1196,3 +1196,1138 @@
     gap: 1.25rem;
   }
 }
+
+/* ==========================================================================
+   PICCO TEMPLATE DESIGN SYSTEM & PORTFOLIO COMPONENTS
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   PICCO FLOATING PILL NAVBAR
+   -------------------------------------------------------------------------- */
+.picco-nav-container {
+  position: sticky;
+  top: 1.25rem;
+  z-index: 100;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+.picco-nav-pill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--picco-border);
+  border-radius: 9999px;
+  padding: 0.6rem 1.25rem;
+  box-shadow: 0 8px 30px rgba(15, 15, 15, 0.05);
+  transition: all 0.3s var(--ease-spring);
+}
+
+.picco-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--picco-ink);
+}
+
+.picco-avatar-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--picco-card-muted);
+  border: 1px solid var(--picco-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  box-shadow: var(--shadow-picco-sm);
+}
+
+.picco-brand-text {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.picco-brand-dot {
+  color: var(--picco-text-subtle);
+}
+
+.picco-brand-tag {
+  color: var(--picco-text-muted);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.picco-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.picco-nav-link {
+  background: none;
+  border: none;
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--picco-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.picco-nav-link:hover {
+  color: var(--picco-ink);
+  background: var(--picco-card-muted);
+}
+
+.picco-nav-link-highlight {
+  background: rgba(41, 120, 243, 0.08);
+  color: var(--picco-blue);
+  border: 1px solid rgba(41, 120, 243, 0.2);
+}
+
+.picco-nav-link-highlight:hover {
+  background: rgba(41, 120, 243, 0.14);
+  color: var(--picco-blue);
+}
+
+.picco-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.picco-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
+  background: #E8F7F1;
+  border: 1px solid rgba(14, 156, 108, 0.25);
+  color: #0E9C6C;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.picco-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0E9C6C;
+  box-shadow: 0 0 8px #0E9C6C;
+}
+
+.pulse-animation {
+  animation: pulseGreen 2s infinite ease-in-out;
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.picco-nav-icon-btn {
+  background: var(--picco-card-muted);
+  border: 1px solid var(--picco-border);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--picco-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.picco-nav-icon-btn:hover {
+  color: var(--picco-ink);
+  border-color: var(--picco-border-hover);
+  background: #FFFFFF;
+}
+
+.picco-btn-contact {
+  background: var(--picco-ink);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.45rem 1.15rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-spring);
+}
+
+.picco-btn-contact:hover {
+  background: var(--picco-blue);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   PICCO HERO SECTION
+   -------------------------------------------------------------------------- */
+.picco-hero {
+  padding: 4.5rem 1.5rem 2rem 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.picco-hero-container {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.picco-greeting-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1.25rem;
+  border-radius: 9999px;
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  box-shadow: var(--shadow-picco-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--picco-ink);
+}
+
+.picco-greeting-avatar {
+  font-size: 1rem;
+}
+
+.picco-pill-separator {
+  color: var(--picco-border);
+}
+
+.picco-greeting-role {
+  color: var(--picco-blue);
+  font-weight: 700;
+}
+
+.picco-hero-title {
+  font-family: var(--font-sans);
+  font-size: 3.6rem;
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -0.035em;
+  color: var(--picco-ink);
+  max-width: 900px;
+}
+
+.picco-serif-highlight {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--picco-orange);
+  position: relative;
+}
+
+.picco-serif-highlight-blue {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--picco-blue);
+}
+
+.picco-hero-subhead {
+  font-size: 1.18rem;
+  line-height: 1.65;
+  color: var(--picco-text-muted);
+  max-width: 720px;
+  font-weight: 450;
+}
+
+.picco-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.picco-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: var(--picco-ink);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.95rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(15, 15, 15, 0.15);
+  transition: all 0.3s var(--ease-spring);
+}
+
+.picco-btn-primary:hover {
+  background: var(--picco-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(41, 120, 243, 0.3);
+}
+
+.picco-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #FFFFFF;
+  color: var(--picco-ink);
+  border: 1px solid var(--picco-border);
+  border-radius: 9999px;
+  padding: 0.95rem 1.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow-picco-sm);
+  transition: all 0.25s ease;
+}
+
+.picco-btn-secondary:hover {
+  border-color: var(--picco-border-hover);
+  background: var(--picco-card-muted);
+  transform: translateY(-2px);
+}
+
+.picco-hero-specs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.picco-spec-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--picco-border-subtle);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--picco-text-muted);
+}
+
+.chip-icon-blue { color: var(--picco-blue); }
+.chip-icon-green { color: var(--picco-green); }
+.chip-icon-orange { color: var(--picco-orange); }
+
+/* Marquee Ribbon */
+.picco-marquee-wrap {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--picco-border);
+  border-bottom: 1px solid var(--picco-border);
+  background: #FFFFFF;
+  padding: 0.85rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.picco-marquee-track {
+  display: inline-flex;
+  animation: marqueePicco 32s linear infinite;
+}
+
+.picco-marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--picco-text-muted);
+}
+
+.picco-marquee-star {
+  color: var(--picco-orange);
+  font-size: 0.75rem;
+}
+
+@keyframes marqueePicco {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* --------------------------------------------------------------------------
+   PICCO SECTION STRUCTURAL LAYOUT
+   -------------------------------------------------------------------------- */
+.picco-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 3rem 1.5rem;
+}
+
+.picco-section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.picco-section-tag {
+  display: inline-flex;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  background: var(--picco-card-muted);
+  border: 1px solid var(--picco-border);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--picco-text-muted);
+}
+
+.picco-section-title {
+  font-family: var(--font-sans);
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--picco-ink);
+}
+
+.picco-section-subtitle {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--picco-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   PROJECTS SECTION & CARDS
+   -------------------------------------------------------------------------- */
+.picco-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+  gap: 2rem;
+}
+
+.picco-project-card {
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 24px;
+  padding: 2.25rem;
+  box-shadow: var(--shadow-picco);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.35s var(--ease-spring);
+}
+
+.picco-project-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--picco-border-hover);
+  box-shadow: var(--shadow-picco-lg);
+}
+
+.picco-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.picco-card-category {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--picco-text-subtle);
+}
+
+.picco-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.picco-card-pill-flagship {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  background: #EAF2FE;
+  border: 1px solid rgba(41, 120, 243, 0.25);
+  color: var(--picco-blue);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.picco-card-year {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--picco-text-muted);
+  background: var(--picco-card-muted);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+
+.picco-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.95rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--picco-ink);
+  margin-bottom: 0.9rem;
+}
+
+.picco-card-desc {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--picco-text-muted);
+  margin-bottom: 1.75rem;
+  flex-grow: 1;
+}
+
+.picco-card-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  background: var(--picco-card-muted);
+  border: 1px solid var(--picco-border);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.picco-metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.picco-metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--picco-text-subtle);
+}
+
+.picco-metric-val {
+  font-family: var(--font-sans);
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--picco-ink);
+}
+
+.picco-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.picco-tag-item {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 9999px;
+  padding: 0.3rem 0.75rem;
+  color: var(--picco-text-muted);
+}
+
+.picco-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.picco-btn-card-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--picco-ink);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-spring);
+}
+
+.picco-btn-card-primary:hover {
+  background: var(--picco-blue);
+  transform: translateY(-2px);
+}
+
+.picco-btn-card-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #FFFFFF;
+  color: var(--picco-ink);
+  border: 1px solid var(--picco-border);
+  border-radius: 9999px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.picco-btn-card-secondary:hover {
+  border-color: var(--picco-border-hover);
+  background: var(--picco-card-muted);
+}
+
+.picco-card-status-badge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--picco-text-subtle);
+}
+
+.status-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--picco-text-subtle);
+}
+
+/* Accent Card Themes */
+.card-accent-blue { border-top: 4px solid var(--picco-blue); }
+.card-accent-orange { border-top: 4px solid var(--picco-orange); }
+.card-accent-green { border-top: 4px solid var(--picco-green); }
+.card-accent-yellow { border-top: 4px solid var(--picco-yellow); }
+
+/* --------------------------------------------------------------------------
+   PICCO SERVICES & CAPABILITIES
+   -------------------------------------------------------------------------- */
+.picco-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.picco-service-card {
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-picco);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+}
+
+.picco-service-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--picco-border-hover);
+  box-shadow: var(--shadow-picco-lg);
+}
+
+.picco-service-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.picco-service-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.service-blue .picco-service-icon-box { background: #EAF2FE; color: var(--picco-blue); }
+.service-orange .picco-service-icon-box { background: #FFEFEA; color: var(--picco-orange); }
+.service-green .picco-service-icon-box { background: #E8F7F1; color: var(--picco-green); }
+.service-yellow .picco-service-icon-box { background: #FEF9E7; color: #B38600; }
+
+.picco-service-num {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--picco-text-subtle);
+}
+
+.picco-service-title {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--picco-ink);
+  margin-bottom: 0.75rem;
+}
+
+.picco-service-desc {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--picco-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.picco-service-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: auto;
+}
+
+.picco-service-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--picco-text-muted);
+}
+
+.picco-bullet-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--picco-blue);
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   PICCO ABOUT SECTION
+   -------------------------------------------------------------------------- */
+.picco-about-card {
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 28px;
+  padding: 3.5rem;
+  box-shadow: var(--shadow-picco);
+}
+
+.picco-about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 3.5rem;
+}
+
+.picco-about-title {
+  font-family: var(--font-sans);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--picco-ink);
+  margin: 0.75rem 0 1.75rem 0;
+}
+
+.picco-about-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--picco-text-muted);
+}
+
+.picco-handwritten-note {
+  margin-top: 2rem;
+  padding: 1.5rem 1.75rem;
+  background: #FEF9E7;
+  border-left: 4px solid var(--picco-yellow);
+  border-radius: 12px;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  line-height: 1.5;
+  color: #382F0B;
+}
+
+.picco-signature {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.picco-about-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.picco-sidebar-card {
+  background: var(--picco-card-muted);
+  border: 1px solid var(--picco-border);
+  border-radius: 18px;
+  padding: 1.75rem;
+}
+
+.picco-sidebar-heading {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--picco-ink);
+  margin-bottom: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.picco-tool-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.picco-tool-pill {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 9999px;
+  padding: 0.35rem 0.8rem;
+  color: var(--picco-ink);
+}
+
+.picco-philosophy-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--picco-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   PICCO FAQ ACCORDION
+   -------------------------------------------------------------------------- */
+.picco-faq-container {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.picco-faq-card {
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 18px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--shadow-picco-sm);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.picco-faq-card:hover {
+  border-color: var(--picco-border-hover);
+  box-shadow: var(--shadow-picco);
+}
+
+.faq-card-open {
+  border-color: var(--picco-blue);
+  background: #FFFFFF;
+}
+
+.picco-faq-question-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.picco-faq-question {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--picco-ink);
+  line-height: 1.4;
+}
+
+.picco-faq-toggle-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--picco-card-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--picco-ink);
+  flex-shrink: 0;
+}
+
+.faq-card-open .picco-faq-toggle-icon {
+  background: #EAF2FE;
+  color: var(--picco-blue);
+}
+
+.picco-faq-answer {
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--picco-border-subtle);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--picco-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   PICCO FOOTER & CTA
+   -------------------------------------------------------------------------- */
+.picco-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3rem 1.5rem;
+}
+
+.picco-footer-cta-card {
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 28px;
+  padding: 4.5rem 2.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-picco-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.picco-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  background: #FFEFEA;
+  border: 1px solid rgba(255, 83, 36, 0.25);
+  color: var(--picco-orange);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.picco-footer-cta-title {
+  font-family: var(--font-sans);
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: var(--picco-ink);
+}
+
+.picco-footer-cta-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: var(--picco-text-muted);
+  max-width: 620px;
+}
+
+.picco-cta-email-wrap {
+  margin: 0.75rem 0;
+}
+
+.picco-cta-email-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--picco-ink);
+  color: #FFFFFF;
+  text-decoration: none;
+  border-radius: 9999px;
+  padding: 1.15rem 2.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(15, 15, 15, 0.15);
+  transition: all 0.3s var(--ease-spring);
+}
+
+.picco-cta-email-btn:hover {
+  background: var(--picco-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(41, 120, 243, 0.35);
+}
+
+.picco-cta-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.picco-cta-link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--picco-card-muted);
+  border: 1px solid var(--picco-border);
+  border-radius: 9999px;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--picco-text-muted);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.picco-cta-link-pill:hover {
+  background: #FFFFFF;
+  color: var(--picco-ink);
+  border-color: var(--picco-border-hover);
+}
+
+.picco-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--picco-border);
+  font-size: 0.88rem;
+  color: var(--picco-text-muted);
+}
+
+.picco-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.picco-brand-bold {
+  font-weight: 700;
+  color: var(--picco-ink);
+}
+
+.picco-brand-sep {
+  color: var(--picco-border);
+}
+
+.picco-scroll-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 9999px;
+  padding: 0.4rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--picco-ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.picco-scroll-top-btn:hover {
+  background: var(--picco-card-muted);
+  border-color: var(--picco-border-hover);
+}
+
+/* --------------------------------------------------------------------------
+   STUDIO EMBED WRAPPER (INSIDE PICCO TEMPLATE)
+   -------------------------------------------------------------------------- */
+.picco-studio-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 3rem 1.5rem;
+}
+
+.picco-studio-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 2.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.picco-studio-container {
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 28px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-picco-lg);
+  position: relative;
+}
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+  .picco-nav-links {
+    display: none;
+  }
+  .picco-hero-title {
+    font-size: 2.6rem;
+  }
+  .picco-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .picco-about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .picco-about-card {
+    padding: 2rem;
+  }
+  .picco-footer-cta-title {
+    font-size: 2.3rem;
+  }
+  .picco-card-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .picco-hero-title {
+    font-size: 2.1rem;
+  }
+  .picco-section-title {
+    font-size: 2rem;
+  }
+  .picco-footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
