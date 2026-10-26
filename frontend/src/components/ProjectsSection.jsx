@@ -118,6 +118,96 @@ export default function ProjectsSection({ onJumpToStudio }) {
               </div>
             </div>
 
+            {/* Picco Visual Showcase Banner */}
+            <div className={`picco-card-visual-wrap visual-bg-${proj.accentColor}`}>
+              {proj.id === "memecraft" && (
+                <div className="visual-stage-memecraft">
+                  <div className="visual-face-split">
+                    <div className="face-half selfie-half">
+                      <div className="landmark-points">
+                        <span className="dot dot-1"></span>
+                        <span className="dot dot-2"></span>
+                        <span className="dot dot-3"></span>
+                        <span className="dot dot-4"></span>
+                      </div>
+                      <span className="visual-side-label font-mono">SELFIE</span>
+                    </div>
+                    <div className="face-divider">
+                      <div className="divider-glow-bar"></div>
+                    </div>
+                    <div className="face-half meme-half">
+                      <div className="meme-caricature-icon">🎭</div>
+                      <span className="visual-side-label font-mono">MEME</span>
+                    </div>
+                  </div>
+                  <div className="visual-badge-sticker sticker-blue">
+                    <span>SUB-350MS</span>
+                  </div>
+                  <div className="visual-badge-sticker sticker-right sticker-green">
+                    <span>800+ MEMES</span>
+                  </div>
+                </div>
+              )}
+
+              {proj.id === "cloudstream" && (
+                <div className="visual-stage-cloudstream">
+                  <div className="pipeline-nodes">
+                    <div className="node-chip">S3 INGEST</div>
+                    <div className="pipeline-line"></div>
+                    <div className="node-chip active-node">STEP FUNCTIONS</div>
+                    <div className="pipeline-line"></div>
+                    <div className="node-chip">HLS ENCODE</div>
+                  </div>
+                  <div className="waveform-bars">
+                    {[40, 75, 55, 90, 60, 85, 45, 95, 70, 50, 80, 65].map((h, i) => (
+                      <span
+                        key={i}
+                        className="wave-bar"
+                        style={{ height: `${h}%`, animationDelay: `${i * 0.08}s` }}
+                      ></span>
+                    ))}
+                  </div>
+                  <div className="visual-badge-sticker sticker-orange">
+                    <span>ZERO IDLE BILLING</span>
+                  </div>
+                </div>
+              )}
+
+              {proj.id === "omnirag" && (
+                <div className="visual-stage-omnirag">
+                  <div className="rag-vector-cluster">
+                    <div className="vector-center">
+                      <span className="vector-core">BEDROCK AI</span>
+                    </div>
+                    <div className="vector-orbit orbit-1">k-NN = 0.98</div>
+                    <div className="vector-orbit orbit-2">HYBRID SEARCH</div>
+                    <div className="vector-orbit orbit-3">OPENSEARCH</div>
+                  </div>
+                  <div className="visual-badge-sticker sticker-green">
+                    <span>CLAUDE 3.5 SONNET</span>
+                  </div>
+                </div>
+              )}
+
+              {proj.id === "pulseiot" && (
+                <div className="visual-stage-pulseiot">
+                  <svg className="iot-wave-svg" viewBox="0 0 400 100" fill="none">
+                    <path
+                      d="M 0 50 Q 50 10 100 50 T 200 50 T 300 50 T 400 50"
+                      stroke="#B38600"
+                      strokeWidth="3.5"
+                      fill="none"
+                      className="pulse-svg-path"
+                    />
+                    <circle cx="200" cy="50" r="6" fill="#F0CD3E" className="pulse-ping-dot" />
+                  </svg>
+                  <div className="visual-badge-sticker sticker-yellow">
+                    <span>10K METRICS / SEC</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
             {/* Title & Description */}
             <h3 className="picco-card-title">{proj.title}</h3>
             <p className="picco-card-desc">{proj.description}</p>

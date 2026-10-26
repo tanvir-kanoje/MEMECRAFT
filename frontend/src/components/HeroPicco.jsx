@@ -28,7 +28,21 @@ export default function HeroPicco({ onScrollToStudio, onScrollToProjects }) {
 
         {/* Big Editorial Headline */}
         <h1 className="picco-hero-title">
-          I build <span className="picco-serif-highlight">event-driven</span> computer vision platforms, serverless cloud architectures, and delightful <span className="picco-serif-highlight-blue">interactive web</span> experiences.
+          I build{" "}
+          <span className="picco-highlight-wrap">
+            <span className="picco-serif-highlight">event-driven</span>
+            <svg className="picco-scribble-svg" viewBox="0 0 140 18" fill="none" preserveAspectRatio="none">
+              <path d="M 4 12 Q 35 4 70 11 T 136 9" stroke="var(--picco-orange)" strokeWidth="3.5" strokeLinecap="round" />
+            </svg>
+          </span>{" "}
+          computer vision platforms, serverless cloud architectures, and delightful{" "}
+          <span className="picco-highlight-wrap">
+            <span className="picco-serif-highlight-blue">interactive web</span>
+            <svg className="picco-scribble-svg" viewBox="0 0 150 18" fill="none" preserveAspectRatio="none">
+              <path d="M 4 13 Q 40 5 75 12 T 146 10" stroke="var(--picco-blue)" strokeWidth="3.5" strokeLinecap="round" />
+            </svg>
+          </span>{" "}
+          experiences.
         </h1>
 
         {/* Narrative Subhead */}
