@@ -1,0 +1,371 @@
+/* ==========================================================================
+   MEMECRAFT DESIGN SYSTEM // ART & CRAFT STUDIO PALETTE
+   Dynamic, vibrant, high-energy UI with mood-reactive chromatic transitions
+   ========================================================================== */
+
+:root {
+  /* Dynamic Vibe Tokens (Default: Electric Aurora / Chromatic Lime-Cyan) */
+  --vibe-hue: 165;
+  --vibe-primary: #00FFA3;
+  --vibe-secondary: #00F0FF;
+  --vibe-tertiary: #B026FF;
+  --vibe-accent: #FFE600;
+  --vibe-glow: rgba(0, 255, 163, 0.35);
+  --vibe-glow-secondary: rgba(0, 240, 255, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #00FFA3 0%, #00F0FF 50%, #B026FF 100%);
+  --vibe-badge-bg: rgba(0, 255, 163, 0.12);
+  --vibe-badge-border: rgba(0, 255, 163, 0.4);
+
+  /* Deep High-End Surface Tokens */
+  --bg-dark: #090B10;
+  --bg-surface: #10141E;
+  --bg-surface-elevated: #171D2C;
+  --bg-card: rgba(22, 28, 44, 0.72);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+
+  /* Clean Crisp White and Foreground Tokens */
+  --text-white: #FFFFFF;
+  --text-primary: #F3F5FA;
+  --text-secondary: #9BA4B8;
+  --text-muted: #5E6982;
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.18);
+  --border-vivid: rgba(255, 255, 255, 0.3);
+
+  /* Shadows & Depth */
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 20px 50px -10px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 30px var(--vibe-glow);
+
+  /* Typography */
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   DYNAMIC EMOTION THEMES (Applied dynamically to document root)
+   ========================================================================== */
+[data-vibe="HAPPY"] {
+  --vibe-hue: 45;
+  --vibe-primary: #FF7B00;
+  --vibe-secondary: #FFD200;
+  --vibe-tertiary: #FF0077;
+  --vibe-accent: #00FFA3;
+  --vibe-glow: rgba(255, 123, 0, 0.4);
+  --vibe-glow-secondary: rgba(255, 210, 0, 0.3);
+  --vibe-gradient: linear-gradient(135deg, #FF7B00 0%, #FFD200 50%, #FF0077 100%);
+  --vibe-badge-bg: rgba(255, 123, 0, 0.15);
+  --vibe-badge-border: rgba(255, 123, 0, 0.5);
+}
+
+[data-vibe="SURPRISED"] {
+  --vibe-hue: 280;
+  --vibe-primary: #9D00FF;
+  --vibe-secondary: #00F0FF;
+  --vibe-tertiary: #FF00E5;
+  --vibe-accent: #FFE600;
+  --vibe-glow: rgba(157, 0, 255, 0.45);
+  --vibe-glow-secondary: rgba(0, 240, 255, 0.3);
+  --vibe-gradient: linear-gradient(135deg, #9D00FF 0%, #00F0FF 60%, #FF00E5 100%);
+  --vibe-badge-bg: rgba(157, 0, 255, 0.15);
+  --vibe-badge-border: rgba(157, 0, 255, 0.5);
+}
+
+[data-vibe="CALM"] {
+  --vibe-hue: 195;
+  --vibe-primary: #00E5FF;
+  --vibe-secondary: #38BDF8;
+  --vibe-tertiary: #6366F1;
+  --vibe-accent: #10B981;
+  --vibe-glow: rgba(0, 229, 255, 0.35);
+  --vibe-glow-secondary: rgba(56, 189, 248, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #00E5FF 0%, #38BDF8 50%, #6366F1 100%);
+  --vibe-badge-bg: rgba(0, 229, 255, 0.15);
+  --vibe-badge-border: rgba(0, 229, 255, 0.5);
+}
+
+[data-vibe="CONFUSED"] {
+  --vibe-hue: 310;
+  --vibe-primary: #EC4899;
+  --vibe-secondary: #8B5CF6;
+  --vibe-tertiary: #F59E0B;
+  --vibe-accent: #14B8A6;
+  --vibe-glow: rgba(236, 72, 153, 0.4);
+  --vibe-glow-secondary: rgba(139, 92, 246, 0.3);
+  --vibe-gradient: linear-gradient(135deg, #EC4899 0%, #8B5CF6 50%, #F59E0B 100%);
+  --vibe-badge-bg: rgba(236, 72, 153, 0.15);
+  --vibe-badge-border: rgba(236, 72, 153, 0.5);
+}
+
+[data-vibe="ANGRY"] {
+  --vibe-hue: 0;
+  --vibe-primary: #FF2E4D;
+  --vibe-secondary: #FF8533;
+  --vibe-tertiary: #FFE600;
+  --vibe-accent: #00FFA3;
+  --vibe-glow: rgba(255, 46, 77, 0.45);
+  --vibe-glow-secondary: rgba(255, 133, 51, 0.3);
+  --vibe-gradient: linear-gradient(135deg, #FF2E4D 0%, #FF8533 50%, #FFE600 100%);
+  --vibe-badge-bg: rgba(255, 46, 77, 0.15);
+  --vibe-badge-border: rgba(255, 46, 77, 0.5);
+}
+
+/* ==========================================================================
+   GLOBAL RESET & ART BACKGROUND
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+  transition: background-color 0.8s var(--ease-smooth);
+}
+
+/* Creative Animated Studio Backdrop */
+body::before {
+  content: '';
+  position: fixed;
+  top: -20%;
+  left: -15%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, var(--vibe-glow) 0%, transparent 65%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  transition: background 1s var(--ease-smooth), opacity 1s ease;
+  animation: floatOrb 22s ease-in-out infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -20%;
+  right: -15%;
+  width: 65vw;
+  height: 65vw;
+  background: radial-gradient(circle, var(--vibe-glow-secondary) 0%, transparent 65%);
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  transition: background 1s var(--ease-smooth);
+  animation: floatOrb 18s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatOrb {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, 30px) scale(1.1); }
+  100% { transform: translate(-30px, -20px) scale(0.95); }
+}
+
+/* Subtle Art Studio Texture */
+.craft-grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.4;
+}
+
+/* Typography Helpers */
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  font-weight: 800;
+}
+
+.gradient-text {
+  background: var(--vibe-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: background 0.8s var(--ease-smooth);
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Button & Interaction Styles */
+.btn-craft {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-spring);
+  text-decoration: none;
+  user-select: none;
+}
+
+.btn-primary {
+  background: var(--text-white);
+  color: #0B0E14;
+  box-shadow: 0 0 25px var(--vibe-glow), 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: #FFFFFF;
+  box-shadow: 0 0 35px var(--vibe-glow), 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-vibe {
+  background: var(--vibe-gradient);
+  color: #000000;
+  border: none;
+  box-shadow: 0 0 25px var(--vibe-glow);
+}
+
+.btn-vibe:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.1);
+  box-shadow: 0 0 40px var(--vibe-glow);
+}
+
+.btn-outline {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-white);
+  border: 1px solid var(--border-light);
+  backdrop-filter: blur(12px);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--vibe-primary);
+  transform: translateY(-2px);
+  color: #FFFFFF;
+}
+
+/* Glassmorphism Surface Container */
+.craft-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-light);
+  border-radius: 28px;
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
+}
+
+.craft-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Iridescent Top Accent Border */
+.craft-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--vibe-gradient);
+  opacity: 0.8;
+  transition: opacity 0.4s ease, background 0.8s var(--ease-smooth);
+}
+
+/* Badge Component */
+.craft-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--vibe-badge-bg);
+  border: 1px solid var(--vibe-badge-border);
+  color: var(--vibe-primary);
+  box-shadow: 0 0 15px var(--vibe-badge-bg);
+  transition: all 0.5s var(--ease-smooth);
+}
+
+/* Shutter Flash Animation */
+@keyframes cameraFlash {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.flash-active {
+  position: fixed;
+  inset: 0;
+  background: #FFFFFF;
+  z-index: 9999;
+  pointer-events: none;
+  animation: cameraFlash 0.35s ease-out forwards;
+}
+
+/* Face Scan Reticle Laser */
+@keyframes laserSweep {
+  0% { top: 4%; opacity: 0.8; }
+  50% { top: 92%; opacity: 1; }
+  100% { top: 4%; opacity: 0.8; }
+}
+
+.laser-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--vibe-gradient);
+  box-shadow: 0 0 16px var(--vibe-primary), 0 0 32px var(--vibe-secondary);
+  animation: laserSweep 2.2s ease-in-out infinite;
+  z-index: 10;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: #252D3F;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vibe-primary);
+}
