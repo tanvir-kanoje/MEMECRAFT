@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
 
 > **Live Production URL:** [https://d2tuc83mjm02el.cloudfront.net](https://d2tuc83mjm02el.cloudfront.net)  
-> **API Gateway Invoke Endpoint:** `https://qjuuckqrxj.execute-api.us-east-1.amazonaws.com`
+> **API Gateway Architecture:** `AWS API Gateway HTTP API (Decoupled Microservices)`
 
 ---
 
