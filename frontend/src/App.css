@@ -2713,3 +2713,267 @@
     text-align: center;
   }
 }
+
+/* --------------------------------------------------------------------------
+   PROJECT FILTER TABS & EDITORIAL COVER VISUALS
+   -------------------------------------------------------------------------- */
+.picco-filter-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.picco-filter-btn {
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 9999px;
+  padding: 0.45rem 1.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--picco-text-muted);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-spring);
+}
+
+.picco-filter-btn:hover {
+  border-color: var(--picco-border-hover);
+  background: var(--picco-card-muted);
+  color: var(--picco-ink);
+  transform: translateY(-1px);
+}
+
+.filter-active {
+  background: var(--picco-ink) !important;
+  color: #FFFFFF !important;
+  border-color: var(--picco-ink) !important;
+  box-shadow: 0 4px 14px rgba(15, 15, 15, 0.15);
+}
+
+.visual-stage-editorial {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.editorial-cover-card {
+  width: 240px;
+  padding: 1.5rem 1.25rem;
+  background: #FFFFFF;
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.picco-project-card:hover .editorial-cover-card {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.editorial-edition {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--picco-text-subtle);
+}
+
+.editorial-heading {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--picco-ink);
+  line-height: 1.25;
+}
+
+.editorial-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--picco-blue);
+  margin-top: 0.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   PICCO TESTIMONIALS SECTION ("What nice People say")
+   -------------------------------------------------------------------------- */
+.picco-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.picco-testimonial-card {
+  background: #FFFFFF;
+  border: 1px solid var(--picco-border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-picco-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.picco-testimonial-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--picco-border-hover);
+  box-shadow: var(--shadow-picco);
+}
+
+.test-accent-blue { border-top: 3px solid var(--picco-blue); }
+.test-accent-orange { border-top: 3px solid var(--picco-orange); }
+.test-accent-green { border-top: 3px solid var(--picco-green); }
+.test-accent-yellow { border-top: 3px solid var(--picco-yellow); }
+
+.picco-testimonial-stars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #F0CD3E;
+}
+
+.star-filled {
+  fill: #F0CD3E;
+}
+
+.picco-testimonial-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--picco-ink);
+  flex-grow: 1;
+}
+
+.picco-testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--picco-border-subtle);
+}
+
+.picco-author-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--picco-card-muted);
+  border: 1px solid var(--picco-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: var(--picco-ink);
+}
+
+.picco-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.picco-author-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--picco-ink);
+}
+
+.picco-author-role {
+  font-size: 0.76rem;
+  color: var(--picco-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   PICCO ABOUT STRIP: TALKS, AWARDS & CLIENTS
+   -------------------------------------------------------------------------- */
+.picco-clients-box {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: var(--picco-card-muted);
+  border: 1px solid var(--picco-border);
+  border-radius: 14px;
+}
+
+.picco-sub-heading {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--picco-ink);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.picco-clients-text {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--picco-text-muted);
+  font-weight: 500;
+}
+
+.picco-talks-list, .picco-awards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.picco-talk-row, .picco-award-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed var(--picco-border);
+  font-size: 0.85rem;
+}
+
+.picco-talk-row:last-child, .picco-award-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.picco-talk-event, .picco-award-title {
+  font-weight: 600;
+  color: var(--picco-ink);
+}
+
+.picco-talk-loc {
+  color: var(--picco-text-subtle);
+  font-size: 0.8rem;
+}
+
+.picco-award-badge-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.picco-award-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  background: #FEF9E7;
+  color: #B38600;
+  border: 1px solid rgba(240, 205, 62, 0.3);
+}
+
+.picco-talk-year, .picco-award-year {
+  color: var(--picco-text-subtle);
+  font-size: 0.78rem;
+}

@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import HeroPicco from "./components/HeroPicco";
 import ProjectsSection from "./components/ProjectsSection";
 import ServicesSection from "./components/ServicesSection";
+import TestimonialsSection from "./components/TestimonialsSection";
 import AboutSection from "./components/AboutSection";
 import FaqSection from "./components/FaqSection";
 import FooterPicco from "./components/FooterPicco";
@@ -98,7 +99,7 @@ export default function App() {
 
   return (
     <div className="studio-app-root">
-      {/* Texture Background Grid */}
+      {/* Picco Warm Paper Dot-Grid Overlay */}
       <div className="craft-grid-overlay"></div>
 
       {/* Picco Floating Pill Navbar */}
@@ -115,17 +116,20 @@ export default function App() {
           onScrollToProjects={() => scrollTo("projects")}
         />
 
-        {/* Live Studio Showcase Stage (Flagship Experience) */}
+        {/* Selected Projects (Sneak peek of works) */}
+        <ProjectsSection onJumpToStudio={() => scrollTo("studio")} />
+
+        {/* Live Interactive AI Studio Showcase (Flagship Event) */}
         <section id="studio" className="picco-studio-section">
           <div className="picco-studio-header">
             <div className="picco-section-tag">
-              <span>✦ FLAGSHIP PROJECT • LIVE AWS WORKSPACE</span>
+              <span>✦ FLAGSHIP PROJECT • LIVE INTERACTIVE STUDIO</span>
             </div>
             <h2 className="picco-section-title">
               MEMECRAFT <span className="picco-serif-highlight">// The Live Studio</span>
             </h2>
             <p className="picco-section-subtitle">
-              Look directly into the camera or upload a portrait. In under 400ms, our AWS Rekognition engine decomposes your facial micro-expressions into an emotional vector and discovers your meme counterpart.
+              Face the camera or upload a portrait. Watch Amazon Rekognition detect your emotional nuance in sub-400ms and reveal your meme alter-ego with the interactive split-face slider.
             </p>
           </div>
 
@@ -161,11 +165,11 @@ export default function App() {
           </div>
         </section>
 
-        {/* Picco Selected Projects Section */}
-        <ProjectsSection onJumpToStudio={() => scrollTo("studio")} />
-
-        {/* Architectural Disciplines / Capabilities */}
+        {/* Capabilities & Services */}
         <ServicesSection />
+
+        {/* Testimonials ("What nice People say") */}
+        <TestimonialsSection />
 
         {/* The Person Behind the Work */}
         <AboutSection />

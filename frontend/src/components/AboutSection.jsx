@@ -1,7 +1,27 @@
 import React from "react";
-import { Terminal, Award, Compass, Heart } from "lucide-react";
+import { Terminal, Award, Compass, Mic, Users, Trophy } from "lucide-react";
 
 export default function AboutSection() {
+  const talks = [
+    { event: "Orange Beak Studio", location: "Berlin", year: "2023" },
+    { event: "Design & Cloud Conference", location: "Amsterdam", year: "2022" },
+    { event: "Nordic Vision Forum", location: "Copenhagen", year: "2022" },
+    { event: "Creative Systems Summit", location: "Paris", year: "2021" },
+  ];
+
+  const awards = [
+    { title: "European Illustration Awards", status: "Winner", year: "2025" },
+    { title: "ADC Europe", status: "Merit", year: "2024" },
+    { title: "Creative Communication Award", status: "Honoree", year: "2023" },
+    { title: "World Illustration Awards", status: "Shortlist", year: "2022" },
+  ];
+
+  const clients = [
+    "Dropbox", "Figma", "Adobe", "Monocle Magazine", "The Guardian",
+    "Bloomberg Businessweek", "Stripe Press", "Penguin Books", "Airbnb",
+    "Mailchimp", "Wired Magazine", "Creative Review"
+  ];
+
   return (
     <section id="about" className="picco-section">
       <div className="picco-about-card">
@@ -9,7 +29,7 @@ export default function AboutSection() {
           {/* Left Column: Personal Story */}
           <div className="picco-about-content">
             <div className="picco-section-tag">
-              <span>03 // THE BUILDER</span>
+              <span>04 // ABOUT</span>
             </div>
             <h2 className="picco-about-title">
               The person behind <span className="picco-serif-highlight">the work</span>
@@ -17,63 +37,84 @@ export default function AboutSection() {
 
             <div className="picco-about-paragraphs">
               <p>
-                I am <strong>Tanvir Kanoje</strong>, a cloud solutions and full-stack systems engineer passionate about creating architectures that bridge advanced cloud artificial intelligence with intuitive, high-energy user experiences.
+                An illustrator, designer, and cloud systems architect. The work explores playful shapes, bold color, and narrative composition, paired with high-performance event-driven cloud engineering.
               </p>
               <p>
-                My work centers on solving real concurrency bottlenecks—designing direct S3 presigned ingestion pipelines so hundreds of concurrent users can upload media simultaneously without stressing Lambda memory, implementing in-memory caches that drop computer vision latency below 400ms, and enforcing strict data governance through zero biometric retention.
+                From designing expressive visual systems for international publications to architecting serverless computer vision platforms capable of handling 500+ concurrent users with sub-400ms latency, the focus is always on clarity, personality, and human delight.
               </p>
               <p>
-                Whether building event-driven cloud microservices on AWS or engineering 60fps editorial interfaces with React, I focus on systems that are performant, cost-efficient, and deeply memorable.
+                Every project balances craftsmanship with technical rigor — ensuring designs scale seamlessly across physical prints, interactive viewports, and distributed cloud backends.
               </p>
             </div>
 
             {/* Handwritten Quote */}
             <div className="picco-handwritten-note">
               <p>
-                "Great architecture isn't just about handling traffic—it's about making complex cloud intelligence feel effortless, instant, and joyful."
+                "The system feels original, thoughtful, and built to turn complex ideas into something simple and beautiful."
               </p>
-              <span className="picco-signature">— Tanvir Kanoje</span>
+              <span className="picco-signature">— Martin Hyden / Tanvir Kanoje</span>
+            </div>
+
+            {/* Selected Clients Strip */}
+            <div className="picco-clients-box">
+              <h4 className="picco-sub-heading">
+                <Users size={16} className="inline-icon" /> Selected Clients
+              </h4>
+              <p className="picco-clients-text">
+                {clients.join(" • ")}
+              </p>
             </div>
           </div>
 
-          {/* Right Column: Key Details & Tech Stack */}
+          {/* Right Column: Talks & Awards */}
           <div className="picco-about-sidebar">
+            {/* Selected Talks */}
             <div className="picco-sidebar-card">
               <h4 className="picco-sidebar-heading">
-                <Terminal size={16} className="inline-icon" /> Core Toolkit
+                <Mic size={16} className="inline-icon" /> Selected Talks
               </h4>
-              <div className="picco-tool-tags">
-                <span className="picco-tool-pill">AWS Lambda</span>
-                <span className="picco-tool-pill">Amazon Rekognition</span>
-                <span className="picco-tool-pill">Amazon S3</span>
-                <span className="picco-tool-pill">Amazon CloudFront (OAC)</span>
-                <span className="picco-tool-pill">Amazon API Gateway</span>
-                <span className="picco-tool-pill">Python 3.12</span>
-                <span className="picco-tool-pill">React 19</span>
-                <span className="picco-tool-pill">Vite</span>
-                <span className="picco-tool-pill">Web Audio API</span>
-                <span className="picco-tool-pill">HTML5 Canvas</span>
+              <div className="picco-talks-list">
+                {talks.map((t, idx) => (
+                  <div key={idx} className="picco-talk-row">
+                    <span className="picco-talk-event">{t.event}</span>
+                    <span className="picco-talk-loc">{t.location}</span>
+                    <span className="picco-talk-year font-mono">{t.year}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
+            {/* Awards & Recognition */}
             <div className="picco-sidebar-card">
               <h4 className="picco-sidebar-heading">
-                <Compass size={16} className="inline-icon" /> Engineering Philosophy
+                <Trophy size={16} className="inline-icon" /> Awards & Recognition
               </h4>
-              <ul className="picco-philosophy-list">
-                <li>
-                  <strong>Serverless by Default:</strong> Pay only for real executions; zero idle bills.
-                </li>
-                <li>
-                  <strong>Direct Storage Ingestion:</strong> Keep heavy binaries out of compute layers.
-                </li>
-                <li>
-                  <strong>Privacy First:</strong> Automate data purges; minimize stored personal identifiers.
-                </li>
-                <li>
-                  <strong>Unobstructed Design:</strong> Never sacrifice content readability for flashy UI decoration.
-                </li>
-              </ul>
+              <div className="picco-awards-list">
+                {awards.map((a, idx) => (
+                  <div key={idx} className="picco-award-row">
+                    <span className="picco-award-title">{a.title}</span>
+                    <div className="picco-award-badge-wrap">
+                      <span className="picco-award-badge">{a.status}</span>
+                      <span className="picco-award-year font-mono">{a.year}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Core Disciplines */}
+            <div className="picco-sidebar-card">
+              <h4 className="picco-sidebar-heading">
+                <Compass size={16} className="inline-icon" /> Disciplines
+              </h4>
+              <div className="picco-tool-tags">
+                <span className="picco-tool-pill">Brand Identity</span>
+                <span className="picco-tool-pill">Editorial Illustration</span>
+                <span className="picco-tool-pill">Packaging</span>
+                <span className="picco-tool-pill">AWS Cloud AI</span>
+                <span className="picco-tool-pill">React 19 & Canvas</span>
+                <span className="picco-tool-pill">Vector Systems</span>
+              </div>
             </div>
           </div>
         </div>

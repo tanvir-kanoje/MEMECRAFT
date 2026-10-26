@@ -6,24 +6,28 @@ export default function FaqSection() {
 
   const faqs = [
     {
-      q: "How does MEMECRAFT support 500+ concurrent students without server crashes?",
-      a: "Instead of uploading large image files through API Gateway and Lambda (which exhausts Lambda memory and hits the 10MB gateway ceiling), the frontend issues a lightweight handshake to get a cryptographic S3 presigned PUT URL. The browser uploads the raw photo directly to Amazon S3 over encrypted HTTPS. API Gateway and Lambda process only lightweight JSON, allowing hundreds of simultaneous uploads with zero memory bloat.",
+      q: "What services do you offer?",
+      a: "I specialize in brand identity, editorial illustrations, vector packaging systems, and creative full-stack cloud platforms. From full brand visual systems to custom interactive web experiences, every deliverable is tailored to strengthen connection and distinctiveness.",
     },
     {
-      q: "Why use Amazon Rekognition DetectFaces rather than SearchFacesByImage?",
-      a: "Memes are caricatures, cartoons, actors, and exaggerated expressions. Traditional biometric face search (SearchFacesByImage) looks for physical bone structure and exact facial identities—failing 99% of the time on humorous images. By using DetectFaces, we extract an explainable 8-dimensional expression vector (dominant emotion, smile intensity, eye state, mouth aperture, pose angles) and perform weighted geometric affinity matching, succeeding 100% of the time.",
+      q: "What does a typical project process look like?",
+      a: "The process begins with discovery and narrative direction, followed by exploratory sketches, architectural specs, and visual concepts. Once a direction is approved, we move into high-fidelity design, interactive prototyping, responsive code implementation, and production deployment.",
     },
     {
-      q: "How is student privacy and sensitive biometric data safeguarded?",
-      a: "MEMECRAFT enforces zero biometric data debt. Uploaded selfies are compartmentalized under temporary prefix paths in S3 with no public enumeration access. An automated AWS S3 Lifecycle configuration (AutoExpireStudentSelfies) permanently deletes every upload after 24 hours. No biometric fingerprints, facial geometry vectors, or identity profiles are stored in any persistent database.",
+      q: "How long does a project usually take?",
+      a: "Most identity and illustration projects range from 3 to 6 weeks. Interactive digital applications or custom cloud platforms (like MEMECRAFT) typically span 6 to 10 weeks, with clear weekly milestones and staging previews.",
     },
     {
-      q: "How does the system achieve sub-400ms match response times?",
-      a: "The 800+ meme catalogue was pre-processed offline using a checkpointed Rekognition batch script and saved as normalized metadata in S3. During live user requests, Rekognition runs only once on the uploaded selfie. The matching Lambda caches the 800-record metadata JSON in global execution context memory across warm invocations, eliminating redundant S3 GET requests and keeping live scoring under 350ms.",
+      q: "Do you work with international clients?",
+      a: "Yes, absolutely. I collaborate with agencies, startups, publishers, and studios worldwide across Europe, North America, and Asia, using structured async communication and regular syncs.",
     },
     {
-      q: "What is the AWS infrastructure cost of running this platform?",
-      a: "Because all services are 100% serverless, there is zero idle cost. Static assets are served via CloudFront edge caches at pennies per million hits. Lambda executions run for under 400ms at 512MB RAM ($0.000003 per match). Running 1,000 live student submissions costs approximately $1.00 USD in Amazon Rekognition API fees.",
+      q: "Can you adapt illustrations and UI to our existing brand style?",
+      a: "Yes. While my work has a distinctive playful and tactile sensibility, every typographic hierarchy, color palette, and micro-interaction is customized to harmonize with your existing design system and brand guidelines.",
+    },
+    {
+      q: "How can I start a project with you?",
+      a: "Simply send an email to tanvirkanoje@gmail.com with an outline of your project goals, desired timeline, and scope. I will reply within 24–48 hours to schedule an introductory discovery call.",
     },
   ];
 
@@ -35,13 +39,13 @@ export default function FaqSection() {
     <section id="faq" className="picco-section">
       <div className="picco-section-header">
         <div className="picco-section-tag">
-          <span>04 // CLARITY</span>
+          <span>05 // CLARITY</span>
         </div>
         <h2 className="picco-section-title">
-          Frequently asked <span className="picco-serif-highlight">questions</span>
+          FAQ // <span className="picco-serif-highlight">Your questions</span>, answered
         </h2>
         <p className="picco-section-subtitle">
-          Key architectural decisions, performance benchmarks, and data security explained clearly.
+          Everything you need to know about project timelines, process, and collaborations.
         </p>
       </div>
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { Sparkles, ExternalLink, ArrowUpRight, Shield, Zap, Layers, Cpu, Code2 } from "lucide-react";
+import React, { useState } from "react";
+import { Sparkles, ArrowUpRight, ExternalLink } from "lucide-react";
 
 function GithubIcon({ size = 16 }) {
   return (
@@ -11,103 +11,221 @@ function GithubIcon({ size = 16 }) {
 }
 
 export default function ProjectsSection({ onJumpToStudio }) {
+  const [filter, setFilter] = useState("ALL");
+
   const projects = [
     {
       id: "memecraft",
       title: "MEMECRAFT // The Neural Mirror",
-      category: "COMPUTER VISION & AWS SERVERLESS",
+      category: "FLAGSHIP AI",
+      categoryLabel: "COMPUTER VISION & AWS SERVERLESS",
       year: "2026",
       status: "LIVE PRODUCTION",
       accentColor: "blue",
       description:
-        "An event-driven facial expression matching platform built on Amazon Rekognition and AWS Lambda. Bypasses compute bottlenecks via direct S3 presigned PUT ingestion, matches users to 800+ indexed memes in sub-400ms, and enforces zero biometric data debt with 24-hour auto-purging.",
+        "A live serverless computer vision platform built on Amazon Rekognition and AWS Lambda. Bypasses compute bottlenecks via direct S3 presigned PUT ingestion, matches users to 800+ indexed memes in sub-400ms, and enforces zero biometric data debt with 24-hour auto-purging.",
       metrics: [
         { label: "P99 LATENCY", value: "< 350ms" },
         { label: "CONCURRENCY", value: "500+ Users" },
         { label: "CATALOGUE", value: "800+ Memes" },
         { label: "COMPLIANCE", value: "Zero Retention" },
       ],
-      tags: ["AWS Rekognition", "AWS Lambda (Python 3.12)", "S3 Presigned Ingestion", "CloudFront OAC", "React 19"],
-      liveUrl: "https://d2tuc83mjm02el.cloudfront.net",
+      tags: ["AWS Rekognition", "AWS Lambda", "S3 Presigned", "CloudFront OAC", "React 19"],
       githubUrl: "https://github.com/tanvir-kanoje/AWS-Memer",
       isFlagship: true,
     },
     {
-      id: "cloudstream",
-      title: "CloudStream // Event-Driven Video Transcoder",
-      category: "DISTRIBUTED CLOUD PIPELINE",
-      year: "2025",
+      id: "northern-times",
+      title: "The Northern Times",
+      category: "ILLUSTRATION",
+      categoryLabel: "EDITORIAL ILLUSTRATION & BRAND IDENTITY",
+      year: "2024",
       status: "COMPLETED",
       accentColor: "orange",
       description:
-        "A zero-idle serverless media processing pipeline. Ingests raw multi-gigabyte video uploads to S3, orchestrates validation and watermark burn-in via AWS Step Functions state machines, and parallelizes adaptive bitrate HLS packaging with AWS Elemental MediaConvert.",
+        "Built around clarity and rhythm — reflecting how news moves in real time. Modular layouts, bold typography, and restrained color allow stories to take center stage without distraction.",
       metrics: [
-        { label: "IDLE COST", value: "$0.00 / Mo" },
-        { label: "STEP FUNCTIONS", value: "8 States" },
-        { label: "CODECS", value: "H.264 / HLS" },
-        { label: "REDUCTION", value: "70% Bandwidth" },
+        { label: "PLATFORM", value: "Print & Digital" },
+        { label: "SYSTEM", value: "Modular Grid" },
+        { label: "TYPE", value: "Averia Serif" },
+        { label: "DELIVERABLE", value: "Vector Suite" },
       ],
-      tags: ["AWS Step Functions", "Elemental MediaConvert", "Amazon EventBridge", "S3 Notifications", "Terraform"],
+      tags: ["Art Direction", "Editorial", "Typography", "Vector Illustration"],
       githubUrl: "https://github.com/tanvir-kanoje",
     },
     {
-      id: "omnirag",
-      title: "OmniRAG // Enterprise Multimodal Knowledge Agent",
-      category: "GENERATIVE AI & VECTOR SEARCH",
-      year: "2025",
-      status: "CASE STUDY",
-      accentColor: "green",
-      description:
-        "High-concurrency hybrid vector retrieval and synthesis agent. Integrates AWS Bedrock (Claude 3.5 Sonnet) with OpenSearch Serverless hybrid k-NN embeddings, returning verifiable document citations and streaming markdown responses with sub-second time-to-first-token.",
-      metrics: [
-        { label: "TTFT", value: "480ms" },
-        { label: "EMBEDDINGS", value: "Titan v2" },
-        { label: "SEARCH", value: "Hybrid k-NN" },
-        { label: "CITATION", value: "100% Traceable" },
-      ],
-      tags: ["AWS Bedrock", "OpenSearch Serverless", "Claude 3.5 Sonnet", "DynamoDB Caching", "FastAPI"],
-      githubUrl: "https://github.com/tanvir-kanoje",
-    },
-    {
-      id: "pulseiot",
-      title: "PulseIoT // Real-Time Fleet Telemetry Streamer",
-      category: "STREAMING DATA & WEBSOCKETS",
-      year: "2024",
-      status: "OPEN SOURCE",
+      id: "nitty-craft",
+      title: "Nitty Craft Co.",
+      category: "PACKAGING",
+      categoryLabel: "TACTILE PACKAGING & BRAND IDENTITY",
+      year: "2023",
+      status: "COMPLETED",
       accentColor: "yellow",
       description:
-        "High-frequency MQTT telemetry ingestion gateway for distributed IoT devices. Ingests 10,000+ metrics/sec via AWS IoT Core Rules Engine, fans out to Amazon Kinesis Data Firehose, and streams real-time anomaly telemetry over bidirectional WebSockets.",
+        "Approached through tactility — bold forms, raw textures, and playful compositions. The packaging system feels hands-on and expressive, turning everyday products into collectible objects.",
       metrics: [
-        { label: "THROUGHPUT", value: "10K msg/sec" },
-        { label: "INGESTION", value: "AWS IoT Core" },
-        { label: "STORAGE", value: "Timestream" },
-        { label: "FRONTEND", value: "Canvas Realtime" },
+        { label: "TEXTURE", value: "Raw Kraft Paper" },
+        { label: "PALETTE", value: "Warm Ochre" },
+        { label: "ITEMS", value: "14 SKUs" },
+        { label: "ENGAGEMENT", value: "+45% Repeats" },
       ],
-      tags: ["AWS IoT Core", "Amazon Kinesis", "Timestream", "API Gateway WebSockets", "React"],
+      tags: ["Packaging", "Visual Identity", "Custom Shapes", "Print Specs"],
+      githubUrl: "https://github.com/tanvir-kanoje",
+    },
+    {
+      id: "oxbridge-press",
+      title: "Oxbridge Press",
+      category: "BRAND IDENTITY",
+      categoryLabel: "ACADEMIC PUBLISHING & TYPOGRAPHY",
+      year: "2022",
+      status: "COMPLETED",
+      accentColor: "green",
+      description:
+        "The concept focused on timelessness and precision. A refined typographic system paired with subtle illustration details creates a balance between academic heritage and contemporary publishing.",
+      metrics: [
+        { label: "HERITAGE", value: "Academic" },
+        { label: "FOUNDRY", value: "Custom Serif" },
+        { label: "COVERS", value: "32 Editions" },
+        { label: "STYLE", value: "Modern Classical" },
+      ],
+      tags: ["Brand Identity", "Book Covers", "Typography", "Editorial"],
+      githubUrl: "https://github.com/tanvir-kanoje",
+    },
+    {
+      id: "barcelona-civic",
+      title: "Barcelona Civic Office",
+      category: "BRAND IDENTITY",
+      categoryLabel: "MUNICIPAL IDENTITY & WAYFINDING",
+      year: "2021",
+      status: "COMPLETED",
+      accentColor: "blue",
+      description:
+        "A flexible identity system designed to unify diverse city initiatives. Bright colors, simple geometric shapes, and clear hierarchy make civic communication accessible across digital and physical spaces.",
+      metrics: [
+        { label: "SCALE", value: "City-wide" },
+        { label: "SIGNAGE", value: "Wayfinding" },
+        { label: "ACCESSIBILITY", value: "WCAG AAA" },
+        { label: "TOUCHPOINTS", value: "Digital + Print" },
+      ],
+      tags: ["Public Identity", "Wayfinding", "Graphic Design", "Signage"],
+      githubUrl: "https://github.com/tanvir-kanoje",
+    },
+    {
+      id: "sudstadt-zeitung",
+      title: "Südstadt Zeitung",
+      category: "ILLUSTRATION",
+      categoryLabel: "NEWSPAPER EDITORIAL & CONTRAST",
+      year: "2021",
+      status: "COMPLETED",
+      accentColor: "orange",
+      description:
+        "Exploring contrast — tradition and modernity coexisting. Clean grids meet expressive editorial accents, creating a visual language that feels familiar and forward-looking.",
+      metrics: [
+        { label: "FREQUENCY", value: "Daily Edition" },
+        { label: "CONTRAST", value: "Modern / Classic" },
+        { label: "SPOT ART", value: "40+ Icons" },
+        { label: "REACH", value: "120K Readers" },
+      ],
+      tags: ["Illustration", "Newspaper", "Editorial", "Iconography"],
+      githubUrl: "https://github.com/tanvir-kanoje",
+    },
+    {
+      id: "monochrome-journal",
+      title: "Monochrome Journal",
+      category: "BRAND IDENTITY",
+      categoryLabel: "MINIMALIST ART DIRECTION",
+      year: "2020",
+      status: "COMPLETED",
+      accentColor: "green",
+      description:
+        "Stripped back to essentials. A minimal palette and sharp typographic rhythm create a calm, focused reading experience where content defines the aesthetic.",
+      metrics: [
+        { label: "PALETTE", value: "Pure Grayscale" },
+        { label: "RHYTHM", value: "Vertical Grid" },
+        { label: "LAYOUT", value: "Uncluttered" },
+        { label: "NOISE", value: "Zero Distraction" },
+      ],
+      tags: ["Art Direction", "Minimalism", "Typography", "Editorial"],
+      githubUrl: "https://github.com/tanvir-kanoje",
+    },
+    {
+      id: "economic-review",
+      title: "The Economic Review",
+      category: "ILLUSTRATION",
+      categoryLabel: "DATA VISUALIZATION & ANALYTICAL ART",
+      year: "2019",
+      status: "COMPLETED",
+      accentColor: "yellow",
+      description:
+        "Centered around structure and data. Precise layouts, subtle motion cues, and analytical visual illustrations reinforce clarity and trust in complex financial information.",
+      metrics: [
+        { label: "FOCUS", value: "Data Clarity" },
+        { label: "INFOGRAPHICS", value: "Vector Sets" },
+        { label: "COLOR", value: "Financial Tint" },
+        { label: "READABILITY", value: "High Contrast" },
+      ],
+      tags: ["Illustration", "Data Viz", "Finance", "Vector Infographics"],
+      githubUrl: "https://github.com/tanvir-kanoje",
+    },
+    {
+      id: "the-chronicle",
+      title: "The Chronicle",
+      category: "BRAND IDENTITY",
+      categoryLabel: "NARRATIVE PUBLISHING & ART DIRECTION",
+      year: "2019",
+      status: "COMPLETED",
+      accentColor: "blue",
+      description:
+        "Built on narrative flow — guiding the reader through layered stories. Warm tones, editorial typography, and soft transitions create a human, immersive news experience.",
+      metrics: [
+        { label: "FLOW", value: "Narrative" },
+        { label: "ATMOSPHERE", value: "Warm Editorial" },
+        { label: "CHAPTERS", value: "8 Sections" },
+        { label: "PACING", value: "Thoughtful" },
+      ],
+      tags: ["Art Direction", "Publishing", "Narrative", "Editorial"],
       githubUrl: "https://github.com/tanvir-kanoje",
     },
   ];
+
+  const filterTabs = ["ALL", "FLAGSHIP AI", "BRAND IDENTITY", "ILLUSTRATION", "PACKAGING"];
+
+  const filteredProjects =
+    filter === "ALL" ? projects : projects.filter((p) => p.category === filter);
 
   return (
     <section id="projects" className="picco-section">
       <div className="picco-section-header">
         <div className="picco-section-tag">
-          <span>01 // PORTFOLIO</span>
+          <span>01 // SELECTED WORKS</span>
         </div>
         <h2 className="picco-section-title">
           Selected <span className="picco-serif-highlight">projects</span>
         </h2>
         <p className="picco-section-subtitle">
-          A showcase of cloud-native distributed systems, computer vision models, and production web engineering.
+          Sneak peek of works across computer vision, brand identity, editorial illustration, and packaging.
         </p>
+
+        {/* Filter Pills */}
+        <div className="picco-filter-tabs">
+          {filterTabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setFilter(tab)}
+              className={`picco-filter-btn ${filter === tab ? "filter-active" : ""}`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div className="picco-projects-grid">
-        {projects.map((proj) => (
+        {filteredProjects.map((proj) => (
           <article key={proj.id} className={`picco-project-card card-accent-${proj.accentColor}`}>
             {/* Top Bar: Category & Year */}
             <div className="picco-card-meta">
-              <span className="picco-card-category">{proj.category}</span>
+              <span className="picco-card-category">{proj.categoryLabel}</span>
               <div className="picco-card-badges">
                 {proj.isFlagship && (
                   <span className="picco-card-pill-flagship">
@@ -120,7 +238,7 @@ export default function ProjectsSection({ onJumpToStudio }) {
 
             {/* Picco Visual Showcase Banner */}
             <div className={`picco-card-visual-wrap visual-bg-${proj.accentColor}`}>
-              {proj.id === "memecraft" && (
+              {proj.id === "memecraft" ? (
                 <div className="visual-stage-memecraft">
                   <div className="visual-face-split">
                     <div className="face-half selfie-half">
@@ -147,62 +265,15 @@ export default function ProjectsSection({ onJumpToStudio }) {
                     <span>800+ MEMES</span>
                   </div>
                 </div>
-              )}
-
-              {proj.id === "cloudstream" && (
-                <div className="visual-stage-cloudstream">
-                  <div className="pipeline-nodes">
-                    <div className="node-chip">S3 INGEST</div>
-                    <div className="pipeline-line"></div>
-                    <div className="node-chip active-node">STEP FUNCTIONS</div>
-                    <div className="pipeline-line"></div>
-                    <div className="node-chip">HLS ENCODE</div>
+              ) : (
+                <div className="visual-stage-editorial">
+                  <div className="editorial-cover-card">
+                    <span className="editorial-edition font-mono">{proj.year} EDITION</span>
+                    <h4 className="editorial-heading">{proj.title}</h4>
+                    <span className="editorial-tag">{proj.category}</span>
                   </div>
-                  <div className="waveform-bars">
-                    {[40, 75, 55, 90, 60, 85, 45, 95, 70, 50, 80, 65].map((h, i) => (
-                      <span
-                        key={i}
-                        className="wave-bar"
-                        style={{ height: `${h}%`, animationDelay: `${i * 0.08}s` }}
-                      ></span>
-                    ))}
-                  </div>
-                  <div className="visual-badge-sticker sticker-orange">
-                    <span>ZERO IDLE BILLING</span>
-                  </div>
-                </div>
-              )}
-
-              {proj.id === "omnirag" && (
-                <div className="visual-stage-omnirag">
-                  <div className="rag-vector-cluster">
-                    <div className="vector-center">
-                      <span className="vector-core">BEDROCK AI</span>
-                    </div>
-                    <div className="vector-orbit orbit-1">k-NN = 0.98</div>
-                    <div className="vector-orbit orbit-2">HYBRID SEARCH</div>
-                    <div className="vector-orbit orbit-3">OPENSEARCH</div>
-                  </div>
-                  <div className="visual-badge-sticker sticker-green">
-                    <span>CLAUDE 3.5 SONNET</span>
-                  </div>
-                </div>
-              )}
-
-              {proj.id === "pulseiot" && (
-                <div className="visual-stage-pulseiot">
-                  <svg className="iot-wave-svg" viewBox="0 0 400 100" fill="none">
-                    <path
-                      d="M 0 50 Q 50 10 100 50 T 200 50 T 300 50 T 400 50"
-                      stroke="#B38600"
-                      strokeWidth="3.5"
-                      fill="none"
-                      className="pulse-svg-path"
-                    />
-                    <circle cx="200" cy="50" r="6" fill="#F0CD3E" className="pulse-ping-dot" />
-                  </svg>
-                  <div className="visual-badge-sticker sticker-yellow">
-                    <span>10K METRICS / SEC</span>
+                  <div className={`visual-badge-sticker sticker-${proj.accentColor}`}>
+                    <span>{proj.status}</span>
                   </div>
                 </div>
               )}
@@ -259,7 +330,7 @@ export default function ProjectsSection({ onJumpToStudio }) {
                     className="picco-btn-card-secondary"
                   >
                     <GithubIcon size={16} />
-                    <span>View Repository</span>
+                    <span>View Project</span>
                     <ArrowUpRight size={14} />
                   </a>
                   <span className="picco-card-status-badge">

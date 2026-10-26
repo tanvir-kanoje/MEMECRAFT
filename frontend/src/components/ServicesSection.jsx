@@ -1,62 +1,62 @@
 import React from "react";
-import { Cloud, Cpu, Layout, ShieldCheck, ArrowRight } from "lucide-react";
+import { Palette, PenTool, Sparkles, Package, ArrowRight } from "lucide-react";
 
 export default function ServicesSection() {
   const capabilities = [
     {
-      icon: Cloud,
-      title: "Cloud & Serverless Systems",
+      icon: Palette,
+      title: "Brand Identity",
       colorClass: "service-blue",
       number: "01",
       description:
-        "Architecting resilient event-driven systems that eliminate idle costs and scale horizontally from zero to thousands of concurrent transactions.",
+        "Building flexible identity systems designed to unify diverse touchpoints. Clean typography, structured grids, and strategic color palettes.",
       bullets: [
-        "Direct-to-S3 presigned ingestion pipelines",
-        "Sub-second Lambda microservice orchestration",
-        "CloudFront global edge distribution with OAC",
-        "Cost-optimized zero-idle serverless topologies",
+        "Visual identity guidelines & design tokens",
+        "Logo systems, marks & brand architecture",
+        "Digital & physical collateral design",
+        "Scalable design systems & UI patterns",
       ],
     },
     {
-      icon: Cpu,
-      title: "Computer Vision & Applied AI",
+      icon: PenTool,
+      title: "Graphic Design",
       colorClass: "service-orange",
       number: "02",
       description:
-        "Translating multi-modal deep learning models and Amazon Rekognition neural APIs into production-ready, low-latency business logic.",
+        "Editorial design, typographic rhythm, and print production. Crafting publications, posters, and books where content defines the aesthetic.",
       bullets: [
-        "Facial landmark geometry & pose telemetry",
-        "Expression affinity distance mathematical modeling",
-        "Precomputed batch catalog indexing pipelines",
-        "Warm in-memory Lambda caching (sub-400ms)",
+        "Editorial layouts & publishing systems",
+        "Custom typography pairings & hierarchy",
+        "Print specifications & paper craft",
+        "Event exhibitions & promotional posters",
       ],
     },
     {
-      icon: Layout,
-      title: "Full-Stack Web & Creative UI",
+      icon: Sparkles,
+      title: "Illustrations & Vector Art",
       colorClass: "service-green",
       number: "03",
       description:
-        "Crafting responsive web interfaces that combine strict typographic rigor, buttery 60fps micro-interactions, and instant feedback.",
+        "Expressive vector sets, editorial spot illustrations, and computer vision alter-egos. Adding warmth, character, and delight to complex ideas.",
       bullets: [
-        "React 19 + modern Vite development workflows",
-        "Non-overlapping CSS Grid viewport systems",
-        "Client-side HTML5 Canvas compositing & export",
-        "Web Audio API hardware-free audio synthesizers",
+        "Custom editorial illustration suites",
+        "Vector iconography & asset libraries",
+        "Character design & facial expressions",
+        "Digital storyboards & motion assets",
       ],
     },
     {
-      icon: ShieldCheck,
-      title: "Enterprise Privacy & Governance",
+      icon: Package,
+      title: "Packaging & Physical",
       colorClass: "service-yellow",
       number: "04",
       description:
-        "Engineering zero-trust cloud architectures with data minimization, immutable auditing, and automated compliance by design.",
+        "Tactile, hands-on packaging design. Turning products into small collectible objects through bold forms, raw textures, and playful compositions.",
       bullets: [
-        "Zero biometric data retention compliance",
-        "24-hour S3 Lifecycle automated purge rules",
-        "IAM least-privilege cryptographic roles",
-        "Short-lived cryptographic capability tokens",
+        "Structural box design & die-line preparation",
+        "Label systems & SKU color coding",
+        "Material selection & tactile finishes",
+        "Shelf impact & retail presentation",
       ],
     },
   ];
@@ -68,10 +68,10 @@ export default function ServicesSection() {
           <span>02 // CAPABILITIES</span>
         </div>
         <h2 className="picco-section-title">
-          Architectural <span className="picco-serif-highlight">disciplines</span> & services
+          Services // <span className="picco-serif-highlight">What I bring</span>
         </h2>
         <p className="picco-section-subtitle">
-          How I approach designing high-scale cloud platforms, real-time computer vision, and user-facing digital experiences.
+          Comprehensive creative disciplines from brand identity to vector craft and high-performance interactive experiences.
         </p>
       </div>
 
