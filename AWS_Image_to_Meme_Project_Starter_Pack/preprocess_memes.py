@@ -30,6 +30,7 @@ CHECKPOINT_EVERY = int(os.getenv("CHECKPOINT_EVERY", "25"))
 # Safe by default. Use LIMIT=0 only after reviewing a successful small run.
 LIMIT = int(os.getenv("LIMIT", "20"))
 PAUSE_SECONDS = float(os.getenv("PAUSE_SECONDS", "0.15"))
+FRESH_START = os.getenv("FRESH_START", "0").lower() in ("1", "true", "yes")
 EXTENSIONS = (".jpg", ".jpeg", ".png")
 
 client_config = Config(retries={"max_attempts": 8, "mode": "standard"})
@@ -49,6 +50,9 @@ def list_image_keys():
 
 
 def load_existing_results():
+    if FRESH_START:
+        print("[FRESH_START active] Starting a completely clean metadata index (ignoring previous checkpoint).")
+        return {}
     try:
         response = s3.get_object(Bucket=BUCKET, Key=CHECKPOINT_KEY)
         payload = response["Body"].read().decode("utf-8")
@@ -132,6 +136,7 @@ def main():
     print(f"Image prefix: {IMAGE_PREFIX}")
     print(f"Metadata output: s3://{BUCKET}/{OUTPUT_KEY}")
     print(f"LIMIT: {LIMIT} (0 means all images)")
+    print(f"FRESH_START: {FRESH_START}")
 
     keys = list_image_keys()
     print(f"JPEG/PNG images found: {len(keys)}")

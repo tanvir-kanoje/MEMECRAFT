@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="ub-glow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#262520" />
+      <stop offset="100%" stop-color="#141412" />
+    </radialGradient>
+    <linearGradient id="coffee-steam" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#D6FF61" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#D6FF61" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="800" fill="url(#ub-glow)" />
+
+  <!-- Archival Framing Border -->
+  <rect x="24" y="24" width="752" height="752" fill="none" stroke="#77796D" stroke-opacity="0.25" stroke-width="1.5" />
+  <rect x="36" y="36" width="728" height="728" fill="none" stroke="#77796D" stroke-opacity="0.15" stroke-dasharray="4 6" stroke-width="1" />
+
+  <!-- Taxonomy Metadata Stamps -->
+  <text x="56" y="74" fill="#D6FF61" font-family="'JetBrains Mono', monospace" font-size="13" letter-spacing="3" font-weight="600">ARCHIVE SPECIMEN // NO. 029</text>
+  <text x="744" y="74" text-anchor="end" fill="#77796D" font-family="'JetBrains Mono', monospace" font-size="12" letter-spacing="2">EMOTION: CALM / TRANQUIL</text>
+
+  <!-- Gentle Ambient Waves & Flame Archetype Vignette -->
+  <g stroke="#77796D" stroke-opacity="0.25" stroke-width="1" fill="none">
+    <path d="M 120 480 Q 260 460 400 480 T 680 480" />
+    <path d="M 120 510 Q 260 490 400 510 T 680 510" />
+    <path d="M 120 540 Q 260 520 400 540 T 680 540" />
+  </g>
+
+  <!-- Subtle Flame Icons in the Distance (This Is Fine Homage) -->
+  <g fill="#D6FF61" fill-opacity="0.15" transform="translate(180, 260)">
+    <path d="M 0 40 Q 15 10 30 40 Q 40 0 50 40 Q 60 20 70 50 Z" />
+  </g>
+  <g fill="#D6FF61" fill-opacity="0.12" transform="translate(560, 270)">
+    <path d="M 0 40 Q 15 10 30 40 Q 40 0 50 40 Q 60 20 70 50 Z" />
+  </g>
+
+  <!-- Central Silhouette: The Serene Unbothered Figure -->
+  <g transform="translate(400, 420)">
+    <!-- Aura glow -->
+    <circle cx="0" cy="-40" r="130" fill="#D6FF61" fill-opacity="0.04" filter="blur(25px)" />
+
+    <!-- Shoulders & Coat -->
+    <path d="M -160 230 Q -130 130 -70 110 L 70 110 Q 130 130 160 230 Z" fill="#1C1E18" stroke="#77796D" stroke-opacity="0.4" stroke-width="2" />
+
+    <!-- Neck -->
+    <path d="M -36 110 L -32 45 L 32 45 L 36 110 Z" fill="#262721" />
+
+    <!-- Head -->
+    <ellipse cx="0" cy="-30" rx="80" ry="90" fill="#2E2F26" stroke="#77796D" stroke-width="2" />
+
+    <!-- Signature Archival Little Hat -->
+    <path d="M -65 -100 L 65 -100 L 45 -150 L -45 -150 Z" fill="#181914" stroke="#77796D" stroke-width="2" />
+    <ellipse cx="0" cy="-98" rx="85" ry="12" fill="#D6FF61" fill-opacity="0.8" />
+
+    <!-- Relaxed Closed Eyes (Curves of Pure Serenity) -->
+    <path d="M -48 -25 Q -32 -10 -16 -25" fill="none" stroke="#F5F1E8" stroke-width="3" stroke-linecap="round" />
+    <path d="M 16 -25 Q 32 -10 48 -25" fill="none" stroke="#F5F1E8" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Gentle Smile of Supreme Acceptance -->
+    <path d="M -24 35 Q 0 52 24 35" fill="none" stroke="#D6FF61" stroke-width="3" stroke-linecap="round" />
+
+    <!-- Coffee Mug (Homage to Ultimate Calm) -->
+    <g transform="translate(70, 75)">
+      <rect x="0" y="0" width="42" height="48" rx="6" fill="#F5F1E8" stroke="#181A14" stroke-width="2" />
+      <path d="M 42 10 Q 56 10 56 24 Q 56 38 42 38" fill="none" stroke="#F5F1E8" stroke-width="3" />
+      <!-- Steam -->
+      <path d="M 12 -8 Q 6 -20 16 -32" fill="none" stroke="url(#coffee-steam)" stroke-width="2.5" stroke-linecap="round" />
+      <path d="M 28 -6 Q 34 -18 24 -30" fill="none" stroke="url(#coffee-steam)" stroke-width="2.5" stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- Bottom Archival Stamp -->
+  <g transform="translate(56, 700)">
+    <rect x="0" y="0" width="688" height="48" rx="6" fill="#181913" stroke="#77796D" stroke-opacity="0.3" stroke-width="1" />
+    <text x="20" y="30" fill="#F5F1E8" font-family="'Instrument Serif', Georgia, serif" font-size="20" font-style="italic">The Unbothered</text>
+    <text x="165" y="29" fill="#77796D" font-family="'JetBrains Mono', monospace" font-size="11">“Inner peace through catastrophic acceptance.”</text>
+    <text x="668" y="29" text-anchor="end" fill="#D6FF61" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">MEMECRAFT HISTORIC ARCHIVE</text>
+  </g>
+</svg>
+

@@ -1,28 +1,46 @@
 import json
+import logging
 import os
 import random
 import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
 
+# Logger setup
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 # Configuration
 REGION = os.getenv("AWS_REGION", "us-east-1")
 BUCKET = os.getenv("BUCKET", "my-meme-database-2026")
 METADATA_KEY = os.getenv("METADATA_KEY", "metadata/memes_metadata.json")
 MEME_URL_EXPIRATION = int(os.getenv("MEME_URL_EXPIRATION", "900"))  # 15 minutes
+ALLOWED_ORIGIN = os.getenv("ALLOWED_ORIGIN", "https://d2tuc83mjm02el.cloudfront.net")
+UPLOAD_PREFIX = os.getenv("UPLOAD_PREFIX", "uploads/")
 
 s3_config = Config(retries={"max_attempts": 3, "mode": "standard"}, signature_version="s3v4")
 s3 = boto3.client("s3", region_name=REGION, config=s3_config)
 rekognition = boto3.client("rekognition", region_name=REGION, config=s3_config)
 
-CORS_HEADERS = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-}
-
 # In-memory cache for warm Lambda execution environments (avoids re-fetching 800+ memes from S3)
 CACHED_METADATA = None
+
+
+def get_cors_headers(request_origin=None):
+    """Returns CORS headers. Allows local development or restricted CloudFront production origin."""
+    origin = ALLOWED_ORIGIN
+    if request_origin:
+        if "localhost" in request_origin or "127.0.0.1" in request_origin:
+            origin = request_origin
+        elif request_origin == ALLOWED_ORIGIN:
+            origin = request_origin
+
+    return {
+        "Access-Control-Allow-Origin": origin,
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        "Access-Control-Max-Age": "86400",
+    }
 
 
 def get_metadata():
@@ -32,14 +50,14 @@ def get_metadata():
         return CACHED_METADATA
 
     try:
-        print(f"Loading metadata from s3://{BUCKET}/{METADATA_KEY}...")
+        logger.info(f"Loading metadata from s3://{BUCKET}/{METADATA_KEY}...")
         response = s3.get_object(Bucket=BUCKET, Key=METADATA_KEY)
         payload = response["Body"].read().decode("utf-8")
         CACHED_METADATA = json.loads(payload)
-        print(f"Successfully loaded {len(CACHED_METADATA)} meme metadata records into memory.")
+        logger.info(f"Successfully loaded {len(CACHED_METADATA)} meme metadata records into memory.")
         return CACHED_METADATA
-    except Exception as exc:
-        print(f"Error loading metadata from S3: {exc}")
+    except Exception:
+        logger.exception("Error loading metadata from S3")
         return {}
 
 
@@ -98,29 +116,45 @@ def calculate_match_score(user_face, meme_face):
     # 4. Pose Similarity (Pitch & Yaw) (0.10)
     user_pose = user_face.get("Pose", {})
     meme_pose = meme_face.get("pose", {})
-    yaw_diff = abs(user_pose.get("Yaw", 0.0) - meme_pose.get("Yaw", 0.0))
-    pitch_diff = abs(user_pose.get("Pitch", 0.0) - meme_pose.get("Pitch", 0.0))
-    # Normalize differences up to 90 degrees
-    pose_penalty = min(1.0, (yaw_diff + pitch_diff) / 90.0)
-    score += 0.10 * (1.0 - pose_penalty)
+    user_pitch = user_pose.get("Pitch", 0.0)
+    user_yaw = user_pose.get("Yaw", 0.0)
+    meme_pitch = meme_pose.get("pitch", 0.0)
+    meme_yaw = meme_pose.get("yaw", 0.0)
 
-    # 5. Eyeglasses Agreement (0.05)
-    user_glasses = bool(user_face.get("Eyeglasses", {}).get("Value", False)) or bool(user_face.get("Sunglasses", {}).get("Value", False))
-    meme_glasses = bool(meme_face.get("eyeglasses", {}).get("value", False)) or bool(meme_face.get("sunglasses", {}).get("value", False))
+    pitch_diff = abs(user_pitch - meme_pitch)
+    yaw_diff = abs(user_yaw - meme_yaw)
+
+    pose_pitch_score = max(0.0, 1.0 - (pitch_diff / 45.0))
+    pose_yaw_score = max(0.0, 1.0 - (yaw_diff / 45.0))
+    score += 0.10 * ((pose_pitch_score + pose_yaw_score) / 2.0)
+
+    # 5. Eyewear Agreement (0.05)
+    user_glasses = bool(user_face.get("Eyeglasses", {}).get("Value", False)) or \
+                   bool(user_face.get("Sunglasses", {}).get("Value", False))
+    meme_glasses = bool(meme_face.get("eyeglasses", {}).get("value", False)) or \
+                   bool(meme_face.get("sunglasses", {}).get("value", False))
     if user_glasses == meme_glasses:
         score += 0.05
 
-    return round(score, 3)
+    return round(score, 4)
 
 
 def lambda_handler(event, context):
-    """Analyzes a student selfie and returns the best matching meme from the catalog."""
+    """
+    Validates uploaded selfie, invokes Rekognition DetectFaces once,
+    evaluates against the in-memory meme catalogue, and returns top match.
+    Enforces path containment and generic client-facing error sanitation.
+    """
+    request_headers = event.get("headers") or {}
+    request_origin = request_headers.get("origin") or request_headers.get("Origin")
+    cors_headers = get_cors_headers(request_origin)
+
     # Handle CORS preflight OPTIONS request
     http_method = event.get("httpMethod") or event.get("requestContext", {}).get("http", {}).get("method", "")
     if http_method == "OPTIONS":
         return {
             "statusCode": 200,
-            "headers": CORS_HEADERS,
+            "headers": cors_headers,
             "body": ""
         }
 
@@ -132,99 +166,103 @@ def lambda_handler(event, context):
             body_raw = base64.b64decode(body_raw).decode("utf-8")
 
         body = json.loads(body_raw) if isinstance(body_raw, str) else (body_raw or {})
-        object_key = body.get("objectKey", "").strip()
+        object_key = body.get("objectKey")
 
         if not object_key:
             return {
                 "statusCode": 400,
-                "headers": CORS_HEADERS,
-                "body": json.dumps({"error": "Missing 'objectKey' in request body."})
+                "headers": cors_headers,
+                "body": json.dumps({"error": "Missing required field 'objectKey'."})
             }
 
-        # Verify object exists in S3
+        # Security check: Enforce prefix containment to prevent arbitrary S3 inspection
+        clean_key = os.path.normpath(object_key)
+        if not clean_key.startswith(UPLOAD_PREFIX) or ".." in clean_key:
+            logger.warning(f"Unauthorized objectKey access attempt: {object_key}")
+            return {
+                "statusCode": 403,
+                "headers": cors_headers,
+                "body": json.dumps({"error": "Access denied. Object key must reside within uploads prefix."})
+            }
+
+        logger.info(f"Analyzing facial attributes for s3://{BUCKET}/{clean_key}...")
+
+        # 1. Detect faces in uploaded selfie using Amazon Rekognition
         try:
-            head = s3.head_object(Bucket=BUCKET, Key=object_key)
-            if head["ContentLength"] > 10 * 1024 * 1024:
+            rekog_response = rekognition.detect_faces(
+                Image={"S3Object": {"Bucket": BUCKET, "Name": clean_key}},
+                Attributes=["ALL"]
+            )
+        except ClientError as e:
+            code = e.response.get("Error", {}).get("Code", "")
+            if code == "InvalidImageFormatException":
                 return {
                     "statusCode": 400,
-                    "headers": CORS_HEADERS,
-                    "body": json.dumps({"error": "Uploaded image exceeds 10MB limit."})
+                    "headers": cors_headers,
+                    "body": json.dumps({"status": "no_face", "message": "Uploaded file is not a supported image format."})
                 }
-        except ClientError as exc:
-            return {
-                "statusCode": 404,
-                "headers": CORS_HEADERS,
-                "body": json.dumps({"error": f"Image not found in S3: {object_key}"})
-            }
+            logger.exception("Rekognition client error")
+            raise
 
-        # Analyze uploaded selfie with Rekognition DetectFaces
-        rekog_response = rekognition.detect_faces(
-            Image={"S3Object": {"Bucket": BUCKET, "Name": object_key}},
-            Attributes=["ALL"]
-        )
-
-        detected_faces = rekog_response.get("FaceDetails", [])
-        if not detected_faces:
+        face_details = rekog_response.get("FaceDetails", [])
+        if not face_details:
+            logger.info("No faces detected in the provided image.")
             return {
                 "statusCode": 200,
-                "headers": CORS_HEADERS,
+                "headers": cors_headers,
                 "body": json.dumps({
                     "status": "no_face",
-                    "message": "No face detected in your photo. Please take a clearer selfie with good lighting!"
+                    "message": "No face detected in the image. Please look directly at the camera and ensure good lighting."
                 })
             }
 
-        # Select primary face
-        user_face = get_primary_face(detected_faces)
-        user_emotions = sorted(
-            user_face.get("Emotions", []),
-            key=lambda x: x.get("Confidence", 0.0),
-            reverse=True
-        )
-        primary_emotion = user_emotions[0]["Type"] if user_emotions else "UNKNOWN"
-        emotion_confidence = round(user_emotions[0]["Confidence"], 1) if user_emotions else 0.0
+        # 2. Pick primary face and extract attributes
+        primary_face = get_primary_face(face_details)
+        emotions = primary_face.get("Emotions", [])
+        primary_emotion = emotions[0]["Type"] if emotions else "UNKNOWN"
+        emotion_confidence = round(emotions[0]["Confidence"], 1) if emotions else 0.0
 
-        is_smiling = bool(user_face.get("Smile", {}).get("Value", False))
-        mouth_open = bool(user_face.get("MouthOpen", {}).get("Value", False))
-        glasses = bool(user_face.get("Eyeglasses", {}).get("Value", False)) or bool(user_face.get("Sunglasses", {}).get("Value", False))
+        is_smiling = bool(primary_face.get("Smile", {}).get("Value", False))
+        mouth_open = bool(primary_face.get("MouthOpen", {}).get("Value", False))
+        glasses = bool(primary_face.get("Eyeglasses", {}).get("Value", False)) or \
+                  bool(primary_face.get("Sunglasses", {}).get("Value", False))
 
-        # Retrieve catalog metadata
-        metadata = get_metadata()
-        if not metadata:
+        # 3. Load precomputed catalogue from warm cache
+        catalogue = get_metadata()
+        if not catalogue:
+            logger.error("Meme metadata catalogue is empty or failed to load.")
             return {
                 "statusCode": 500,
-                "headers": CORS_HEADERS,
-                "body": json.dumps({"error": "Meme catalogue metadata is currently unavailable."})
+                "headers": cors_headers,
+                "body": json.dumps({"error": "Meme catalogue is temporarily unavailable. Please try again later."})
             }
 
-        # Score all eligible memes that have detected faces
+        # 4. Score all catalogue memes against user's face
         scored_memes = []
-        for meme_key, meme_data in metadata.items():
-            if meme_data.get("status") != "success" or not meme_data.get("faces"):
+        for meme_key, meme_info in catalogue.items():
+            faces = meme_info.get("faces", [])
+            if not faces:
                 continue
 
-            # Pick the primary face of the meme
-            meme_faces = meme_data["faces"]
-            meme_primary_face = meme_faces[0]
-
-            score = calculate_match_score(user_face, meme_primary_face)
+            best_meme_face = faces[0]
+            score = calculate_match_score(primary_face, best_meme_face)
             scored_memes.append({
                 "memeKey": meme_key,
                 "score": score,
-                "memeEmotion": meme_primary_face.get("dominant_emotion"),
+                "details": best_meme_face
             })
 
         if not scored_memes:
             return {
-                "statusCode": 500,
-                "headers": CORS_HEADERS,
-                "body": json.dumps({"error": "No indexed face memes found in catalogue."})
+                "statusCode": 404,
+                "headers": cors_headers,
+                "body": json.dumps({"error": "No matching memes found in catalogue."})
             }
 
-        # Sort descending by score
+        # Sort descending by affinity score
         scored_memes.sort(key=lambda item: item["score"], reverse=True)
 
-        # Select randomly from top 5 candidates for variety
+        # Select with entropy from top 5 candidates to prevent repetitive matches
         candidate_pool = scored_memes[:5]
         chosen_match = random.choice(candidate_pool)
 
@@ -235,9 +273,11 @@ def lambda_handler(event, context):
             ExpiresIn=MEME_URL_EXPIRATION
         )
 
+        logger.info(f"Matched {clean_key} to {chosen_match['memeKey']} with score {chosen_match['score']}")
+
         return {
             "statusCode": 200,
-            "headers": CORS_HEADERS,
+            "headers": cors_headers,
             "body": json.dumps({
                 "status": "success",
                 "memeKey": chosen_match["memeKey"],
@@ -254,10 +294,12 @@ def lambda_handler(event, context):
             })
         }
 
-    except Exception as exc:
-        print(f"Error matching meme: {exc}")
+    except Exception:
+        # Diagnostic stack trace preserved in CloudWatch
+        logger.exception("Internal error processing facial expression match")
+        # Client receives sanitized safe response
         return {
             "statusCode": 500,
-            "headers": CORS_HEADERS,
-            "body": json.dumps({"error": "Failed to match meme", "details": str(exc)})
+            "headers": cors_headers,
+            "body": json.dumps({"error": "Failed to complete facial expression match. Please try again."})
         }

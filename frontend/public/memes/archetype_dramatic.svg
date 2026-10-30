@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <radialGradient id="de-glow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#272A1F" />
+      <stop offset="100%" stop-color="#131510" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="800" fill="url(#de-glow)" />
+
+  <!-- Archival Framing Border -->
+  <rect x="24" y="24" width="752" height="752" fill="none" stroke="#77796D" stroke-opacity="0.25" stroke-width="1.5" />
+  <rect x="36" y="36" width="728" height="728" fill="none" stroke="#77796D" stroke-opacity="0.15" stroke-dasharray="4 6" stroke-width="1" />
+
+  <!-- Taxonomy Metadata Stamps -->
+  <text x="56" y="74" fill="#D6FF61" font-family="'JetBrains Mono', monospace" font-size="13" letter-spacing="3" font-weight="600">ARCHIVE SPECIMEN // NO. 088</text>
+  <text x="744" y="74" text-anchor="end" fill="#77796D" font-family="'JetBrains Mono', monospace" font-size="12" letter-spacing="2">EMOTION: HAPPY / TRIUMPHANT</text>
+
+  <!-- Dramatic Radial Rays of Triumph -->
+  <g stroke="#D6FF61" stroke-opacity="0.12" stroke-width="1" fill="none">
+    <line x1="400" y1="380" x2="100" y2="100" stroke-dasharray="4 8" />
+    <line x1="400" y1="380" x2="700" y2="100" stroke-dasharray="4 8" />
+    <line x1="400" y1="380" x2="400" y2="80" />
+    <line x1="400" y1="380" x2="80" y2="380" />
+    <line x1="400" y1="380" x2="720" y2="380" />
+  </g>
+
+  <!-- Central Silhouette: The Dramatic Mastermind -->
+  <g transform="translate(400, 420)">
+    <!-- Aura glow -->
+    <circle cx="0" cy="-40" r="140" fill="#D6FF61" fill-opacity="0.06" filter="blur(30px)" />
+
+    <!-- Shoulders with Popped Collar / Dramatic Silhouette -->
+    <path d="M -170 240 L -120 120 L -60 110 L 60 110 L 120 120 L 170 240 Z" fill="#1C1E17" stroke="#77796D" stroke-opacity="0.4" stroke-width="2" />
+    <path d="M -110 110 L -60 50 L -40 100 Z" fill="#2E3324" stroke="#D6FF61" stroke-width="1.5" />
+    <path d="M 110 110 L 60 50 L 40 100 Z" fill="#2E3324" stroke="#D6FF61" stroke-width="1.5" />
+
+    <!-- Neck -->
+    <path d="M -36 110 L -32 45 L 32 45 L 36 110 Z" fill="#262920" />
+
+    <!-- Head / Cranium -->
+    <ellipse cx="0" cy="-30" rx="82" ry="92" fill="#2D3126" stroke="#77796D" stroke-width="2" />
+
+    <!-- Slicked Dramatic Hair -->
+    <path d="M -80 -40 C -85 -140, 75 -150, 85 -50 C 60 -90, -30 -90, -80 -40 Z" fill="#171913" />
+
+    <!-- Knowing / Asymmetric Eyebrows (One raised high, one relaxed) -->
+    <path d="M -48 -35 L -16 -28" stroke="#F5F1E8" stroke-width="3" stroke-linecap="round" />
+    <path d="M 18 -48 Q 36 -62 52 -45" fill="none" stroke="#D6FF61" stroke-width="3.5" stroke-linecap="round" />
+
+    <!-- Expressive Eyes with Confident Sparkle -->
+    <ellipse cx="-32" cy="-15" rx="14" ry="10" fill="#F5F1E8" stroke="#171913" stroke-width="2" />
+    <circle cx="-30" cy="-15" r="5" fill="#171913" />
+    <circle cx="-28" cy="-17" r="2" fill="#D6FF61" />
+
+    <ellipse cx="34" cy="-20" rx="15" ry="11" fill="#F5F1E8" stroke="#171913" stroke-width="2" />
+    <circle cx="36" cy="-20" r="5.5" fill="#171913" />
+    <circle cx="38" cy="-22" r="2" fill="#D6FF61" />
+
+    <!-- Nose -->
+    <path d="M 0 -12 L -4 16 L 6 18" fill="none" stroke="#77796D" stroke-width="2" stroke-linecap="round" />
+
+    <!-- Signature Asymmetric Smirk / Grin (Smile: true) -->
+    <path d="M -24 45 Q 0 46 26 32" fill="none" stroke="#D6FF61" stroke-width="3.5" stroke-linecap="round" />
+    <circle cx="28" cy="31" r="3" fill="#D6FF61" />
+
+    <!-- Clenched Fist of Victory in Foreground (Success Kid Vibe) -->
+    <g transform="translate(90, 80)">
+      <circle cx="0" cy="0" r="24" fill="#323829" stroke="#D6FF61" stroke-width="2" />
+      <path d="M -12 -6 L 12 -6 M -12 2 L 12 2 M -12 10 L 8 10" stroke="#77796D" stroke-width="2" stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- Bottom Archival Stamp -->
+  <g transform="translate(56, 700)">
+    <rect x="0" y="0" width="688" height="48" rx="6" fill="#181A13" stroke="#77796D" stroke-opacity="0.3" stroke-width="1" />
+    <text x="20" y="30" fill="#F5F1E8" font-family="'Instrument Serif', Georgia, serif" font-size="20" font-style="italic">The Dramatic Entrance</text>
+    <text x="180" y="29" fill="#77796D" font-family="'JetBrains Mono', monospace" font-size="11">“Arriving with unmatched narrative momentum.”</text>
+    <text x="668" y="29" text-anchor="end" fill="#D6FF61" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">MEMECRAFT HISTORIC ARCHIVE</text>
+  </g>
+</svg>
+

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Sparkles } from "lucide-react";
 
 const STEPS = [
-  "Uploading selfie to private S3 container...",
-  "Invoking AWS Rekognition DetectFaces...",
-  "Analyzing facial landmarks & emotion geometry...",
-  "Evaluating 800+ pre-indexed memes in Lambda...",
-  "Stitching best expression affinity match...",
+  "Awaiting your expression...",
+  "Consulting the permanent collection...",
+  "Analyzing micro-expression geometry & gaze...",
+  "Searching 800+ indexed comedic archetypes...",
+  "Synthesizing your unexpected alter ego...",
 ];
 
 export default function AnalyzingOverlay({ userPreview }) {
@@ -20,25 +20,26 @@ export default function AnalyzingOverlay({ userPreview }) {
   }, []);
 
   return (
-    <div className="analyzing-card craft-card">
+    <div className="analyzing-card gallery-card">
       <div className="analyzing-preview-box">
         {userPreview && (
           <img src={userPreview} alt="Scanning" className="analyzing-img" />
         )}
-        <div className="laser-line"></div>
-        <div className="reticle-box">
-          <div className="reticle-corner corner-tl"></div>
-          <div className="reticle-corner corner-tr"></div>
-          <div className="reticle-corner corner-bl"></div>
-          <div className="reticle-corner corner-br"></div>
+        <div className="scanning-laser-lime"></div>
+        <div className="analyzing-framing">
+          <div className="frame-tick frame-tl"></div>
+          <div className="frame-tick frame-tr"></div>
+          <div className="frame-tick frame-bl"></div>
+          <div className="frame-tick frame-br"></div>
         </div>
       </div>
 
       <div className="analyzing-text-wrap">
-        <div className="analyzing-badge font-mono">
-          <Sparkles size={16} className="spin-icon" /> NEURAL SCAN IN PROGRESS
+        <div className="archive-kicker font-mono">
+          <Sparkles size={14} color="var(--electric-lime)" />
+          <span>PORTRAIT SYNTHESIS IN PROGRESS</span>
         </div>
-        <h3 className="font-display analyzing-title">Decoding Your Vibe</h3>
+        <h3 className="analyzing-title font-serif">Let’s see what your expression has to say.</h3>
         <p className="analyzing-step font-mono">{STEPS[stepIndex]}</p>
 
         {/* Progress Dots */}

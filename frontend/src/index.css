@@ -1,137 +1,54 @@
 /* ==========================================================================
-   PICCO DESIGN SYSTEM // WARM CREAM ALABASTER & EDITORIAL TYPOGRAPHY
-   Inspired by Picco Framer Template + AWS Serverless Engineering
+   MEMECRAFT DESIGN SYSTEM // THE ART OF YOUR OTHER SELF
+   Editorial Dark-Gallery Aesthetic, Warm Ivory Paper & Electric Lime
+   Inspired by Avedon 100, High-End Portrait Archives & Literary Studies
    ========================================================================== */
 
 :root {
-  /* Picco Core Paper & Surface Palette */
-  --picco-bg: #F7F4ED;
-  --picco-card: #FFFFFF;
-  --picco-card-muted: #F2EEE5;
-  --picco-border: #E5E0D5;
-  --picco-border-hover: #D5CEBE;
-  --picco-border-subtle: #ECE8DE;
+  /* Editorial Palette: Dark Gallery, Warm Paper & Electric Lime */
+  --gallery-black: #171815;
+  --gallery-surface: #1E201B;
+  --gallery-card: #232520;
+  --gallery-elevated: #2A2D26;
   
-  /* Ink & Typography */
-  --picco-ink: #0F0F0F;
-  --picco-text-muted: #52524E;
-  --picco-text-subtle: #8A8880;
+  --warm-paper: #F5F1E8;
+  --warm-paper-dim: rgba(245, 241, 232, 0.76);
+  --warm-paper-muted: rgba(245, 241, 232, 0.48);
+  --warm-paper-subtle: rgba(245, 241, 232, 0.12);
+  
+  --electric-lime: #D6FF61;
+  --electric-lime-glow: rgba(214, 255, 97, 0.35);
+  --electric-lime-dim: rgba(214, 255, 97, 0.14);
+  --electric-lime-border: rgba(214, 255, 97, 0.45);
 
-  /* Picco Signature Accents */
-  --picco-blue: #2978F3;
-  --picco-navy: #2F4C9C;
-  --picco-yellow: #F0CD3E;
-  --picco-orange: #FF5324;
-  --picco-green: #0E9C6C;
-  --picco-sky: #69AFEB;
+  --archive-grey: #77796D;
+  --archive-border: rgba(119, 121, 109, 0.28);
+  --archive-border-strong: rgba(119, 121, 109, 0.55);
 
-  /* Dynamic Emotion Vibe Tokens (Active when selfie match runs) */
-  --vibe-hue: 220;
-  --vibe-primary: #2978F3;
-  --vibe-secondary: #00D2FF;
-  --vibe-tertiary: #1D4ED8;
-  --vibe-accent: #FF5324;
-  --vibe-glow: rgba(41, 120, 243, 0.25);
-  --vibe-glow-secondary: rgba(0, 210, 255, 0.2);
-  --vibe-gradient: linear-gradient(135deg, #1D4ED8 0%, #2978F3 45%, #00D2FF 100%);
-  --vibe-badge-bg: rgba(41, 120, 243, 0.08);
-  --vibe-badge-border: rgba(41, 120, 243, 0.25);
+  /* Unified tokens */
+  --bg-dark: #171815;
+  --bg-surface: #1E201B;
+  --bg-card: #232520;
+  --text-primary: #F5F1E8;
+  --text-secondary: rgba(245, 241, 232, 0.72);
+  --text-muted: #77796D;
 
-  /* Shadows & Depth */
-  --shadow-picco-sm: 0 2px 8px rgba(0, 0, 0, 0.03);
-  --shadow-picco: 0 4px 20px rgba(15, 15, 15, 0.04);
-  --shadow-picco-lg: 0 16px 40px -10px rgba(15, 15, 15, 0.07);
-  --shadow-glow: 0 0 35px var(--vibe-glow);
+  --vibe-primary: #D6FF61;
+  --vibe-glow: rgba(214, 255, 97, 0.3);
 
-  /* Typography Hierarchy */
-  --font-serif: 'Averia Serif Libre', Georgia, serif;
-  --font-hand: 'Caveat', cursive;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Typography */
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-display: 'Instrument Serif', Georgia, serif;
 
-  /* Transitions */
-  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Easing */
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.font-serif {
-  font-family: var(--font-serif);
-}
-
-.font-hand {
-  font-family: var(--font-hand);
-}
-
-.font-mono {
-  font-family: var(--font-mono);
-}
-
 /* ==========================================================================
-   DYNAMIC EMOTION THEMES (Blue Base with Festive Holi Gulal Accents)
-   ========================================================================== */
-[data-vibe="HAPPY"] {
-  --vibe-primary: #2563EB;
-  --vibe-secondary: #FF9900;
-  --vibe-tertiary: #FF007F;
-  --vibe-accent: #00D2FF;
-  --vibe-glow: rgba(255, 153, 0, 0.3);
-  --vibe-glow-secondary: rgba(37, 99, 235, 0.25);
-  --vibe-gradient: linear-gradient(135deg, #2563EB 0%, #FF007F 50%, #FF9900 100%);
-  --vibe-badge-bg: rgba(255, 153, 0, 0.1);
-  --vibe-badge-border: rgba(255, 153, 0, 0.4);
-}
-
-[data-vibe="SURPRISED"] {
-  --vibe-primary: #7C3AED;
-  --vibe-secondary: #00D2FF;
-  --vibe-tertiary: #EC4899;
-  --vibe-accent: #2563EB;
-  --vibe-glow: rgba(124, 58, 237, 0.35);
-  --vibe-glow-secondary: rgba(0, 210, 255, 0.25);
-  --vibe-gradient: linear-gradient(135deg, #7C3AED 0%, #00D2FF 50%, #EC4899 100%);
-  --vibe-badge-bg: rgba(124, 58, 237, 0.1);
-  --vibe-badge-border: rgba(124, 58, 237, 0.4);
-}
-
-[data-vibe="CALM"] {
-  --vibe-primary: #0284C7;
-  --vibe-secondary: #00D2FF;
-  --vibe-tertiary: #10B981;
-  --vibe-accent: #2563EB;
-  --vibe-glow: rgba(2, 132, 199, 0.3);
-  --vibe-glow-secondary: rgba(16, 185, 129, 0.2);
-  --vibe-gradient: linear-gradient(135deg, #1E40AF 0%, #0284C7 50%, #00D2FF 100%);
-  --vibe-badge-bg: rgba(2, 132, 199, 0.1);
-  --vibe-badge-border: rgba(2, 132, 199, 0.4);
-}
-
-[data-vibe="CONFUSED"] {
-  --vibe-primary: #9333EA;
-  --vibe-secondary: #2563EB;
-  --vibe-tertiary: #F43F5E;
-  --vibe-accent: #06B6D4;
-  --vibe-glow: rgba(147, 51, 234, 0.3);
-  --vibe-glow-secondary: rgba(37, 99, 235, 0.25);
-  --vibe-gradient: linear-gradient(135deg, #9333EA 0%, #2563EB 50%, #F43F5E 100%);
-  --vibe-badge-bg: rgba(147, 51, 234, 0.1);
-  --vibe-badge-border: rgba(147, 51, 234, 0.4);
-}
-
-[data-vibe="ANGRY"] {
-  --vibe-primary: #DC2626;
-  --vibe-secondary: #2563EB;
-  --vibe-tertiary: #F97316;
-  --vibe-accent: #FF007F;
-  --vibe-glow: rgba(220, 38, 38, 0.35);
-  --vibe-glow-secondary: rgba(37, 99, 235, 0.2);
-  --vibe-gradient: linear-gradient(135deg, #DC2626 0%, #2563EB 50%, #F97316 100%);
-  --vibe-badge-bg: rgba(220, 38, 38, 0.1);
-  --vibe-badge-border: rgba(220, 38, 38, 0.4);
-}
-
-/* ==========================================================================
-   GLOBAL RESET & HOLI POWDER BURST CANVAS
+   GLOBAL RESET & DARK GALLERY BACKGROUND
    ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -139,255 +56,179 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: var(--font-sans);
-  background-color: var(--picco-bg);
-  color: var(--picco-ink);
+  font-family: var(--font-body);
+  background-color: var(--gallery-black);
+  color: var(--warm-paper);
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
   position: relative;
-  transition: background-color 0.8s var(--ease-smooth);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(214, 255, 97, 0.05) 0%, transparent 60%),
+    radial-gradient(circle at 85% 30%, rgba(245, 241, 232, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 15% 65%, rgba(214, 255, 97, 0.03) 0%, transparent 45%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Holi Gulal Burst 1: Vibrant Magenta & Rose Pink (Top Left) */
-body::before {
-  content: '';
-  position: fixed;
-  top: -10%;
-  left: -10%;
-  width: 65vw;
-  height: 65vw;
-  background: radial-gradient(circle, rgba(255, 0, 127, 0.22) 0%, rgba(255, 105, 180, 0.14) 35%, transparent 70%);
-  filter: blur(85px);
-  pointer-events: none;
-  z-index: 0;
-  animation: floatHoli1 18s ease-in-out infinite alternate;
-}
-
-/* Holi Gulal Burst 2: Saffron Orange, Electric Blue & Turquoise (Bottom Right) */
-body::after {
-  content: '';
-  position: fixed;
-  bottom: -15%;
-  right: -10%;
-  width: 70vw;
-  height: 70vw;
-  background: radial-gradient(circle, rgba(0, 210, 255, 0.25) 0%, rgba(37, 99, 235, 0.2) 35%, rgba(255, 153, 0, 0.18) 55%, transparent 75%);
-  filter: blur(90px);
-  pointer-events: none;
-  z-index: 0;
-  animation: floatHoli2 22s ease-in-out infinite alternate-reverse;
-}
-
-/* Floating Holi Powder Keyframes */
-@keyframes floatHoli1 {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(60px, 40px) scale(1.15) rotate(15deg); }
-  100% { transform: translate(-40px, 20px) scale(0.92) rotate(-10deg); }
-}
-
-@keyframes floatHoli2 {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(-50px, -30px) scale(1.12) rotate(-12deg); }
-  100% { transform: translate(30px, -40px) scale(0.95) rotate(10deg); }
-}
-
-/* Picco Warm Paper Tactile Dot Matrix & Ambient Glow */
-.craft-grid-overlay {
+/* Subtle Archival Fine Grain Overlay */
+.gallery-grain-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: 
-    radial-gradient(rgba(15, 15, 15, 0.045) 1.2px, transparent 1.2px);
-  background-size: 24px 24px;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.9;
+  background-image: 
+    linear-gradient(rgba(119, 121, 109, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(119, 121, 109, 0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.6;
 }
 
 /* Typography Helpers */
-h1, h2, h3, h4, .font-display {
-  font-family: var(--font-display);
-  letter-spacing: -0.025em;
-  font-weight: 800;
+.font-serif {
+  font-family: var(--font-serif);
 }
 
-.gradient-text {
-  background: var(--vibe-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  transition: background 0.8s var(--ease-smooth);
-}
-
-.mono {
+.font-mono {
   font-family: var(--font-mono);
 }
 
-/* Button & Interaction Styles */
-.btn-craft {
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Archival Badges & Labels */
+.archive-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--archive-grey);
+}
+
+.archive-kicker .lime-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--electric-lime);
+  box-shadow: 0 0 8px var(--electric-lime);
+  display: inline-block;
+}
+
+/* Primary Electric Lime Button */
+.btn-lime {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  font-family: var(--font-display);
+  background: var(--electric-lime);
+  color: var(--gallery-black);
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
-  padding: 0.85rem 1.75rem;
+  letter-spacing: 0.01em;
+  padding: 0.85rem 1.85rem;
   border-radius: 9999px;
-  border: 1px solid transparent;
+  border: 1px solid var(--electric-lime);
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s var(--ease-spring);
   text-decoration: none;
+  transition: all 0.25s var(--ease-spring);
+  box-shadow: 0 4px 20px rgba(214, 255, 97, 0.25);
   user-select: none;
 }
 
-.btn-primary {
-  background: var(--vibe-gradient);
-  color: #FFFFFF;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
-  border: none;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.08);
-  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.45);
-}
-
-.btn-primary:active {
-  transform: translateY(1px) scale(0.98);
-}
-
-.btn-vibe {
-  background: var(--vibe-gradient);
-  color: #FFFFFF;
-  border: none;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
-}
-
-.btn-vibe:hover {
-  transform: translateY(-2px) scale(1.02);
-  filter: brightness(1.1);
-  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
-}
-
-.btn-outline {
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--text-primary);
-  border: 1px solid var(--border-light);
-  backdrop-filter: blur(12px);
-}
-
-.btn-outline:hover {
-  background: #FFFFFF;
-  border-color: var(--vibe-primary);
-  color: var(--vibe-primary);
+.btn-lime:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.12);
+  box-shadow: 0 8px 30px var(--electric-lime-glow);
+  filter: brightness(1.05);
 }
 
-/* Crisp Frosted Glass Surface Container */
-.craft-card {
-  background: var(--bg-card);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid var(--border-light);
-  border-radius: 28px;
-  box-shadow: 0 15px 40px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
+.btn-lime:active {
+  transform: scale(0.98);
 }
 
-.craft-card:hover {
-  border-color: rgba(37, 99, 235, 0.35);
-  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.12);
-}
-
-/* Iridescent Top Accent Border */
-.craft-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--vibe-gradient);
-  opacity: 0.9;
-  transition: opacity 0.4s ease, background 0.8s var(--ease-smooth);
-}
-
-/* Badge Component */
-.craft-badge {
+/* Secondary Archival Outline Button */
+.btn-archive-outline {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.95rem;
+  justify-content: center;
+  gap: 0.55rem;
+  background: rgba(245, 241, 232, 0.04);
+  color: var(--warm-paper);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.8rem 1.6rem;
   border-radius: 9999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background: var(--vibe-badge-bg);
-  border: 1px solid var(--vibe-badge-border);
-  color: var(--vibe-primary);
-  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.08);
-  transition: all 0.5s var(--ease-smooth);
+  border: 1px solid var(--archive-border);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s var(--ease-spring);
 }
 
-/* Shutter Flash Animation */
-@keyframes cameraFlash {
-  0% { opacity: 0; }
-  25% { opacity: 1; }
-  100% { opacity: 0; }
+.btn-archive-outline:hover {
+  background: rgba(245, 241, 232, 0.08);
+  border-color: var(--warm-paper);
+  transform: translateY(-1px);
 }
 
-.flash-active {
-  position: fixed;
-  inset: 0;
-  background: #FFFFFF;
-  z-index: 9999;
-  pointer-events: none;
-  animation: cameraFlash 0.35s ease-out forwards;
+/* Archival Exhibition Cards */
+.gallery-card {
+  background: var(--gallery-card);
+  border: 1px solid var(--archive-border);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s var(--ease-spring);
 }
 
-/* Face Scan Reticle Laser */
-@keyframes laserSweep {
-  0% { top: 4%; opacity: 0.8; }
-  50% { top: 92%; opacity: 1; }
-  100% { top: 4%; opacity: 0.8; }
+.gallery-card:hover {
+  border-color: var(--archive-border-strong);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
-.laser-line {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--vibe-gradient);
-  box-shadow: 0 0 16px var(--vibe-primary), 0 0 32px var(--vibe-secondary);
-  animation: laserSweep 2.2s ease-in-out infinite;
-  z-index: 10;
-}
-
-/* Custom Scrollbar */
+/* Minimalist Gallery Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: var(--gallery-black);
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 4px;
+  background: var(--archive-border);
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--vibe-primary);
+  background: var(--archive-grey);
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & REDUCED MOTION PREFERENCES
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--electric-lime);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

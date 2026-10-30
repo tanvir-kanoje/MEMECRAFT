@@ -1,88 +1,78 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "./components/Navbar";
-import HeroPicco from "./components/HeroPicco";
-import ProjectsSection from "./components/ProjectsSection";
-import ServicesSection from "./components/ServicesSection";
-import TestimonialsSection from "./components/TestimonialsSection";
-import AboutSection from "./components/AboutSection";
-import FaqSection from "./components/FaqSection";
-import FooterPicco from "./components/FooterPicco";
+import React, { useState } from "react";
+import Header from "./components/Header";
 import CameraBooth from "./components/CameraBooth";
 import AnalyzingOverlay from "./components/AnalyzingOverlay";
 import SplitFaceSlider from "./components/SplitFaceSlider";
 import SettingsModal from "./components/SettingsModal";
-import { matchSelfieImage, getApiBaseUrl } from "./api/client";
-import { Sparkles, AlertTriangle } from "lucide-react";
+import AboutSection from "./components/AboutSection";
+import { matchSelfieImage } from "./api/client";
+import { Camera, ArrowDown, AlertTriangle } from "lucide-react";
+import heroSampleImg from "./assets/hero.png";
 import "./App.css";
 
 export default function App() {
-  const [currentVibe, setCurrentVibe] = useState(null);
   const [userPreview, setUserPreview] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [matchResult, setMatchResult] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [apiBaseUrl, setApiBaseUrlState] = useState(getApiBaseUrl());
 
-  // Dynamically update document theme attribute whenever vibe changes
-  useEffect(() => {
-    if (currentVibe) {
-      document.documentElement.setAttribute("data-vibe", currentVibe);
-    } else {
-      document.documentElement.removeAttribute("data-vibe");
-    }
-  }, [currentVibe]);
-
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
+  const scrollToStudio = () => {
+    const el = document.getElementById("portrait-studio");
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
   // Handle photo capture & triggering match pipeline
-  const handleCapture = async (blobOrFile, previewUrl, forceVibe = null) => {
-    setUserPreview(previewUrl);
+  const handleCapture = async (blobOrFile, previewUrl, forceVibe = null, presetMeta = null) => {
     setErrorMsg(null);
     setIsAnalyzing(true);
-
-    // Scroll to the studio stage to keep user focused
-    setTimeout(() => {
-      scrollTo("studio");
-    }, 100);
 
     try {
       let result;
       if (blobOrFile) {
+        setUserPreview(previewUrl);
         result = await matchSelfieImage(blobOrFile);
       } else {
-        // Preset mock fallback for testing
-        await new Promise((r) => setTimeout(r, 1200));
+        // Preset specimen demonstration
+        setUserPreview(heroSampleImg);
+        await new Promise((r) => setTimeout(r, 900));
         result = {
           status: "success",
           memeUrl: previewUrl,
+          archiveId: presetMeta?.num || "ARCHIVE SPECIMEN",
+          archetypeName: presetMeta?.name || presetMeta?.category || "Archetype Specimen",
+          caption: presetMeta?.caption || `A classic expression of ${forceVibe || "HUMAN"} energy.`,
           score: 0.94,
           detectedEmotion: forceVibe || "HAPPY",
-          emotionConfidence: 98.2,
-          userTraits: { smiling: true, mouthOpen: false, wearingGlasses: false },
-          explanation: `High-fidelity match on ${forceVibe || "HAPPY"} expression!`,
+          emotionConfidence: 96.5,
+          userTraits: {
+            smiling: forceVibe === "HAPPY",
+            mouthOpen: forceVibe === "SURPRISED",
+            wearingGlasses: forceVibe === "CONFUSED",
+          },
+          explanation: `Simulated comparison against ${presetMeta?.num || "archetype"}. Connect AWS API Gateway for live Amazon Rekognition matches.`,
+          isMock: true,
         };
       }
 
+      // Handle "No Face Detected" API state gracefully
       if (result.status === "no_face") {
-        setErrorMsg(result.message || "No face detected. Please ensure bright lighting and look directly at the camera!");
+        setErrorMsg(
+          result.message ||
+            "No human face was detected in this photograph. Please position your face toward the camera under even lighting and try again."
+        );
         setIsAnalyzing(false);
         return;
       }
 
       setMatchResult(result);
-      if (result.detectedEmotion) {
-        setCurrentVibe(result.detectedEmotion);
-      }
     } catch (err) {
       console.error("Match error:", err);
       setErrorMsg(
-        err.message || "Could not complete the match. Make sure your API Gateway endpoint is online."
+        err.message ||
+          "Could not complete the facial match. Please verify your network connection or API Gateway configuration in Settings."
       );
     } finally {
       setIsAnalyzing(false);
@@ -92,100 +82,118 @@ export default function App() {
   const handleReset = () => {
     setMatchResult(null);
     setUserPreview(null);
-    setCurrentVibe(null);
     setErrorMsg(null);
-    scrollTo("studio");
+    scrollToStudio();
   };
 
   return (
-    <div className="studio-app-root">
-      {/* Picco Warm Paper Dot-Grid Overlay */}
-      <div className="craft-grid-overlay"></div>
+    <div className="editorial-app-root">
+      {/* Subtle Archival Texture */}
+      <div className="gallery-grain-overlay" aria-hidden="true"></div>
 
-      {/* Picco Floating Pill Navbar */}
-      <Navbar
-        currentVibe={currentVibe}
-        apiBaseUrl={apiBaseUrl}
+      {/* Navigation Header */}
+      <Header
         onOpenSettings={() => setIsSettingsOpen(true)}
+        onScrollToStudio={scrollToStudio}
       />
 
-      <main className="main-content">
-        {/* Picco Editorial Hero */}
-        <HeroPicco
-          onScrollToStudio={() => scrollTo("studio")}
-          onScrollToProjects={() => scrollTo("projects")}
-        />
-
-        {/* Selected Projects (Sneak peek of works) */}
-        <ProjectsSection onJumpToStudio={() => scrollTo("studio")} />
-
-        {/* Live Interactive AI Studio Showcase (Flagship Event) */}
-        <section id="studio" className="picco-studio-section">
-          <div className="picco-studio-header">
-            <div className="picco-section-tag">
-              <span>✦ FLAGSHIP PROJECT • LIVE INTERACTIVE STUDIO</span>
-            </div>
-            <h2 className="picco-section-title">
-              MEMECRAFT <span className="picco-serif-highlight">// The Live Studio</span>
-            </h2>
-            <p className="picco-section-subtitle">
-              Face the camera or upload a portrait. Watch Amazon Rekognition detect your emotional nuance in sub-400ms and reveal your meme alter-ego with the interactive split-face slider.
-            </p>
-          </div>
-
-          <div className="picco-studio-container">
-            {/* Error Notice */}
-            {errorMsg && (
-              <div className="error-banner craft-card" style={{ marginBottom: "2rem" }}>
-                <AlertTriangle className="error-icon" size={24} />
-                <div className="error-text">
-                  <h4 className="font-display">Detection Notice</h4>
-                  <p>{errorMsg}</p>
-                </div>
-                <button className="btn-craft btn-outline btn-sm" onClick={handleReset}>
-                  Try Again
-                </button>
+      <main className="main-gallery-flow">
+        {/* ========================================================
+            FIRST VIEWPORT: ASYMMETRIC ART-DIRECTED STAGE
+           ======================================================== */}
+        {!matchResult && !isAnalyzing && (
+          <section className="first-viewport-stage">
+            {/* Left Column: Literary Narrative & Actions */}
+            <div className="hero-column-narrative">
+              <div className="archive-kicker font-mono">
+                <span className="lime-dot" aria-hidden="true"></span>
+                AN EXPERIMENT IN SELF-PORTRAITURE
               </div>
-            )}
 
-            {/* Dynamic Studio Workspace */}
-            <div className="studio-workspace">
-              {isAnalyzing ? (
-                <AnalyzingOverlay userPreview={userPreview} />
-              ) : matchResult ? (
-                <SplitFaceSlider
-                  matchResult={matchResult}
-                  userPreview={userPreview}
-                  onReset={handleReset}
-                />
-              ) : (
-                <CameraBooth onCapture={handleCapture} isAnalyzing={isAnalyzing} />
-              )}
+              <h1 className="hero-monumental-headline font-serif">
+                Your face has a second life.
+              </h1>
+
+              <p className="hero-subheadline font-serif">
+                Meet the meme that captures your expression a little too well.
+              </p>
+
+              <div className="hero-actions-container">
+                <div className="hero-btn-row">
+                  <button
+                    onClick={scrollToStudio}
+                    className="btn-lime hero-main-cta font-mono"
+                    aria-label="Find my meme twin - scroll to camera booth"
+                  >
+                    <Camera size={18} />
+                    <span>FIND MY MEME TWIN</span>
+                  </button>
+                </div>
+
+                <p className="hero-reassurance-note font-mono">
+                  Your selfie. An unexpected counterpart. Private upload · Ephemeral processing.
+                </p>
+              </div>
+
+              <div className="hero-footer-status font-mono">
+                <div className="status-item">
+                  <span className="status-label">PERMANENT ARCHIVE</span>
+                  <span className="status-val text-lime">800+ INDEXED PORTRAITS</span>
+                </div>
+                <a href="#how-it-works" className="scroll-indicator font-mono" aria-label="Scroll down to discover how it works">
+                  <span>SCROLL TO DISCOVER</span>
+                  <ArrowDown size={14} className="arrow-pulse" />
+                </a>
+              </div>
             </div>
+
+            {/* Right Column: Immediate Interactive Product Studio */}
+            <div className="hero-column-studio" id="portrait-studio">
+              <CameraBooth onCapture={handleCapture} isAnalyzing={isAnalyzing} />
+            </div>
+          </section>
+        )}
+
+        {/* Error Notice */}
+        {errorMsg && (
+          <div className="error-banner font-mono" role="alert">
+            <AlertTriangle className="error-icon" size={20} color="var(--electric-lime)" />
+            <div className="error-text">
+              <h4 className="font-serif">Notice from the Archive</h4>
+              <p>{errorMsg}</p>
+            </div>
+            <button className="btn-archive-outline" onClick={handleReset}>
+              Try Again
+            </button>
           </div>
-        </section>
+        )}
 
-        {/* Capabilities & Services */}
-        <ServicesSection />
+        {/* Analyzing Scan Overlay OR Exhibition Match Result */}
+        {(isAnalyzing || matchResult) && (
+          <section className="active-result-workspace">
+            {isAnalyzing ? (
+              <AnalyzingOverlay userPreview={userPreview} />
+            ) : (
+              <SplitFaceSlider
+                matchResult={matchResult}
+                userPreview={userPreview}
+                onReset={handleReset}
+              />
+            )}
+          </section>
+        )}
 
-        {/* Testimonials ("What nice People say") */}
-        <TestimonialsSection />
-
-        {/* The Person Behind the Work */}
-        <AboutSection />
-
-        {/* Frequently Asked Questions */}
-        <FaqSection />
+        {/* Narrative & Educational Deep Dive */}
+        {!matchResult && !isAnalyzing && (
+          <AboutSection onSelectArchiveSpecimen={(url, vibe, meta) => handleCapture(null, url, vibe, meta)} />
+        )}
       </main>
 
-      {/* Picco Footer & Contact CTA */}
-      <FooterPicco />
-
-      {/* Settings Modal (AWS API Configuration) */}
+      {/* Cloud Ingress Configuration Modal */}
       <SettingsModal
         isOpen={isSettingsOpen}
         onClose={() => setIsSettingsOpen(false)}
-        onSave={(url) => setApiBaseUrlState(url)}
+        onSave={() => {}}
       />
     </div>
   );

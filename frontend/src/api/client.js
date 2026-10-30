@@ -14,28 +14,29 @@ export function setApiBaseUrl(url) {
   }
 }
 
-// Curated high-res creative demo memes with expressional vibes (instant fallback)
+export function isBackendConfigured() {
+  return Boolean(getApiBaseUrl());
+}
+
+// Curated Expression Archetypes from the MEMECRAFT Historic Archive (Self-contained vector assets)
 export const DEMO_MEMES = {
   HAPPY: [
     {
-      url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=80",
-      caption: "When the AWS Lambda deploys with zero errors on the first try",
-      score: 0.95,
+      url: "/memes/archetype_dramatic.svg",
+      archiveId: "ARCHIVE NO. 088",
+      name: "The Dramatic Entrance",
+      caption: "Arriving with unmatched narrative momentum when the pipeline passes.",
+      score: 0.94,
       emotion: "HAPPY",
       traits: { smiling: true, mouthOpen: false, wearingGlasses: false },
-    },
-    {
-      url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=800&auto=format&fit=crop&q=80",
-      caption: "Vibing in the college auditorium after finishing the presentation",
-      score: 0.92,
-      emotion: "HAPPY",
-      traits: { smiling: true, mouthOpen: true, wearingGlasses: false },
     },
   ],
   SURPRISED: [
     {
-      url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=80",
-      caption: "When you check AWS Cost Explorer and your bill is only $0.04",
+      url: "/memes/archetype_plottwist.svg",
+      archiveId: "ARCHIVE NO. 052",
+      name: "The Plot Twist",
+      caption: "When you inspect AWS Cost Explorer and the bill is strictly $0.04.",
       score: 0.96,
       emotion: "SURPRISED",
       traits: { smiling: false, mouthOpen: true, wearingGlasses: false },
@@ -43,72 +44,81 @@ export const DEMO_MEMES = {
   ],
   CALM: [
     {
-      url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=80",
-      caption: "Unbothered. Moisturized. In my serverless lane.",
-      score: 0.89,
-      emotion: "CALM",
-      traits: { smiling: false, mouthOpen: false, wearingGlasses: true },
-    },
-  ],
-  ANGRY: [
-    {
-      url: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=800&auto=format&fit=crop&q=80",
-      caption: "Who changed the IAM role policy right before the demo?!",
+      url: "/memes/archetype_unbothered.svg",
+      archiveId: "ARCHIVE NO. 029",
+      name: "The Unbothered",
+      caption: "Serene inner calm through absolute acceptance of serverless logs.",
       score: 0.91,
-      emotion: "ANGRY",
-      traits: { smiling: false, mouthOpen: false, wearingGlasses: false },
+      emotion: "CALM",
+      traits: { smiling: true, mouthOpen: false, wearingGlasses: false },
     },
   ],
   CONFUSED: [
     {
-      url: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=800&auto=format&fit=crop&q=80",
-      caption: "Wait... it worked on localhost, why is CORS blocked?",
-      score: 0.88,
+      url: "/memes/archetype_overthinker.svg",
+      archiveId: "ARCHIVE NO. 014",
+      name: "The Overthinker",
+      caption: "Processing 47 hypothetical deployment timelines at once.",
+      score: 0.89,
       emotion: "CONFUSED",
-      traits: { smiling: false, mouthOpen: false, wearingGlasses: false },
+      traits: { smiling: false, mouthOpen: false, wearingGlasses: true },
     },
   ],
 };
 
 /**
- * 3-Step Pipeline:
+ * 3-Step Serverless Pipeline:
  * 1. POST /uploads/presign -> get uploadUrl & objectKey
- * 2. PUT blob to uploadUrl (Direct S3 upload)
- * 3. POST /matches -> get matched meme & score
+ * 2. PUT blob to uploadUrl (Direct client-to-S3 upload)
+ * 3. POST /matches -> Rekognition inference + vector catalog matching
  */
 export async function matchSelfieImage(imageBlob) {
   const apiBase = getApiBaseUrl();
 
-  // If no API configured yet, return a dynamic creative mock match
+  // If no backend endpoint configured, execute an explicit offline archetype simulation
   if (!apiBase) {
-    console.warn("No API Base URL configured. Simulating AI Rekognition match.");
-    await new Promise((r) => setTimeout(r, 1400)); // Simulate neural scan
+    console.info("MEMECRAFT: Operating in offline archetype simulation mode.");
+    await new Promise((r) => setTimeout(r, 1200)); // Simulate neural inference time
+
     const moods = ["HAPPY", "SURPRISED", "CALM", "CONFUSED"];
     const randomMood = moods[Math.floor(Math.random() * moods.length)];
     const list = DEMO_MEMES[randomMood];
-    const picked = list[Math.floor(Math.random() * list.length)];
+    const picked = list[0];
+
     return {
       status: "success",
       memeUrl: picked.url,
+      archiveId: picked.archiveId,
+      archetypeName: picked.name,
+      caption: picked.caption,
       score: picked.score,
       detectedEmotion: picked.emotion,
-      emotionConfidence: 97.4,
+      emotionConfidence: 96.8,
       userTraits: picked.traits,
-      explanation: `Matched your ${picked.emotion.toLowerCase()} vibe with high expression affinity!`,
+      explanation: `Simulated match against curated specimen ${picked.archiveId} (${picked.name}). Connect your AWS API Gateway to run live Amazon Rekognition searches.`,
       isMock: true,
     };
   }
+
+  const contentType = imageBlob.type || "image/jpeg";
+  const contentLength = imageBlob.size;
 
   // 1. Get Presigned S3 PUT URL
   const presignRes = await fetch(`${apiBase}/uploads/presign`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ contentType: "image/jpeg" }),
+    body: JSON.stringify({ contentType, contentLength }),
   });
 
   if (!presignRes.ok) {
-    const errText = await presignRes.text();
-    throw new Error(`Failed to obtain upload ticket: ${errText}`);
+    let errMessage = "Failed to obtain upload ticket from API Gateway";
+    try {
+      const errJson = await presignRes.json();
+      errMessage = errJson.error || errMessage;
+    } catch {
+      errMessage = await presignRes.text();
+    }
+    throw new Error(errMessage);
   }
 
   const { uploadUrl, objectKey } = await presignRes.json();
@@ -116,12 +126,12 @@ export async function matchSelfieImage(imageBlob) {
   // 2. Upload file directly to S3
   const s3UploadRes = await fetch(uploadUrl, {
     method: "PUT",
-    headers: { "Content-Type": "image/jpeg" },
+    headers: { "Content-Type": contentType },
     body: imageBlob,
   });
 
   if (!s3UploadRes.ok) {
-    throw new Error("Failed to upload image directly to S3 storage.");
+    throw new Error("Direct S3 upload failed. Please verify bucket CORS configuration.");
   }
 
   // 3. Request Rekognition Match
@@ -132,10 +142,17 @@ export async function matchSelfieImage(imageBlob) {
   });
 
   if (!matchRes.ok) {
-    const errText = await matchRes.text();
-    throw new Error(`Facial matching service returned an error: ${errText}`);
+    let errMessage = "Facial matching service returned an error";
+    try {
+      const errJson = await matchRes.json();
+      errMessage = errJson.error || errMessage;
+    } catch {
+      errMessage = await matchRes.text();
+    }
+    throw new Error(errMessage);
   }
 
   const matchData = await matchRes.json();
+  matchData.isMock = false;
   return matchData;
 }
