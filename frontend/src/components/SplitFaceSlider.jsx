@@ -26,16 +26,15 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
   }, [userPreview]);
 
   useEffect(() => {
-    // Check reduced motion preference before firing audio & confetti
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!prefersReducedMotion) {
       soundFX.playMatchCelebration();
       try {
         confetti({
-          particleCount: 50,
-          spread: 60,
+          particleCount: 85,
+          spread: 75,
           origin: { y: 0.6 },
-          colors: ["#D6FF61", "#F5F1E8", "#77796D", "#B8FF2E"],
+          colors: ["#2563EB", "#00D2FF", "#FF007F", "#FF9900", "#10B981"],
           disableForReducedMotion: true,
         });
       } catch (e) {
@@ -102,91 +101,61 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
   const traits = matchResult.userTraits || { smiling: true, mouthOpen: false, wearingGlasses: false };
   const isMock = Boolean(matchResult.isMock);
 
-  // Determine viewport aspect ratio: dynamically adopt the user's photo ratio in contain mode
   const computedAspectRatio = fitMode === "contain" && imageRatio ? `${imageRatio}` : "4 / 3";
 
   return (
-    <div className="gallery-result-stage">
-      {/* Editorial Header Status */}
-      <div className="result-kicker-row font-mono">
-        <div className="result-header-left">
-          <span className="archive-badge">
-            {matchResult.archiveId || "EXHIBITION RECORD // SPECIMEN 001"}
-          </span>
-          {isMock && (
-            <span
-              className="demo-mode-badge"
-              title="Simulated match using curated archetype archive. Connect AWS API Gateway for live Amazon Rekognition search."
-            >
-              DEMO SIMULATION · OFFLINE PREVIEW
-            </span>
-          )}
-        </div>
-        <span className="affinity-score-pill">
-          {scorePercent}% AFFINITY SCORE
-        </span>
-      </div>
-
-      {isMock && (
-        <div className="demo-disclaimer-note font-mono">
-          <AlertCircle size={14} color="var(--electric-lime)" />
-          <span>
-            Offline preview: matching against MEMECRAFT vector archetypes. Configure AWS Ingress in Settings to enable live Amazon Rekognition inference.
-          </span>
-        </div>
-      )}
-
-      <div className="gallery-result-grid">
+    <div className="editorial-stage">
+      {/* 3-Column Exhibition Canvas Grid */}
+      <div className="cinematic-canvas-grid craft-card">
         {/* ========================================================
-            COLUMN 1: THE ORIGINAL (LEFT)
+            COLUMN 1: REALITY (LEFT)
            ======================================================== */}
-        <aside className="column-exhibition column-original">
-          <div className="exhibition-tag font-mono">01 // THE ORIGINAL</div>
-          <h2 className="exhibition-title font-serif">Human Expression</h2>
-          <div className="editorial-divider"></div>
+        <aside className="column-reality">
+          <div className="editorial-kicker font-mono">01 // HUMAN INPUT</div>
+          <h2 className="editorial-headline-condensed font-condensed">REALITY</h2>
+          <div className="editorial-rule-blue"></div>
 
-          <p className="exhibition-caption font-serif">
-            Authentic countenance analyzed via computer vision.
+          <p className="editorial-lead-text">
+            High-resolution facial landmark telemetry scanned via Amazon Rekognition.
           </p>
 
-          <div className="exhibition-meta-box font-mono">
-            <div className="meta-row">
-              <span className="meta-k">DOMINANT EMOTION</span>
-              <span className="meta-v text-lime">{emotion}</span>
+          <div className="reality-metric-card">
+            <div className="metric-row font-mono">
+              <span className="metric-label">DETECTED EMOTION</span>
+              <span className="metric-value text-blue">{emotion}</span>
             </div>
-            <div className="meta-row">
-              <span className="meta-k">CONFIDENCE</span>
-              <span className="meta-v">{matchResult.emotionConfidence || 96.8}%</span>
+            <div className="metric-row font-mono">
+              <span className="metric-label">CONFIDENCE</span>
+              <span className="metric-value">{matchResult.emotionConfidence || 97}%</span>
             </div>
-            <div className="meta-row">
-              <span className="meta-k">SMILE DETECTED</span>
-              <span className="meta-v">
-                {traits.smiling ? "ACTIVE" : "NEUTRAL"}
+            <div className="metric-row font-mono">
+              <span className="metric-label">SMILE DETECTED</span>
+              <span className="metric-value">
+                {traits.smiling ? "YES (ACTIVE)" : "NEUTRAL"}
               </span>
             </div>
-            <div className="meta-row">
-              <span className="meta-k">EYEWEAR</span>
-              <span className="meta-v">
-                {traits.wearingGlasses ? "PRESENT" : "NONE"}
+            <div className="metric-row font-mono">
+              <span className="metric-label">EYEWEAR</span>
+              <span className="metric-value">
+                {traits.wearingGlasses ? "GLASSES DETECTED" : "NONE"}
               </span>
             </div>
           </div>
         </aside>
 
         {/* ========================================================
-            COLUMN 2: MONUMENTAL SPLIT PORTAL (CENTER)
+            COLUMN 2: MONUMENTAL SPLIT FACE PORTAL (CENTER)
            ======================================================== */}
-        <main className="column-exhibition column-center-portal">
-          {/* Sizing & Framing Controls Bar */}
+        <main className="column-face-stage">
+          {/* Framing mode toggle */}
           <div className="viewport-framing-toolbar font-mono">
-            <span className="toolbar-label">VIEWPORT FRAMING:</span>
+            <span className="toolbar-label">FRAMING:</span>
             <div className="framing-toggle-group">
               <button
                 type="button"
                 className={`btn-framing-toggle ${fitMode === "contain" ? "active" : ""}`}
                 onClick={() => setFitMode("contain")}
-                title="Show 100% of captured photograph without cropping"
-                aria-pressed={fitMode === "contain"}
+                title="Show 100% of photograph without cropping"
               >
                 <Minimize2 size={12} />
                 <span>WHOLE PHOTO</span>
@@ -195,8 +164,7 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
                 type="button"
                 className={`btn-framing-toggle ${fitMode === "cover" ? "active" : ""}`}
                 onClick={() => setFitMode("cover")}
-                title="Fill entire portal frame"
-                aria-pressed={fitMode === "cover"}
+                title="Fill portal frame"
               >
                 <Maximize2 size={12} />
                 <span>FILL FRAME</span>
@@ -206,7 +174,7 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
 
           <div
             ref={containerRef}
-            className={`gallery-split-viewport fit-${fitMode}`}
+            className={`split-face-viewport fit-${fitMode}`}
             style={{ aspectRatio: computedAspectRatio }}
             role="slider"
             tabIndex={0}
@@ -251,36 +219,33 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
               aria-hidden="true"
             >
               <div className="split-thumb">
-                <MoveHorizontal size={14} color="#171815" />
+                <MoveHorizontal size={14} color="#0F172A" />
               </div>
             </div>
           </div>
 
-          {/* Morph Instruction Prompt */}
-          <div className="split-instruction-label font-mono">
-            <span>DRAG SLIDER OR USE ARROW KEYS TO EXPLORE MORPH ({sliderPos}% / {100 - sliderPos}%)</span>
+          <div className="split-hint-label font-mono">
+            <span>DRAG SLIDER TO MORPH REALITY & MEME ({sliderPos}% / {100 - sliderPos}%)</span>
           </div>
         </main>
 
         {/* ========================================================
-            COLUMN 3: THE ALTER EGO (RIGHT)
+            COLUMN 3: THE MEME TWIN (RIGHT)
            ======================================================== */}
-        <aside className="column-exhibition column-alterego">
-          <div className="exhibition-tag font-mono">02 // THE ALTER EGO</div>
-          <h2 className="exhibition-title font-serif">
-            {matchResult.archetypeName || "The Meme Twin"}
-          </h2>
-          <div className="editorial-divider"></div>
+        <aside className="column-meme">
+          <div className="editorial-kicker font-mono text-cyan">02 // NEURAL SYNTHESIS</div>
+          <h2 className="editorial-headline-italic font-display">THE MEME TWIN</h2>
+          <div className="editorial-rule-cyan"></div>
 
-          <blockquote className="exhibition-quote font-serif">
-            {matchResult.caption ? `“${matchResult.caption}”` : "“A familiar expression in a rather unfamiliar place.”"}
-          </blockquote>
+          <p className="editorial-lead-text text-light">
+            {matchResult.caption || "An artificial cognition experiment in expressive transmutation from 800+ catalogue memes."}
+          </p>
 
-          <div className="affinity-heuristic-box">
-            <div className="heuristic-num font-serif">{scorePercent}%</div>
-            <div className="heuristic-label font-mono">EXPRESSION AFFINITY SCORE</div>
-            <p className="heuristic-sub font-mono">
-              Weighted match: Emotion (50%) + Smile (25%) + Gaze & Pose (15%) + Features (10%)
+          <div className="affinity-score-box">
+            <div className="score-number font-display">{scorePercent}%</div>
+            <div className="score-label font-mono">EXPRESSION AFFINITY SCORE</div>
+            <p className="score-sub font-mono">
+              Geometric match across 800+ catalogue portraits
             </p>
           </div>
 
@@ -290,32 +255,35 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
             </div>
           )}
 
-          <div className="exhibition-actions-row">
+          <div className="result-action-buttons">
             <button
-              className="btn-lime btn-download-twin font-mono"
+              className="btn-craft btn-primary btn-download font-mono"
               onClick={handleDownload}
               disabled={downloading}
-              aria-label="Download collectible comparison print"
             >
-              <Download size={15} />
-              <span>{downloading ? "GENERATING PRINT..." : "DOWNLOAD PRINT"}</span>
+              <Download size={16} />
+              <span>{downloading ? "GENERATING..." : "EXPORT POSTER"}</span>
             </button>
 
             <button
-              className="btn-archive-outline font-mono"
+              className="btn-craft btn-outline btn-rematch font-mono"
               onClick={onReset}
-              aria-label="Try another facial expression match"
             >
-              <RefreshCw size={14} />
-              <span>TRY ANOTHER MATCH</span>
+              <RefreshCw size={15} />
+              <span>NEW SELFIE</span>
             </button>
           </div>
         </aside>
       </div>
 
       {/* Ephemeral Guarantee Footer */}
-      <div className="result-privacy-footer font-mono">
-        <span>EPHEMERAL DATA · ZERO BIOMETRIC RETENTION · PURGED IN 24H</span>
+      <div className="stage-privacy-note font-mono">
+        <AlertCircle size={14} color="#2563EB" />
+        <span>
+          {isMock
+            ? "DEMO ARCHETYPE MODE · ZERO BIOMETRIC RETENTION · PURGED IN 24H"
+            : "AMAZON REKOGNITION POWERED · DIRECT S3 UPLOAD · ZERO BIOMETRIC RETENTION"}
+        </span>
       </div>
     </div>
   );

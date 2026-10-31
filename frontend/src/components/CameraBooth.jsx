@@ -1,35 +1,39 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
-import { Camera, Upload, RefreshCw, AlertCircle, AlertTriangle } from "lucide-react";
+import { Camera, Upload, RefreshCw, Sparkles, AlertCircle } from "lucide-react";
 import { soundFX } from "../utils/audio";
 
-// Curated Expression Archive Presets (MEMECRAFT Vector Archetypes)
+// Curated Expression Archetypes (MEMECRAFT Vector Archetypes)
 const ARCHIVE_PRESETS = [
   {
-    num: "NO. 014",
     name: "The Overthinker",
-    caption: "Processing 47 hypothetical timelines at once.",
+    emoji: "🤔",
     vibe: "CONFUSED",
+    num: "NO. 014",
+    caption: "Processing 47 hypothetical timelines at once.",
     url: "/memes/archetype_overthinker.svg",
   },
   {
-    num: "NO. 029",
     name: "The Unbothered",
-    caption: "Inner peace through catastrophic acceptance.",
+    emoji: "☕",
     vibe: "CALM",
+    num: "NO. 029",
+    caption: "Inner peace through catastrophic acceptance.",
     url: "/memes/archetype_unbothered.svg",
   },
   {
-    num: "NO. 052",
     name: "The Plot Twist",
-    caption: "When reality writes a script no one asked for.",
+    emoji: "😲",
     vibe: "SURPRISED",
+    num: "NO. 052",
+    caption: "When reality writes a script no one asked for.",
     url: "/memes/archetype_plottwist.svg",
   },
   {
-    num: "NO. 088",
     name: "The Dramatic Entrance",
-    caption: "Arriving with unmatched narrative momentum.",
+    emoji: "😏",
     vibe: "HAPPY",
+    num: "NO. 088",
+    caption: "Arriving with unmatched narrative momentum.",
     url: "/memes/archetype_dramatic.svg",
   },
 ];
@@ -38,9 +42,10 @@ export default function CameraBooth({ onCapture, isAnalyzing }) {
   const videoRef = useRef(null);
   const fileInputRef = useRef(null);
   const [streamActive, setStreamActive] = useState(false);
-  const [cameraStatus, setCameraStatus] = useState("idle"); // "idle" | "initializing" | "active" | "denied" | "error"
+  const [cameraStatus, setCameraStatus] = useState("initializing"); // "initializing" | "active" | "denied" | "error"
   const [facingMode, setFacingMode] = useState("user");
   const [flash, setFlash] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
   const [validationError, setValidationError] = useState(null);
 
   // Initialize camera stream
@@ -134,7 +139,7 @@ export default function CameraBooth({ onCapture, isAnalyzing }) {
     if (!videoRef.current || !streamActive) return;
     soundFX.playShutter();
     setFlash(true);
-    setTimeout(() => setFlash(false), 220);
+    setTimeout(() => setFlash(false), 260);
 
     const canvas = document.createElement("canvas");
     canvas.width = videoRef.current.videoWidth || 640;
@@ -161,28 +166,34 @@ export default function CameraBooth({ onCapture, isAnalyzing }) {
     );
   };
 
-  // Upload photo from file system with client-side validation
+  // Upload photo from file system
   const handleFileChange = (e) => {
     setValidationError(null);
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validate mime type
-    const validTypes = ["image/jpeg", "image/png", "image/webp"];
-    if (!validTypes.includes(file.type)) {
-      setValidationError("Please select a standard JPEG, PNG, or WebP photograph.");
-      return;
-    }
-
-    // Validate size (10MB max)
-    const maxSize = 10 * 1024 * 1024;
-    if (file.size > maxSize) {
-      setValidationError("Photograph size exceeds 10MB limit. Please upload a smaller image.");
+    if (!file.type.startsWith("image/")) {
+      setValidationError("Please select a standard image photograph (JPG, PNG, WebP).");
       return;
     }
 
     const previewUrl = URL.createObjectURL(file);
     onCapture(file, previewUrl);
+  };
+
+  // Handle Drag & Drop
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files?.[0];
+    if (file) {
+      if (!file.type.startsWith("image/")) {
+        setValidationError("Please drop an image file (JPG, PNG, WebP).");
+        return;
+      }
+      const previewUrl = URL.createObjectURL(file);
+      onCapture(file, previewUrl);
+    }
   };
 
   const handleSelectPreset = (preset) => {
@@ -193,199 +204,183 @@ export default function CameraBooth({ onCapture, isAnalyzing }) {
     setFacingMode((prev) => (prev === "user" ? "environment" : "user"));
   };
 
-  // Only consider camera genuinely active if stream is set and active
   const isCameraLive = streamActive && cameraStatus === "active";
 
   return (
-    <div className="studio-container-viewport">
-      {flash && <div className="gallery-flash" />}
+    <div className="camera-booth-container">
+      {flash && <div className="flash-active"></div>}
 
-      {/* Hidden File Input accessible anytime */}
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/jpeg,image/png,image/webp"
-        onChange={handleFileChange}
-        style={{ display: "none" }}
-        aria-label="Upload portrait image file"
-      />
-
-      <div className="studio-panel-body">
-        {/* Header Metadata */}
-        <div className="panel-header font-mono">
-          <div className="panel-status">
-            <span className={isCameraLive ? "status-dot-lime" : "status-dot-idle"}></span>
-            <span>{isCameraLive ? "OPTICAL SENSOR ACTIVE" : "SENSOR STANDBY"}</span>
-          </div>
-          <span className="panel-id">REF. MMXXVI</span>
-        </div>
-
-        {/* Viewfinder Lens with Live Video Stream */}
-        <div className="panel-viewfinder">
-          {/* Video element is permanently mounted to preserve ref and avoid race conditions */}
+      {/* Main Studio Viewfinder Card */}
+      <div
+        className={`craft-card viewfinder-card ${dragOver ? "drag-active" : ""}`}
+        onDragOver={(e) => {
+          e.preventDefault();
+          setDragOver(true);
+        }}
+        onDragLeave={() => setDragOver(false)}
+        onDrop={handleDrop}
+      >
+        <div className="viewfinder-lens">
+          {/* Live Video Feed - permanently mounted */}
           <video
             ref={videoRef}
             playsInline
             muted
             autoPlay
-            className={`studio-video ${isCameraLive ? "studio-video-active" : "studio-video-hidden"}`}
+            className={`viewfinder-video ${isCameraLive ? "active" : "hidden"}`}
           />
 
-          {isCameraLive && (
-            <>
-              {/* Delicate Archival Viewfinder Framing Ticks */}
-              <div className="viewfinder-framing" aria-hidden="true">
-                <div className="frame-tick frame-tl"></div>
-                <div className="frame-tick frame-tr"></div>
-                <div className="frame-tick frame-bl"></div>
-                <div className="frame-tick frame-br"></div>
-              </div>
-
-              {/* Viewfinder Lens Tag */}
-              <div className="viewfinder-lens-tag font-mono">
-                <span>ALIGN COUNTENANCE</span>
-              </div>
-            </>
+          {/* Biometric Reticle Overlay (Exact match to CloudFront studio UI) */}
+          {isCameraLive && !isAnalyzing && (
+            <div className="reticle-box">
+              <div className="reticle-corner corner-tl"></div>
+              <div className="reticle-corner corner-tr"></div>
+              <div className="reticle-corner corner-bl"></div>
+              <div className="reticle-corner corner-br"></div>
+              <div className="reticle-label font-mono">ALIGN FACE HERE</div>
+            </div>
           )}
 
-          {/* Standby / Initializing View when stream is not active */}
+          {/* Standby / Permission Fallback Screen */}
           {!isCameraLive && (
-            <div className="viewfinder-standby">
+            <div className="camera-fallback-screen">
               {cameraStatus === "initializing" && (
                 <>
-                  <div className="standby-spinner" aria-hidden="true"></div>
-                  <span className="font-mono text-xs">CONNECTING OPTICAL SENSOR...</span>
+                  <div className="fallback-spinner" aria-hidden="true"></div>
+                  <h4 className="font-display">Connecting Optical Sensor...</h4>
+                  <p className="text-secondary text-sm">
+                    Initializing your camera in the MEMECRAFT studio.
+                  </p>
                 </>
               )}
 
               {cameraStatus === "denied" && (
-                <div className="standby-content-box">
-                  <AlertCircle size={24} color="var(--electric-lime)" />
-                  <span className="font-mono text-xs text-warm-dim">
-                    CAMERA ACCESS DENIED BY BROWSER
-                  </span>
-                  <p className="standby-explanation font-serif">
-                    Allow camera permission in browser settings, or upload an existing photo.
+                <>
+                  <div className="fallback-icon-wrap">
+                    <AlertCircle size={38} color="#2563EB" />
+                  </div>
+                  <h4 className="font-display">Camera Permission Required</h4>
+                  <p className="text-secondary text-sm">
+                    Allow camera access in your browser or upload a portrait to match.
                   </p>
-                  <div className="standby-btn-group">
-                    <button onClick={startCamera} className="btn-archive-outline text-xs">
-                      Try Camera Again
+                  <div className="fallback-actions">
+                    <button className="btn-craft btn-outline" onClick={startCamera}>
+                      <RefreshCw size={16} /> Try Camera Again
                     </button>
                     <button
+                      className="btn-craft btn-primary"
                       onClick={() => fileInputRef.current?.click()}
-                      className="btn-lime text-xs"
                     >
-                      Upload Photo
+                      <Upload size={16} /> Upload Photo
                     </button>
                   </div>
-                </div>
+                </>
               )}
 
-              {(cameraStatus === "error" || cameraStatus === "idle") && (
-                <div className="standby-content-box">
-                  <Camera size={24} color="var(--archive-grey)" />
-                  <span className="font-mono text-xs text-warm-dim">
-                    NO CAMERA SENSOR DETECTED
-                  </span>
-                  <p className="standby-explanation font-serif">
-                    Upload an existing photograph to find your comedic archetype.
+              {cameraStatus === "error" && (
+                <>
+                  <div className="fallback-icon-wrap">
+                    <Camera size={38} className="gradient-text" />
+                  </div>
+                  <h4 className="font-display">Webcam Standby</h4>
+                  <p className="text-secondary text-sm">
+                    No active optical sensor detected. Upload a photo or select an archetype below.
                   </p>
-                  <button
-                    onClick={() => fileInputRef.current?.click()}
-                    className="btn-lime text-xs mt-1"
-                  >
-                    Upload Photograph
-                  </button>
-                </div>
+                  <div className="fallback-actions">
+                    <button
+                      className="btn-craft btn-primary"
+                      onClick={() => fileInputRef.current?.click()}
+                    >
+                      <Upload size={16} /> Upload Photo
+                    </button>
+                    <button className="btn-craft btn-outline" onClick={startCamera}>
+                      <RefreshCw size={16} /> Retry Camera
+                    </button>
+                  </div>
+                </>
               )}
             </div>
           )}
+
+          {/* Hidden File Input */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            onChange={handleFileChange}
+            style={{ display: "none" }}
+            aria-label="Upload photo file"
+          />
         </div>
 
         {/* Validation Warning Alert */}
         {validationError && (
           <div className="studio-validation-alert font-mono" role="alert">
-            <AlertTriangle size={14} color="var(--electric-lime)" />
+            <AlertCircle size={15} color="#2563EB" />
             <span>{validationError}</span>
           </div>
         )}
 
-        {/* Primary Controls Row */}
-        <div className="studio-actions-bar">
-          {isCameraLive ? (
-            <>
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="btn-studio-secondary font-mono"
-                title="Upload photo from device"
-                aria-label="Upload photo from device"
-              >
-                <Upload size={15} />
-                <span>UPLOAD</span>
-              </button>
+        {/* Viewfinder Bottom Controls (Exact 3-Button Layout from Screenshot) */}
+        <div className="viewfinder-controls">
+          {/* Upload Button */}
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="btn-ctrl-secondary"
+            title="Upload photo from disk"
+            aria-label="Upload photo from disk"
+          >
+            <Upload size={20} />
+          </button>
 
-              <button
-                onClick={handleSnap}
-                disabled={isAnalyzing}
-                className="btn-lime btn-snap-shutter font-mono"
-                title="Capture expression and find meme twin"
-                aria-label="Capture photo and match meme twin"
-              >
-                <Camera size={18} />
-                <span>SNAP & MATCH</span>
-              </button>
-
-              <button
-                onClick={toggleFacingMode}
-                className="btn-studio-secondary font-mono"
-                title="Switch camera lens"
-                aria-label="Switch camera lens"
-              >
-                <RefreshCw size={15} />
-                <span>FLIP</span>
-              </button>
-            </>
-          ) : (
-            <div className="studio-launch-row">
-              <button onClick={startCamera} className="btn-lime btn-launch-primary font-mono">
-                <Camera size={16} />
-                <span>ENABLE CAMERA</span>
-              </button>
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                className="btn-archive-outline btn-launch-secondary font-mono"
-              >
-                <Upload size={15} />
-                <span>UPLOAD PHOTO</span>
-              </button>
+          {/* Giant Shutter Button */}
+          <button
+            onClick={isCameraLive ? handleSnap : () => fileInputRef.current?.click()}
+            disabled={isAnalyzing}
+            className="shutter-trigger-btn"
+            title={isCameraLive ? "Capture Snapshot" : "Upload Photo"}
+            aria-label="Capture photo or upload"
+          >
+            <div className="shutter-inner">
+              <Camera size={26} />
             </div>
-          )}
-        </div>
+          </button>
 
-        {/* Curated Archive Specimens Bar */}
-        <div className="archive-specimens-section">
-          <div className="specimens-label-row font-mono">
-            <span>OR TEST A CURATED ARCHIVE SPECIMEN</span>
-          </div>
-          <div className="specimens-row">
-            {ARCHIVE_PRESETS.map((preset) => (
-              <button
-                key={preset.name}
-                onClick={() => handleSelectPreset(preset)}
-                className="specimen-pill font-mono"
-                disabled={isAnalyzing}
-                title={`${preset.name}: ${preset.caption}`}
-              >
-                <span className="specimen-id">{preset.num}</span>
-                <span className="specimen-title">{preset.name}</span>
-              </button>
-            ))}
-          </div>
+          {/* Camera Flip Button */}
+          <button
+            onClick={toggleFacingMode}
+            className="btn-ctrl-secondary"
+            title="Switch front/rear camera"
+            aria-label="Switch front or rear camera"
+          >
+            <RefreshCw size={20} />
+          </button>
         </div>
+      </div>
 
-        {/* Privacy & Ephemeral Data Guarantee */}
-        <div className="panel-privacy-reassurance font-mono">
-          <span>PRIVATE UPLOAD · EPHEMERAL PROCESSING · PURGED IN 24H</span>
+      {/* Demo Expressive Presets Strip */}
+      <div className="demo-strip-card craft-card">
+        <div className="demo-strip-header">
+          <div className="badge-pill font-mono">
+            <Sparkles size={14} /> INSTANT TEST
+          </div>
+          <span className="demo-strip-title font-display">
+            Or test curated meme archetypes without webcam:
+          </span>
+        </div>
+        <div className="demo-pills-row font-mono">
+          {ARCHIVE_PRESETS.map((preset) => (
+            <button
+              key={preset.name}
+              onClick={() => handleSelectPreset(preset)}
+              className="demo-pill-btn"
+              disabled={isAnalyzing}
+              title={`${preset.name}: ${preset.caption}`}
+            >
+              <span className="demo-emoji">{preset.emoji}</span>
+              <span className="demo-name">{preset.name}</span>
+            </button>
+          ))}
         </div>
       </div>
     </div>

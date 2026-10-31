@@ -1,54 +1,117 @@
 /* ==========================================================================
-   MEMECRAFT DESIGN SYSTEM // THE ART OF YOUR OTHER SELF
-   Editorial Dark-Gallery Aesthetic, Warm Ivory Paper & Electric Lime
-   Inspired by Avedon 100, High-End Portrait Archives & Literary Studies
+   MEMECRAFT DESIGN SYSTEM // VIBRANT STUDIO WHITE & AMBIENT AURORA
+   Vibrant White Canvas, Electric Blue & Cyan Accents, and Ambient Glow
    ========================================================================== */
 
 :root {
-  /* Editorial Palette: Dark Gallery, Warm Paper & Electric Lime */
-  --gallery-black: #171815;
-  --gallery-surface: #1E201B;
-  --gallery-card: #232520;
-  --gallery-elevated: #2A2D26;
-  
-  --warm-paper: #F5F1E8;
-  --warm-paper-dim: rgba(245, 241, 232, 0.76);
-  --warm-paper-muted: rgba(245, 241, 232, 0.48);
-  --warm-paper-subtle: rgba(245, 241, 232, 0.12);
-  
-  --electric-lime: #D6FF61;
-  --electric-lime-glow: rgba(214, 255, 97, 0.35);
-  --electric-lime-dim: rgba(214, 255, 97, 0.14);
-  --electric-lime-border: rgba(214, 255, 97, 0.45);
+  /* Dynamic Vibe Tokens (Default: Electric Royal Blue & Cyan) */
+  --vibe-hue: 220;
+  --vibe-primary: #2563EB;
+  --vibe-secondary: #00D2FF;
+  --vibe-tertiary: #1D4ED8;
+  --vibe-accent: #FF007F;
+  --vibe-glow: rgba(37, 99, 235, 0.35);
+  --vibe-glow-secondary: rgba(0, 210, 255, 0.28);
+  --vibe-gradient: linear-gradient(135deg, #1D4ED8 0%, #2563EB 45%, #00D2FF 100%);
+  --vibe-badge-bg: rgba(37, 99, 235, 0.08);
+  --vibe-badge-border: rgba(37, 99, 235, 0.3);
 
-  --archive-grey: #77796D;
-  --archive-border: rgba(119, 121, 109, 0.28);
-  --archive-border-strong: rgba(119, 121, 109, 0.55);
+  /* Clean White Canvas & Elevated Glass Surface Tokens */
+  --bg-dark: #FFFFFF;
+  --bg-surface: #F8FAFC;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --bg-glass: rgba(255, 255, 255, 0.75);
 
-  /* Unified tokens */
-  --bg-dark: #171815;
-  --bg-surface: #1E201B;
-  --bg-card: #232520;
-  --text-primary: #F5F1E8;
-  --text-secondary: rgba(245, 241, 232, 0.72);
-  --text-muted: #77796D;
+  /* High-Contrast Crisp Midnight & Blue Typography */
+  --text-white: #FFFFFF;
+  --text-primary: #0F172A;
+  --text-secondary: #334155;
+  --text-muted: #64748B;
+  --border-subtle: rgba(37, 99, 235, 0.1);
+  --border-light: rgba(37, 99, 235, 0.18);
+  --border-vivid: rgba(37, 99, 235, 0.35);
 
-  --vibe-primary: #D6FF61;
-  --vibe-glow: rgba(214, 255, 97, 0.3);
+  /* Shadows & Depth with Soft Royal Blue Diffusion */
+  --shadow-sm: 0 4px 14px rgba(37, 99, 235, 0.06);
+  --shadow-md: 0 12px 30px rgba(37, 99, 235, 0.09);
+  --shadow-lg: 0 25px 60px -10px rgba(37, 99, 235, 0.14);
+  --shadow-glow: 0 0 35px var(--vibe-glow);
 
   /* Typography */
-  --font-serif: 'Instrument Serif', Georgia, serif;
-  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-display: 'Syne', sans-serif;
+  --font-serif: 'Cinzel', serif;
+  --font-condensed: 'Bebas Neue', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-display: 'Instrument Serif', Georgia, serif;
 
-  /* Easing */
-  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Transitions */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-condensed {
+  font-family: var(--font-condensed);
+  letter-spacing: 0.05em;
+}
+
 /* ==========================================================================
-   GLOBAL RESET & DARK GALLERY BACKGROUND
+   DYNAMIC EMOTION THEMES
+   ========================================================================== */
+[data-vibe="HAPPY"] {
+  --vibe-primary: #2563EB;
+  --vibe-secondary: #FF9900;
+  --vibe-tertiary: #FF007F;
+  --vibe-accent: #00D2FF;
+  --vibe-glow: rgba(255, 153, 0, 0.3);
+  --vibe-glow-secondary: rgba(37, 99, 235, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #2563EB 0%, #FF007F 50%, #FF9900 100%);
+  --vibe-badge-bg: rgba(255, 153, 0, 0.1);
+  --vibe-badge-border: rgba(255, 153, 0, 0.4);
+}
+
+[data-vibe="SURPRISED"] {
+  --vibe-primary: #7C3AED;
+  --vibe-secondary: #00D2FF;
+  --vibe-tertiary: #EC4899;
+  --vibe-accent: #2563EB;
+  --vibe-glow: rgba(124, 58, 237, 0.35);
+  --vibe-glow-secondary: rgba(0, 210, 255, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #7C3AED 0%, #00D2FF 50%, #EC4899 100%);
+  --vibe-badge-bg: rgba(124, 58, 237, 0.1);
+  --vibe-badge-border: rgba(124, 58, 237, 0.4);
+}
+
+[data-vibe="CALM"] {
+  --vibe-primary: #0284C7;
+  --vibe-secondary: #00D2FF;
+  --vibe-tertiary: #10B981;
+  --vibe-accent: #2563EB;
+  --vibe-glow: rgba(2, 132, 199, 0.3);
+  --vibe-glow-secondary: rgba(16, 185, 129, 0.2);
+  --vibe-gradient: linear-gradient(135deg, #1E40AF 0%, #0284C7 50%, #00D2FF 100%);
+  --vibe-badge-bg: rgba(2, 132, 199, 0.1);
+  --vibe-badge-border: rgba(2, 132, 199, 0.4);
+}
+
+[data-vibe="CONFUSED"] {
+  --vibe-primary: #9333EA;
+  --vibe-secondary: #2563EB;
+  --vibe-tertiary: #F43F5E;
+  --vibe-accent: #06B6D4;
+  --vibe-glow: rgba(147, 51, 234, 0.3);
+  --vibe-glow-secondary: rgba(37, 99, 235, 0.25);
+  --vibe-gradient: linear-gradient(135deg, #9333EA 0%, #2563EB 50%, #F43F5E 100%);
+  --vibe-badge-bg: rgba(147, 51, 234, 0.1);
+  --vibe-badge-border: rgba(147, 51, 234, 0.4);
+}
+
+/* ==========================================================================
+   GLOBAL RESET & LUMINOUS STUDIO CANVAS
    ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -56,171 +119,199 @@
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   font-family: var(--font-body);
-  background-color: var(--gallery-black);
-  color: var(--warm-paper);
+  background-color: #FFFFFF;
+  color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
   position: relative;
-  background-image: 
-    radial-gradient(circle at 50% 0%, rgba(214, 255, 97, 0.05) 0%, transparent 60%),
-    radial-gradient(circle at 85% 30%, rgba(245, 241, 232, 0.03) 0%, transparent 40%),
-    radial-gradient(circle at 15% 65%, rgba(214, 255, 97, 0.03) 0%, transparent 45%);
-  background-attachment: fixed;
-  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.8s var(--ease-smooth);
 }
 
-/* Subtle Archival Fine Grain Overlay */
-.gallery-grain-overlay {
+/* Luminous Ambient Glow (Top Left: Rose Pink & Soft Violet) */
+body::before {
+  content: '';
+  position: fixed;
+  top: -12%;
+  left: -10%;
+  width: 65vw;
+  height: 65vw;
+  background: radial-gradient(circle, rgba(255, 0, 127, 0.15) 0%, rgba(147, 51, 234, 0.12) 35%, transparent 70%);
+  filter: blur(95px);
+  pointer-events: none;
+  z-index: 0;
+  animation: floatAura1 20s ease-in-out infinite alternate;
+}
+
+/* Luminous Ambient Glow (Bottom Right: Electric Cyan & Sky Blue) */
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -15%;
+  right: -10%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.2) 0%, rgba(37, 99, 235, 0.16) 35%, rgba(255, 180, 0, 0.12) 55%, transparent 75%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+  animation: floatAura2 24s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatAura1 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(60px, 40px) scale(1.12) rotate(12deg); }
+  100% { transform: translate(-40px, 20px) scale(0.92) rotate(-10deg); }
+}
+
+@keyframes floatAura2 {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(-50px, -30px) scale(1.1) rotate(-10deg); }
+  100% { transform: translate(30px, -40px) scale(0.95) rotate(10deg); }
+}
+
+/* Texture Studio Grid */
+.craft-grid-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 230, 0, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 20%, rgba(0, 255, 163, 0.12) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(147, 51, 234, 0.08) 0%, transparent 50%),
+    radial-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 30px 30px;
   pointer-events: none;
   z-index: 1;
-  background-image: 
-    linear-gradient(rgba(119, 121, 109, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(119, 121, 109, 0.06) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.6;
+  opacity: 0.9;
 }
 
 /* Typography Helpers */
-.font-serif {
-  font-family: var(--font-serif);
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  font-weight: 800;
 }
 
-.font-mono {
-  font-family: var(--font-mono);
-}
-
-.font-body {
-  font-family: var(--font-body);
-}
-
-/* Archival Badges & Labels */
-.archive-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--archive-grey);
-}
-
-.archive-kicker .lime-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--electric-lime);
-  box-shadow: 0 0 8px var(--electric-lime);
+.gradient-text {
+  background: var(--vibe-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: inline-block;
+  transition: background 0.8s var(--ease-smooth);
 }
 
-/* Primary Electric Lime Button */
-.btn-lime {
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* Button & Interaction Styles */
+.btn-craft {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: var(--electric-lime);
-  color: var(--gallery-black);
-  font-family: var(--font-body);
+  font-family: var(--font-display);
   font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
-  padding: 0.85rem 1.85rem;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 1.75rem;
   border-radius: 9999px;
-  border: 1px solid var(--electric-lime);
+  border: 1px solid transparent;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-spring);
   text-decoration: none;
-  transition: all 0.25s var(--ease-spring);
-  box-shadow: 0 4px 20px rgba(214, 255, 97, 0.25);
   user-select: none;
 }
 
-.btn-lime:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px var(--electric-lime-glow);
-  filter: brightness(1.05);
+.btn-primary {
+  background: var(--vibe-gradient);
+  color: #FFFFFF;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.35);
+  border: none;
 }
 
-.btn-lime:active {
-  transform: scale(0.98);
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.45);
 }
 
-/* Secondary Archival Outline Button */
-.btn-archive-outline {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.55rem;
-  background: rgba(245, 241, 232, 0.04);
-  color: var(--warm-paper);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.8rem 1.6rem;
-  border-radius: 9999px;
-  border: 1px solid var(--archive-border);
+.btn-outline {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
   backdrop-filter: blur(12px);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.25s var(--ease-spring);
 }
 
-.btn-archive-outline:hover {
-  background: rgba(245, 241, 232, 0.08);
-  border-color: var(--warm-paper);
-  transform: translateY(-1px);
+.btn-outline:hover {
+  background: #FFFFFF;
+  border-color: var(--vibe-primary);
+  color: var(--vibe-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.12);
 }
 
-/* Archival Exhibition Cards */
-.gallery-card {
-  background: var(--gallery-card);
-  border: 1px solid var(--archive-border);
-  border-radius: 20px;
+/* Crisp Frosted Glass Surface Card */
+.craft-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-light);
+  border-radius: 28px;
+  box-shadow: 0 15px 45px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s var(--ease-spring);
+  transition: border-color 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
 }
 
-.gallery-card:hover {
-  border-color: var(--archive-border-strong);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+.craft-card:hover {
+  border-color: rgba(37, 99, 235, 0.35);
+  box-shadow: 0 20px 55px rgba(37, 99, 235, 0.12);
 }
 
-/* Minimalist Gallery Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--gallery-black);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--archive-border);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--archive-grey);
+/* Badge Component */
+.craft-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--vibe-badge-bg);
+  border: 1px solid var(--vibe-badge-border);
+  color: var(--vibe-primary);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.08);
 }
 
-/* ==========================================================================
-   ACCESSIBILITY & REDUCED MOTION PREFERENCES
-   ========================================================================== */
+/* Shutter Flash Animation */
+@keyframes cameraFlash {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.flash-active {
+  position: fixed;
+  inset: 0;
+  background: #FFFFFF;
+  z-index: 9999;
+  pointer-events: none;
+  animation: cameraFlash 0.35s ease-out forwards;
+}
+
+/* Accessibility & Focus Visible */
 :focus-visible {
-  outline: 2px solid var(--electric-lime);
+  outline: 2px solid var(--vibe-primary);
   outline-offset: 3px;
 }
 
@@ -231,4 +322,20 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vibe-primary);
 }
