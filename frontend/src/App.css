@@ -779,6 +779,7 @@
   cursor: ew-resize;
   user-select: none;
   background: #141512;
+  touch-action: none;
   transition: aspect-ratio 0.25s ease;
 }
 
@@ -894,14 +895,15 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--electric-lime);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 12px rgba(214, 255, 97, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6), 0 0 16px rgba(214, 255, 97, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
+  touch-action: none;
 }
 
 .split-instruction-label {
@@ -1522,22 +1524,33 @@
 }
 
 /* --------------------------------------------------------------------------
-   RESPONSIVE DESIGN (375px, 768px, 1024px, 1440px)
+   RESPONSIVE DESIGN (375px, 640px, 768px, 1024px, 1440px)
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
   .first-viewport-stage {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2.75rem;
     min-height: auto;
     padding-top: 1rem;
   }
   .hero-column-studio {
-    justify-content: flex-start;
+    justify-content: center;
+    width: 100%;
   }
   .gallery-result-grid {
     grid-template-columns: 1fr;
-    padding: 2.5rem 1.75rem;
+    padding: 2.25rem 1.5rem;
     gap: 2rem;
+  }
+  /* Mobile-first result ordering: Visual comparison & actions first */
+  .column-center-portal {
+    order: 1;
+  }
+  .column-alterego {
+    order: 2;
+  }
+  .column-original {
+    order: 3;
   }
   .steps-triad-grid {
     grid-template-columns: 1fr;
@@ -1551,11 +1564,33 @@
   .header-nav {
     display: none;
   }
+  .gallery-result-grid {
+    padding: 1.75rem 1.25rem;
+  }
 }
 
 @media (max-width: 640px) {
+  .gallery-header {
+    padding: 0.85rem 1rem;
+  }
+  .brand-badge {
+    display: none;
+  }
+  .brand-title {
+    font-size: 1.35rem;
+  }
+  .btn-header-cta {
+    font-size: 0.68rem;
+    padding: 0.4rem 0.85rem;
+  }
   .hero-monumental-headline {
-    font-size: 2.4rem;
+    font-size: clamp(2.2rem, 7.5vw, 2.85rem);
+    line-height: 1.08;
+    margin: 0.85rem 0 1rem;
+  }
+  .hero-subheadline {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
   }
   .archive-cards-mosaic {
     grid-template-columns: 1fr;
@@ -1567,14 +1602,32 @@
   .colophon-header {
     flex-direction: column;
   }
-  .specimens-row {
-    grid-template-columns: 1fr;
-  }
   .main-gallery-flow {
-    padding: 1rem 1rem 4rem;
+    padding: 1rem 1rem 3.5rem;
   }
   .studio-panel-body {
     padding: 1.15rem;
+    border-radius: 20px;
+  }
+  .panel-viewfinder {
+    aspect-ratio: 4 / 3;
+    max-height: 380px;
+    border-radius: 14px;
+  }
+  .specimens-row {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.35rem;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .specimens-row::-webkit-scrollbar {
+    display: none;
+  }
+  .specimen-pill {
+    flex-shrink: 0;
+    white-space: nowrap;
   }
   .hero-btn-row {
     width: 100%;
@@ -1582,16 +1635,37 @@
   .hero-main-cta {
     width: 100%;
   }
+  .btn-download-twin {
+    width: 100%;
+  }
+  .heuristic-num {
+    font-size: 3rem;
+  }
+  .exhibition-title {
+    font-size: 2.1rem;
+  }
 }
 
-/* 375px Ultra-Mobile Optimization */
+/* 375px Ultra-Mobile Optimization (iPhone SE, Small Androids) */
 @media (max-width: 380px) {
+  .gallery-header {
+    padding: 0.75rem 0.75rem;
+  }
+  .brand-title {
+    font-size: 1.2rem;
+  }
+  .btn-header-cta span {
+    display: none;
+  }
+  .btn-header-cta {
+    padding: 0.45rem 0.55rem;
+  }
   .hero-monumental-headline {
-    font-size: 2.1rem;
-    line-height: 1.08;
+    font-size: 1.95rem;
+    line-height: 1.1;
   }
   .hero-subheadline {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
   .btn-lime, .btn-archive-outline {
     min-height: 44px;
@@ -1599,16 +1673,18 @@
     font-size: 0.85rem;
   }
   .studio-actions-bar {
-    flex-wrap: wrap;
+    gap: 0.5rem;
   }
   .btn-studio-secondary {
     min-height: 44px;
-    padding: 0.6rem 0.85rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.68rem;
   }
   .btn-snap-shutter {
     min-height: 44px;
+    font-size: 0.8rem;
   }
   .gallery-result-grid {
-    padding: 1.5rem 1rem;
+    padding: 1.25rem 0.85rem;
   }
 }

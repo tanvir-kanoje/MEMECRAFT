@@ -219,6 +219,9 @@ export default function SplitFaceSlider({ matchResult, userPreview, onReset }) {
             onMouseUp={() => setIsDragging(false)}
             onMouseLeave={() => setIsDragging(false)}
             onMouseMove={handleMouseMove}
+            onTouchStart={(e) => {
+              if (e.touches[0]) handleMove(e.touches[0].clientX);
+            }}
             onTouchMove={handleTouchMove}
           >
             {/* Background Layer: Meme Twin (Right Side) */}
